@@ -14,6 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.sql.*;
 import javax.sql.*;
 import javax.naming.*;
+import mx.ipn.www.finalproject.model.Usuario;
+import mx.ipn.www.finalproject.model.dao.UsuarioDAO;
+import mx.ipn.www.finalproject.model.orm.UsuarioDAOImpl;
+import mx.ipn.www.finalproject.utils.ConnectionByPayaraSource;
 
 /**
  *
@@ -31,7 +35,7 @@ public class registerNutricionista extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         
         response.setContentType("text/html;charset=UTF-8");
         String nombre = request.getParameter("nomD");
@@ -44,7 +48,13 @@ public class registerNutricionista extends HttpServlet {
         String confirmPassword = request.getParameter("idConfirm");
         String termsCheck = request.getParameter("termsCheck");
         
-
+        ConnectionByPayaraSource connectionClass = new ConnectionByPayaraSource();
+        Connection con = connectionClass.initConnection();
+        Usuario usuario = new Usuario();
+        UsuarioDAO usuarioDAO = new UsuarioDAOImpl();
+        usuarioDAO.create(usuario, con);
+        
+        connectionClass.destroy();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
