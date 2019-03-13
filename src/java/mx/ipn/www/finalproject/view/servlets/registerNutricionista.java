@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.sql.*;
 import javax.naming.*;
 import mx.ipn.www.finalproject.model.Usuario;
@@ -35,7 +37,7 @@ public class registerNutricionista extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+            throws ServletException, IOException {
         
         response.setContentType("text/html;charset=UTF-8");
         String nombre = request.getParameter("nomD");
@@ -52,7 +54,11 @@ public class registerNutricionista extends HttpServlet {
         Connection con = connectionClass.initConnection();
         Usuario usuario = new Usuario();
         UsuarioDAO usuarioDAO = new UsuarioDAOImpl();
-        usuarioDAO.create(usuario, con);
+        try {
+            usuarioDAO.create(usuario, con);
+        } catch (SQLException ex) {
+            Logger.getLogger(registerNutricionista.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         connectionClass.destroy();
     }
