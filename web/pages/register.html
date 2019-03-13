@@ -94,7 +94,7 @@
                     </div>
                   </div>
                   <div class="col-md-6 mr-auto">
-                    <form id="regForm" class="form" method="" action="">
+                    <form id="regForm" class="form" method="get" action="/projectTTMealPlans/registerNutricionista">
                       <div class="form-group has-default">
                         <div class="input-group">
                           <div class="input-group-prepend">
@@ -102,7 +102,7 @@
                               <i class="material-icons">face</i>
                             </span>
                           </div>
-                          <input type="text" id="nomD" class="form-control" placeholder="NOMBRE..." required="true">
+                          <input type="text" id="nomD" name="nomD" class="form-control" placeholder="NOMBRE..." required="true">
                         </div>
                       </div>
                       <div class="form-group has-default">
@@ -112,7 +112,7 @@
                               <i class="material-icons">face</i>
                             </span>
                           </div>
-                          <input type="text" id="apeD" class="form-control" placeholder="APELLIDOS..." required="true">
+                            <input type="text" id="apeD" name="apeD" class="form-control" placeholder="APELLIDOS..." required="true">
                         </div>
                       </div>
                       <div class="form-group has-default">
@@ -136,7 +136,7 @@
                               <i class="material-icons">local_library</i>
                             </span>
                           </div>
-                          <input type="text" class="form-control" placeholder="CÉDULA...">
+                            <input type="text" id="cedula" name="cedula" class="form-control" placeholder="CÉDULA...">
                         </div>
                       </div>
                       <div class="form-group has-default">
@@ -146,7 +146,7 @@
                               <i class="material-icons">mail</i>
                             </span>
                           </div>
-                          <input type="text" id="email" class="form-control" placeholder="CORREO ELECTRÓNICO...">
+                            <input type="text" id="email" name="email" class="form-control" placeholder="CORREO ELECTRÓNICO...">
                         </div>
                       </div>
                       <div class="form-group has-default">
@@ -156,7 +156,7 @@
                               <i class="material-icons">call</i>
                             </span>
                           </div>
-                          <input type="text" class="form-control" placeholder="TELÉFONO...">
+                            <input type="text" id="idTelefono" name="idTelefono" class="form-control" placeholder="TELÉFONO...">
                         </div>
                       </div>
                       <div class="form-group has-default">
@@ -166,7 +166,7 @@
                               <i class="material-icons">place</i>
                             </span>
                           </div>
-                          <input type="text" class="form-control" placeholder="DIRECCIÓN...">
+                            <input type="text" id="idDireccion" name="idDireccion" class="form-control" placeholder="DIRECCIÓN...">
                         </div>
                       </div>
                       <div class="form-group has-default">
@@ -176,7 +176,7 @@
                               <i class="material-icons">lock_outline</i>
                             </span>
                           </div>
-                          <input type="password" placeholder="CONTRASEÑA..." class="form-control">
+                            <input type="password" id="idPassword" name="idPassword" placeholder="CONTRASEÑA..." class="form-control">
                         </div>
                       </div>
                       <div class="form-group has-default">
@@ -186,12 +186,12 @@
                               <i class="material-icons">lock</i>
                             </span>
                           </div>
-                          <input type="password" placeholder="CONFIRMAR CONTRASEÑA..." class="form-control">
+                            <input type="password" id="idConfirm" name="idConfirm" placeholder="CONFIRMAR CONTRASEÑA..." class="form-control">
                         </div>
                       </div>
                       <div class="form-check">
                         <label class="form-check-label">
-                          <input class="form-check-input" type="checkbox" value="" checked="">
+                            <input class="form-check-input" id="termsCheck" name="termsCheck" type="checkbox" value="true" checked>
                           <span class="form-check-sign">
                             <span class="check"></span>
                           </span>

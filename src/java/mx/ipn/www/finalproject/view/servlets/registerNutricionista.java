@@ -11,12 +11,15 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.sql.*;
+import javax.sql.*;
+import javax.naming.*;
 
 /**
  *
  * @author pepe
  */
-public class Login extends HttpServlet {
+public class registerNutricionista extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,26 +34,17 @@ public class Login extends HttpServlet {
             throws ServletException, IOException {
         
         response.setContentType("text/html;charset=UTF-8");
+        String nombre = request.getParameter("nomD");
+        String apellido = request.getParameter("apeD");
+        String cedula = request.getParameter("cedula");
+        String email = request.getParameter("email");
+        String telefono = request.getParameter("idTelefono");
+        String direccion = request.getParameter("idDireccion");
+        String password = request.getParameter("idPassword");
+        String confirmPassword = request.getParameter("idConfirm");
+        String termsCheck = request.getParameter("termsCheck");
         
-        
-        String email = request.getParameter("emailadress");
-        String password = request.getParameter("password");
-        
-        
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Login</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Login at " + request.getContextPath() + "</h1>");
-            out.println("<p>Email " + email + "</p>");
-            out.println("<p>Password " + password + "</p>");            
-            out.println("</body>");
-            out.println("</html>");
-        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -93,5 +87,3 @@ public class Login extends HttpServlet {
     }// </editor-fold>
 
 }
-
-
