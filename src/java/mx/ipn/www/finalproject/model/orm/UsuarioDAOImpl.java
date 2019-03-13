@@ -25,7 +25,7 @@ import mx.ipn.www.finalproject.model.dao.UsuarioDAO;
 public class UsuarioDAOImpl implements UsuarioDAO {
     /* SQL to insert data */
     private static final String SQL_INSERT =
-        "INSERT INTO usuario ("
+        "INSERT INTO Usuario ("
         + "Correo, Pass"
         + ") VALUES (?, ?)";
 
@@ -33,26 +33,26 @@ public class UsuarioDAOImpl implements UsuarioDAO {
     private static final String SQL_SELECT =
         "SELECT "
         + "idUsuario, Correo, Pass "
-        + "FROM usuario WHERE "
+        + "FROM Usuario WHERE "
         + "idUsuario = ?";
 
     /* SQL to select data without id*/
     private static final String SQL_SELECT_BY_DATA =
         "SELECT "
         + "idUsuario, Correo, Pass "
-        + "FROM usuario WHERE "
+        + "FROM Usuario WHERE "
         + "Correo = ? AND Pass = ?";
 
     /* SQL to update data */
     private static final String SQL_UPDATE =
-        "UPDATE usuario SET "
+        "UPDATE Usuario SET "
         + "Correo = ?, Pass = ? "
         + "WHERE "
         + "idUsuario = ?";
 
     /* SQL to delete data */
     private static final String SQL_DELETE =
-        "DELETE FROM usuario WHERE "
+        "DELETE FROM Usuario WHERE "
         + "idUsuario = ?";
 
     /**

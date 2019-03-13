@@ -6,7 +6,6 @@
 package mx.ipn.www.finalproject.view.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,11 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.sql.*;
-import javax.naming.*;
 import mx.ipn.www.finalproject.model.Nutricionista;
 import mx.ipn.www.finalproject.model.Usuario;
 import mx.ipn.www.finalproject.model.dao.NutricionistaDAO;

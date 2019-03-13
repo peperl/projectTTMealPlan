@@ -24,8 +24,10 @@ public class ConnectionByPayaraSource {
     try {
       ctx = new InitialContext();
       //MySqlConnector es el nombre que le di a mi recurso en payara
-      ds = (DataSource) ctx.lookup("java:comp/env/jdbc/MySqlConnector");
+      ds = (DataSource) ctx.lookup("java:comp/DefaultDataSource");
+        System.out.println("");
       conn = ds.getConnection();
+      return conn;
     }
     catch (SQLException se) {
       System.out.println("SQLException: "+se.getMessage());
