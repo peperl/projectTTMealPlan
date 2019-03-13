@@ -26,9 +26,9 @@ public class NutricionistaDAOImpl implements NutricionistaDAO {
     /* SQL to insert data */
     private static final String SQL_INSERT =
         "INSERT INTO nutricionista ("
-        + "idNutricionista, Usuario_idUsuario, Nombre, Cedula, FechaNacimiento, EscuelaProcedencia, Telefono, "
-        + "Direccion, Estado, FechaRegistro, FechaAceptado"
-        + ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        + "Usuario_idUsuario, Nombre, Cedula, FechaNacimiento, EscuelaProcedencia, Telefono, "
+        + "Direccion, Estado, FechaRegistro"
+        + ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     /* SQL to select data */
     private static final String SQL_SELECT =
@@ -61,26 +61,22 @@ public class NutricionistaDAOImpl implements NutricionistaDAO {
         PreparedStatement ps = null;
         try {
             ps = conn.prepareStatement(SQL_INSERT);
-            ps.setInt(1, bean.getIdnutricionista());
-            ps.setInt(2, bean.getUsuarioIdusuario());
-            ps.setString(3, bean.getNombre());
-            ps.setString(4, bean.getCedula());
+            //ps.setInt(1, bean.getIdnutricionista());
+            ps.setInt(1, bean.getUsuarioIdusuario());
+            ps.setString(2, bean.getNombre());
+            ps.setString(3, bean.getCedula());
             if (bean.getFechanacimiento() != null)
-                ps.setDate(5, new java.sql.Date(bean.getFechanacimiento().getTime()));
+                ps.setDate(4, new java.sql.Date(bean.getFechanacimiento().getTime()));
             else
-                ps.setNull(5, Types.DATE);
-            ps.setString(6, bean.getEscuelaprocedencia());
-            ps.setString(7, bean.getTelefono());
-            ps.setString(8, bean.getDireccion());
-            ps.setInt(9, bean.getEstado());
+                ps.setNull(4, Types.DATE);
+            ps.setString(5, bean.getEscuelaprocedencia());
+            ps.setString(6, bean.getTelefono());
+            ps.setString(7, bean.getDireccion());
+            ps.setInt(8, bean.getEstado());
             if (bean.getFecharegistro() != null)
-                ps.setDate(10, new java.sql.Date(bean.getFecharegistro().getTime()));
+                ps.setDate(9, new java.sql.Date(bean.getFecharegistro().getTime()));
             else
-                ps.setNull(10, Types.DATE);
-            if (bean.getFechaaceptado() != null)
-                ps.setDate(11, new java.sql.Date(bean.getFechaaceptado().getTime()));
-            else
-                ps.setNull(11, Types.DATE);
+                ps.setNull(9, Types.DATE);
             ps.executeUpdate();
         }finally {
             close(ps);

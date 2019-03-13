@@ -7,6 +7,8 @@
 
 package mx.ipn.www.finalproject.model;
 
+import java.util.Date;
+
 /*
  * For Table nutricionista
  */
@@ -45,6 +47,23 @@ public class Nutricionista implements java.io.Serializable, Cloneable {
 
     /* FechaAceptado */
     protected java.util.Date fechaaceptado;
+
+    public Nutricionista() {
+    }
+
+    public Nutricionista(int usuarioIdusuario, String nombre, String cedula, Date fechanacimiento, String escuelaprocedencia, String telefono, String direccion, int estado, Date fecharegistro) {
+        this.usuarioIdusuario = usuarioIdusuario;
+        this.nombre = nombre;
+        this.cedula = cedula;
+        this.fechanacimiento = fechanacimiento;
+        this.escuelaprocedencia = escuelaprocedencia;
+        this.telefono = telefono;
+        this.direccion = direccion;
+        this.estado = estado;
+        this.fecharegistro = fecharegistro;
+    }
+    
+    
 
     /* Return the key object. */
     public NutricionistaKey getKeyObject() {

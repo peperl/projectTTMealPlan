@@ -14,7 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.SQLException;
-import java.sql.Types;
+
 import java.util.List;
 import java.util.ArrayList;
 import mx.ipn.www.finalproject.model.dao.UsuarioDAO;
@@ -26,8 +26,8 @@ public class UsuarioDAOImpl implements UsuarioDAO {
     /* SQL to insert data */
     private static final String SQL_INSERT =
         "INSERT INTO usuario ("
-        + "idUsuario, Correo, Pass"
-        + ") VALUES (?, ?, ?)";
+        + "Correo, Pass"
+        + ") VALUES (?, ?)";
 
     /* SQL to select data */
     private static final String SQL_SELECT =
@@ -35,6 +35,13 @@ public class UsuarioDAOImpl implements UsuarioDAO {
         + "idUsuario, Correo, Pass "
         + "FROM usuario WHERE "
         + "idUsuario = ?";
+
+    /* SQL to select data without id*/
+    private static final String SQL_SELECT_BY_DATA =
+        "SELECT "
+        + "idUsuario, Correo, Pass "
+        + "FROM usuario WHERE "
+        + "Correo = ? AND Pass = ?";
 
     /* SQL to update data */
     private static final String SQL_UPDATE =
@@ -58,9 +65,9 @@ public class UsuarioDAOImpl implements UsuarioDAO {
         PreparedStatement ps = null;
         try {
             ps = conn.prepareStatement(SQL_INSERT);
-            ps.setInt(1, bean.getIdusuario());
-            ps.setString(2, bean.getCorreo());
-            ps.setString(3, bean.getPass());
+            //ps.setInt(1, bean.getIdusuario());
+            ps.setString(1, bean.getCorreo());
+            ps.setString(2, bean.getPass());
             ps.executeUpdate();
         }finally {
             close(ps);
@@ -91,6 +98,31 @@ public class UsuarioDAOImpl implements UsuarioDAO {
         }
     }
 
+    /**
+     * Retrive a record from Database.
+     * @param beanKey   The PK Object to be retrived.
+     * @param conn      JDBC Connection.
+     * @exception       SQLException if something is wrong.
+     */
+    public Usuario loadByData(Usuario usuario, Connection conn) throws SQLException {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            ps = conn.prepareStatement(SQL_SELECT_BY_DATA);
+            ps.setString(1, usuario.getCorreo());
+            ps.setString(2, usuario.getPass());
+            rs = ps.executeQuery();
+            List results = getResults(rs);
+            if (results.size() > 0)
+                return (Usuario) results.get(0);
+            else
+                return null;
+        }finally {
+            close(rs);
+            close(ps);
+        }
+    }    
+    
     /**
      * Update a record in Database.
      * @param bean   The Object to be saved.

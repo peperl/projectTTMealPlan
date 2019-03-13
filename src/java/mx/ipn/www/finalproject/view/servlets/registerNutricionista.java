@@ -12,12 +12,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sql.*;
 import javax.naming.*;
+import mx.ipn.www.finalproject.model.Nutricionista;
 import mx.ipn.www.finalproject.model.Usuario;
+import mx.ipn.www.finalproject.model.dao.NutricionistaDAO;
 import mx.ipn.www.finalproject.model.dao.UsuarioDAO;
+import mx.ipn.www.finalproject.model.orm.NutricionistaDAOImpl;
 import mx.ipn.www.finalproject.model.orm.UsuarioDAOImpl;
 import mx.ipn.www.finalproject.utils.ConnectionByPayaraSource;
 
@@ -43,6 +49,7 @@ public class registerNutricionista extends HttpServlet {
         String nombre = request.getParameter("nomD");
         String apellido = request.getParameter("apeD");
         String cedula = request.getParameter("cedula");
+        String escuela = request.getParameter("escuela");
         String email = request.getParameter("email");
         String telefono = request.getParameter("idTelefono");
         String direccion = request.getParameter("idDireccion");
@@ -50,16 +57,32 @@ public class registerNutricionista extends HttpServlet {
         String confirmPassword = request.getParameter("idConfirm");
         String termsCheck = request.getParameter("termsCheck");
         
+        SimpleDateFormat format = new SimpleDateFormat("d/M/yyyy");
+        java.util.Date fechanacimiento = new java.util.Date();
+        try {
+            fechanacimiento = format.parse(request.getParameter("nacimiento"));
+        } catch (ParseException ex) {
+            Logger.getLogger(registerNutricionista.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                
+                
+        java.util.Date fechaRegistro = new java.util.Date();
+        
         ConnectionByPayaraSource connectionClass = new ConnectionByPayaraSource();
         Connection con = connectionClass.initConnection();
-        Usuario usuario = new Usuario();
+        Usuario usuario = new Usuario(email, password);
         UsuarioDAO usuarioDAO = new UsuarioDAOImpl();
+        Nutricionista nutricionista;
+        NutricionistaDAO nutricionistaDAO = new NutricionistaDAOImpl();
+        
         try {
             usuarioDAO.create(usuario, con);
+            usuario = usuarioDAO.loadByData(usuario, con);
+            nutricionista =  new Nutricionista(usuario.getIdusuario(), nombre + " " + apellido, cedula, fechanacimiento, escuela, telefono, direccion, 0, fechaRegistro);
+            nutricionistaDAO.create(nutricionista, con);
         } catch (SQLException ex) {
             Logger.getLogger(registerNutricionista.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
         connectionClass.destroy();
     }
 

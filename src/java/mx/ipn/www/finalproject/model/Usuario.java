@@ -22,6 +22,14 @@ public class Usuario implements java.io.Serializable, Cloneable {
     /* Pass */
     protected String pass;
 
+    public Usuario() {
+    }
+
+    public Usuario(String correo, String pass) {
+        this.correo = correo;
+        this.pass = pass;
+    }
+
     /* Return the key object. */
     public UsuarioKey getKeyObject() {
         return _key;
