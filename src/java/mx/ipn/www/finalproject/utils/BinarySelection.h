@@ -23,6 +23,22 @@ JNIEXPORT jint JNICALL Java_mx_ipn_www_finalproject_utils_BinarySelection_getAli
 JNIEXPORT jint JNICALL Java_mx_ipn_www_finalproject_utils_BinarySelection_getCantidad
   (JNIEnv *, jobject, jint, jint);
 
+/*
+ * Class:     mx_ipn_www_finalproject_utils_BinarySelection
+ * Method:    cross
+ * Signature: (II)I
+ */
+JNIEXPORT jint JNICALL Java_mx_ipn_www_finalproject_utils_BinarySelection_cross
+  (JNIEnv *, jobject, jint, jint);
+
+/*
+ * Class:     mx_ipn_www_finalproject_utils_BinarySelection
+ * Method:    mutation
+ * Signature: (II)I
+ */
+JNIEXPORT jint JNICALL Java_mx_ipn_www_finalproject_utils_BinarySelection_mutation
+  (JNIEnv *, jobject, jint, jint);
+
 #ifdef __cplusplus
 }
 #endif

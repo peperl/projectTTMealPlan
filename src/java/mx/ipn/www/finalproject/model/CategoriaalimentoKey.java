@@ -11,6 +11,13 @@ public class CategoriaalimentoKey implements java.io.Serializable, Cloneable {
     /* category_id */
     protected int categoryId;
 
+    public CategoriaalimentoKey(int categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public CategoriaalimentoKey() {
+    }
+    
     /* category_id */
     public int getCategoryId() {
         return categoryId;
