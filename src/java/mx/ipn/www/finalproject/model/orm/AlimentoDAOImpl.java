@@ -17,6 +17,7 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.List;
 import java.util.ArrayList;
+import mx.ipn.www.finalproject.model.CategoriaalimentoKey;
 import mx.ipn.www.finalproject.model.dao.AlimentoDAO;
 
 /**
@@ -37,6 +38,14 @@ public class AlimentoDAOImpl implements AlimentoDAO {
         + "Categoria "
         + "FROM alimento WHERE "
         + "idAlimento = ?";
+
+    /* SQL to select data */
+    private static final String SQL_SELECT_BY_CATEGORY =
+        "SELECT "
+        + "idAlimento, Nombre, Cantidad, Proteinas, Lipidos, Carbohidratos, Estado, "
+        + "Categoria "
+        + "FROM alimento WHERE "
+        + "Categoria = ?";
 
     /* SQL to update data */
     private static final String SQL_UPDATE =
@@ -80,6 +89,7 @@ public class AlimentoDAOImpl implements AlimentoDAO {
      * @param conn      JDBC Connection.
      * @exception       SQLException if something is wrong.
      */
+    @Override
     public Alimento load(AlimentoKey key, Connection conn) throws SQLException {
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -90,6 +100,32 @@ public class AlimentoDAOImpl implements AlimentoDAO {
             List results = getResults(rs);
             if (results.size() > 0)
                 return (Alimento) results.get(0);
+            else
+                return null;
+        }finally {
+            close(rs);
+            close(ps);
+        }
+    }
+
+    /**
+     * Retrive a record from Database.
+     * @param key
+     * @param conn      JDBC Connection.
+     * @return 
+     * @exception       SQLException if something is wrong.
+     */
+    @Override
+    public List<Alimento> loadByCategory(CategoriaalimentoKey key, Connection conn) throws SQLException {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            ps = conn.prepareStatement(SQL_SELECT_BY_CATEGORY);
+            ps.setInt(1, key.getCategoryId());
+            rs = ps.executeQuery();
+            List results = getResults(rs);
+            if (results.size() > 0)
+                return results;
             else
                 return null;
         }finally {
@@ -146,7 +182,7 @@ public class AlimentoDAOImpl implements AlimentoDAO {
      * @exception    SQLException if something is wrong.
      */
     protected List<Alimento> getResults(ResultSet rs) throws SQLException {
-        List results = new ArrayList<Alimento>();
+        List<Alimento> results = new ArrayList<>();
         while (rs.next()) {
             Alimento bean = new Alimento();
             bean.setIdalimento(rs.getInt("idAlimento"));
@@ -185,4 +221,5 @@ public class AlimentoDAOImpl implements AlimentoDAO {
             }catch(SQLException e){}
         }
     }
+
 }
