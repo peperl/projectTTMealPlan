@@ -1,0 +1,45 @@
+"idAlimento";"Nombre";"Cantidad";"Unidad";"Proteinas";"Lipidos";"Carbohidratos";"Estado";"Categoria"
+1;"Leche entera lÃ­quida";240.0;"ml";7.9;8.0;11.2;1;1
+2;"Leche entera evaporada";120.0;"ml";7.5;7.5;11.3;1;1
+3;"Jocoque";180.0;"ml";9.4;2.9;12.6;1;1
+4;"Yogurt natural";240.0;"ml";7.9;7.4;10.6;1;1
+5;"Clara de huevo";2.0;"pieza";7.2;0.1;0.5;1;2
+6;"Huevo entero cocido";1.0;"pieza";5.5;4.7;0.5;1;2
+7;"Pescado fresco carpa";30.0;"g";6.8;2.2;0.0;1;2
+8;"Pechuga de pollo";25.0;"g";7.2;1.0;0.0;1;2
+9;"Res ternera";30.0;"g";6.2;3.0;0.0;1;2
+10;"Queso fresco";40.0;"g";6.1;2.8;2.0;1;2
+11;"Queso cotage";3.0;"cucharadas";6.8;2.5;1.5;1;2
+12;"Queso panela";40.0;"g";6.1;2.8;2.0;1;2
+13;"RequesÃ³n";2.0;"cucharadas";3.6;2.9;0.7;1;2
+14;"Aguacate";1.0;"pieza";2.1;15.9;6.2;1;3
+15;"Coco";32.0;"g";2.0;16.6;3.6;1;3
+16;"Nuez";6.0;"piezas";1.8;14.0;2.6;1;3
+17;"Piñon";12.0;"semillas";3.6;18.6;6.0;1;3
+18;"tocino";2.0;"rebanada";1.4;9.2;0.0;1;3
+19;"Almendra";20.0;"piezas";5.4;13.2;1.0;1;3
+20;"Arroz cocido";0.75;"taza";3.3;0.3;39.9;1;4
+21;"Tortillas de maÃ­z";1.0;"pieza";1.4;0.5;13.6;1;4
+22;"Avena cocida";0.75;"taza";5.2;1.3;18.8;1;4
+23;"Pasta cocida";1.0;"taza";6.4;2.2;28.0;1;4
+24;"Bolillo sin migajÃ³n";1.0;"pieza";5.7;0.0;38.4;1;4
+25;"Maicena";2.0;"cucharadas";0.0;0.0;14.4;1;4
+26;"Galletas marÃ­as";5.0;"pieza";1.3;1.3;13.8;1;4
+27;"Pan de caja";2.0;"rebanada";4.4;1.6;27.2;1;4
+28;"Hojuelas de maÃ­z";1.0;"taza";3.3;0.0;34.2;1;4
+29;"Arroz inflado natural";1.0;"taza";2.2;0.2;29.2;1;4
+30;"Cilantro";1.0;"taza";1.2571428571;0.2857142857;2.2285714286;1;5
+31;"Cebolla";1.0;"taza";1.2;0.2;10.8;1;5
+32;"Pimiento";1.0;"taza";0.5;0.1;3.8;1;5
+33;"Poro";1.0;"taza";2.0;0.4;18.0;1;5
+34;"Chayote";1.0;"taza";1.0;0.8;8.2;1;5
+35;"Chilacayote";150.0;"g";0.8;0.2;3.7;1;5
+36;"Chile poblano";1.0;"pieza";1.65;0.45;6.6;1;5
+37;"Jitomate";0.5;"taza";1.0;0.2;4.4;1;6
+38;"Pepino";1.25;"taza";0.8;0.1;4.7;1;6
+39;"BrÃ³coli cocido";0.5;"taza";2.7;0.4;4.6;1;6
+40;"Berenjena";0.75;"taza";0.6;0.2;6.5;1;6
+41;"Flor de calabaza cocida";1.0;"taza";1.4;0.2;4.4;1;6
+42;"Coliflor verde cocida";0.5;"taza";2.1;0.2;4.2;1;6
+43;"Tomate";5.0;"pieza";0.9;0.2;3.9;1;6
+44;"Elotitos de Cambray";8.0;"pieza";2.1;0.0;4.3;1;6

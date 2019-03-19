@@ -11,6 +11,8 @@ import mx.ipn.www.finalproject.model.AlimentoKey;
 import mx.ipn.www.finalproject.model.Alimento;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
+import mx.ipn.www.finalproject.model.CategoriaalimentoKey;
 
 /**
  * This interface provides methods to populate DB Table of alimento
@@ -31,6 +33,14 @@ public interface AlimentoDAO {
      * @exception       SQLException if something is wrong.
      */
     public Alimento load(AlimentoKey key, Connection conn) throws SQLException;
+
+    /**
+     * Retrive a record from Database.
+     * @param beanKey   The PK Object to be retrived.
+     * @param conn      JDBC Connection.
+     * @exception       SQLException if something is wrong.
+     */
+    public List<Alimento> loadByCategory(CategoriaalimentoKey key, Connection conn) throws SQLException;
 
     /**
      * Update a record in Database.

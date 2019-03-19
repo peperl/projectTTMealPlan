@@ -22,6 +22,9 @@ public class Alimento implements java.io.Serializable, Cloneable {
     /* Cantidad */
     protected double cantidad;
 
+    /* Cantidad */
+    protected String unidad;
+
     /* Proteinas */
     protected double proteinas;
 
@@ -71,6 +74,14 @@ public class Alimento implements java.io.Serializable, Cloneable {
     /* Cantidad */
     public void setCantidad(double cantidad) {
         this.cantidad = cantidad;
+    }
+
+    public String getUnidad() {
+        return unidad;
+    }
+
+    public void setUnidad(String unidad) {
+        this.unidad = unidad;
     }
 
     /* Proteinas */
@@ -146,6 +157,9 @@ public class Alimento implements java.io.Serializable, Cloneable {
         if (this.cantidad != bean.cantidad)
             return false;
 
+        if (!this.unidad.equals(bean.unidad))
+            return false;
+
         if (this.proteinas != bean.proteinas)
             return false;
 
@@ -171,6 +185,7 @@ public class Alimento implements java.io.Serializable, Cloneable {
         bean.idalimento = this.idalimento;
         bean.nombre = this.nombre;
         bean.cantidad = this.cantidad;
+        bean.unidad = this.unidad;
         bean.proteinas = this.proteinas;
         bean.lipidos = this.lipidos;
         bean.carbohidratos = this.carbohidratos;
@@ -187,6 +202,7 @@ public class Alimento implements java.io.Serializable, Cloneable {
         sb.append("[").append("idalimento").append(" = ").append(idalimento).append("]").append(sep);
         sb.append("[").append("nombre").append(" = ").append(nombre).append("]").append(sep);
         sb.append("[").append("cantidad").append(" = ").append(cantidad).append("]").append(sep);
+        sb.append("[").append("unidad").append(" = ").append(unidad).append("]").append(sep);
         sb.append("[").append("proteinas").append(" = ").append(proteinas).append("]").append(sep);
         sb.append("[").append("lipidos").append(" = ").append(lipidos).append("]").append(sep);
         sb.append("[").append("carbohidratos").append(" = ").append(carbohidratos).append("]").append(sep);

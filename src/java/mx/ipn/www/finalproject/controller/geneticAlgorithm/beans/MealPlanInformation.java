@@ -13,11 +13,9 @@ import java.util.List;
  */
 class MealPlanInformation {
     
-    protected int mealsQuanity;
     protected Meal[] mealDistribution;
 
-    public MealPlanInformation(int mealsQuanity, Meal[] mealDistribution) {
-        this.mealsQuanity = mealsQuanity;
+    public MealPlanInformation(Meal[] mealDistribution) {
         this.mealDistribution = mealDistribution;
     }
     

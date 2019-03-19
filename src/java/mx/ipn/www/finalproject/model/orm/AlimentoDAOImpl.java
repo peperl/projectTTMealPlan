@@ -14,9 +14,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.SQLException;
-import java.sql.Types;
 import java.util.List;
 import java.util.ArrayList;
+import mx.ipn.www.finalproject.model.CategoriaalimentoKey;
 import mx.ipn.www.finalproject.model.dao.AlimentoDAO;
 
 /**
@@ -25,29 +25,37 @@ import mx.ipn.www.finalproject.model.dao.AlimentoDAO;
 public class AlimentoDAOImpl implements AlimentoDAO {
     /* SQL to insert data */
     private static final String SQL_INSERT =
-        "INSERT INTO alimento ("
-        + "idAlimento, Nombre, Cantidad, Proteinas, Lipidos, Carbohidratos, Estado, "
+        "INSERT INTO Alimento ("
+        + "Nombre, Cantidad, Unidad, Proteinas, Lipidos, Carbohidratos, Estado, "
         + "Categoria"
         + ") VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
     /* SQL to select data */
     private static final String SQL_SELECT =
         "SELECT "
-        + "idAlimento, Nombre, Cantidad, Proteinas, Lipidos, Carbohidratos, Estado, "
+        + "idAlimento, Nombre, Cantidad, Unidad, Proteinas, Lipidos, Carbohidratos, Estado, "
         + "Categoria "
-        + "FROM alimento WHERE "
+        + "FROM Alimento WHERE "
         + "idAlimento = ?";
+
+    /* SQL to select data */
+    private static final String SQL_SELECT_BY_CATEGORY =
+        "SELECT "
+        + "idAlimento, Nombre, Cantidad, Unidad, Proteinas, Lipidos, Carbohidratos, Estado, "
+        + "Categoria "
+        + "FROM Alimento WHERE "
+        + "Categoria = ?";
 
     /* SQL to update data */
     private static final String SQL_UPDATE =
-        "UPDATE alimento SET "
-        + "Nombre = ?, Cantidad = ?, Proteinas = ?, Lipidos = ?, Carbohidratos = ?, Estado = ?, Categoria = ? "
+        "UPDATE Alimento SET "
+        + "Nombre = ?, Cantidad = ?, Unidad = ?, Proteinas = ?, Lipidos = ?, Carbohidratos = ?, Estado = ?, Categoria = ? "
         + "WHERE "
         + "idAlimento = ?";
 
     /* SQL to delete data */
     private static final String SQL_DELETE =
-        "DELETE FROM alimento WHERE "
+        "DELETE FROM Alimento WHERE "
         + "idAlimento = ?";
 
     /**
@@ -60,9 +68,10 @@ public class AlimentoDAOImpl implements AlimentoDAO {
         PreparedStatement ps = null;
         try {
             ps = conn.prepareStatement(SQL_INSERT);
-            ps.setInt(1, bean.getIdalimento());
-            ps.setString(2, bean.getNombre());
-            ps.setDouble(3, bean.getCantidad());
+            //ps.setInt(1, bean.getIdalimento());
+            ps.setString(1, bean.getNombre());
+            ps.setDouble(2, bean.getCantidad());
+            ps.setString(3, bean.getUnidad());
             ps.setDouble(4, bean.getProteinas());
             ps.setDouble(5, bean.getLipidos());
             ps.setDouble(6, bean.getCarbohidratos());
@@ -80,6 +89,7 @@ public class AlimentoDAOImpl implements AlimentoDAO {
      * @param conn      JDBC Connection.
      * @exception       SQLException if something is wrong.
      */
+    @Override
     public Alimento load(AlimentoKey key, Connection conn) throws SQLException {
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -90,6 +100,32 @@ public class AlimentoDAOImpl implements AlimentoDAO {
             List results = getResults(rs);
             if (results.size() > 0)
                 return (Alimento) results.get(0);
+            else
+                return null;
+        }finally {
+            close(rs);
+            close(ps);
+        }
+    }
+
+    /**
+     * Retrive a record from Database.
+     * @param key
+     * @param conn      JDBC Connection.
+     * @return 
+     * @exception       SQLException if something is wrong.
+     */
+    @Override
+    public List<Alimento> loadByCategory(CategoriaalimentoKey key, Connection conn) throws SQLException {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            ps = conn.prepareStatement(SQL_SELECT_BY_CATEGORY);
+            ps.setInt(1, key.getCategoryId());
+            rs = ps.executeQuery();
+            List results = getResults(rs);
+            if (results.size() > 0)
+                return results;
             else
                 return null;
         }finally {
@@ -110,12 +146,13 @@ public class AlimentoDAOImpl implements AlimentoDAO {
             ps = conn.prepareStatement(SQL_UPDATE);
             ps.setString(1, bean.getNombre());
             ps.setDouble(2, bean.getCantidad());
-            ps.setDouble(3, bean.getProteinas());
-            ps.setDouble(4, bean.getLipidos());
-            ps.setDouble(5, bean.getCarbohidratos());
-            ps.setInt(6, bean.getEstado());
-            ps.setInt(7, bean.getCategoria());
-            ps.setInt(8, bean.getIdalimento());
+            ps.setString(3, bean.getUnidad());
+            ps.setDouble(4, bean.getProteinas());
+            ps.setDouble(5, bean.getLipidos());
+            ps.setDouble(6, bean.getCarbohidratos());
+            ps.setInt(7, bean.getEstado());
+            ps.setInt(8, bean.getCategoria());
+            ps.setInt(9, bean.getIdalimento());
             ps.executeUpdate();
         }finally {
             close(ps);
@@ -146,12 +183,13 @@ public class AlimentoDAOImpl implements AlimentoDAO {
      * @exception    SQLException if something is wrong.
      */
     protected List<Alimento> getResults(ResultSet rs) throws SQLException {
-        List results = new ArrayList<Alimento>();
+        List<Alimento> results = new ArrayList<>();
         while (rs.next()) {
             Alimento bean = new Alimento();
             bean.setIdalimento(rs.getInt("idAlimento"));
             bean.setNombre(rs.getString("Nombre"));
             bean.setCantidad(rs.getDouble("Cantidad"));
+            bean.setUnidad(rs.getString("Unidad"));
             bean.setProteinas(rs.getDouble("Proteinas"));
             bean.setLipidos(rs.getDouble("Lipidos"));
             bean.setCarbohidratos(rs.getDouble("Carbohidratos"));
@@ -185,4 +223,5 @@ public class AlimentoDAOImpl implements AlimentoDAO {
             }catch(SQLException e){}
         }
     }
+
 }
