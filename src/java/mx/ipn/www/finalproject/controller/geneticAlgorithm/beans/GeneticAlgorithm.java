@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import mx.ipn.www.finalproject.controller.geneticAlgorithm.constants.ConstantMealDistribution;
+import mx.ipn.www.finalproject.controller.geneticAlgorithm.constants.ConstantSpeedLoseWeight;
 import mx.ipn.www.finalproject.model.Alimento;
 import mx.ipn.www.finalproject.model.CategoriaalimentoKey;
 import mx.ipn.www.finalproject.model.Planalimenticio;
@@ -29,9 +30,11 @@ public class GeneticAlgorithm {
     
     private Map<Integer, List<Alimento>> foodByCategory;
     private Population population;
+    private ObjectiveCalories objectiveCalories;
     
-    public GeneticAlgorithm(int populationSize) throws ServletException {
+    public GeneticAlgorithm(int populationSize, int kilocal, short speed) throws ServletException {
         foodByCategory = new HashMap<>();
+        objectiveCalories = new ObjectiveCalories(kilocal, speed);
         ConnectionByPayaraSource connector = new ConnectionByPayaraSource();
         ConstantMealDistribution cmd = new ConstantMealDistribution(3);
         Meal [] shellMeal = cmd.getTiempos();
@@ -53,7 +56,7 @@ public class GeneticAlgorithm {
         connector.destroy();
         
         MealPlanInformation mpi = new MealPlanInformation(shellMeal);
-        this.population = new Population(populationSize, mpi, foodByCategory);
+        this.population = new Population(populationSize, mpi, foodByCategory, objectiveCalories);
         
     }
     
@@ -63,12 +66,14 @@ public class GeneticAlgorithm {
     }
     
     public static void main(String[] args) {
+        GeneticAlgorithm ga;
         try {
-            GeneticAlgorithm ga = new GeneticAlgorithm(10000000);
+            ga = new GeneticAlgorithm(1000, 1900, ConstantSpeedLoseWeight.SLOW_SPEED);
             ga.runAlgorithm();
         } catch (ServletException ex) {
             Logger.getLogger(GeneticAlgorithm.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
     
     

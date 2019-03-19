@@ -16,21 +16,23 @@ import mx.ipn.www.finalproject.model.Alimento;
  */
 public class Population {
     
-    protected int populationSize;
-    protected MealPlanInformation mpi;
-    Map<Integer, List<Alimento>> foodByCategory;
+    private int populationSize;
+    private MealPlanInformation mpi;
+    private Map<Integer, List<Alimento>> foodByCategory;
+    private ObjectiveCalories objectiveCalories;
     
     
-    Population(int populationSize, MealPlanInformation mpi, Map<Integer, List<Alimento>> foodByCategory) {
+    Population(int populationSize, MealPlanInformation mpi, Map<Integer, List<Alimento>> foodByCategory, ObjectiveCalories objectiveCalories) {
         this.populationSize = populationSize;
         this.mpi = mpi;
         this.foodByCategory = foodByCategory;
+        this.objectiveCalories = objectiveCalories;
     }
     
     public void generatePopulation() {
         Map<Double, Individual> initialPopulation = new TreeMap<>();
         for (int i = 0; i < this.populationSize; i++) {
-            Individual x = new Individual(mpi,foodByCategory);
+            Individual x = new Individual(mpi,foodByCategory, objectiveCalories);
             x.calculateHability();
             initialPopulation.put(x.getAptitud(), x);
         }
