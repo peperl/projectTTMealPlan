@@ -5,7 +5,10 @@
  */
 package mx.ipn.www.finalproject.controller.geneticAlgorithm.beans;
 
-import mx.ipn.www.finalproject.controller.geneticAlgorithm.planDistribution.ConstantMealDistribution;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+import mx.ipn.www.finalproject.model.Alimento;
 
 /**
  *
@@ -13,23 +16,23 @@ import mx.ipn.www.finalproject.controller.geneticAlgorithm.planDistribution.Cons
  */
 public class Population {
     
-    protected int size;
+    protected int populationSize;
     protected MealPlanInformation mpi;
-        
-
-    public Population (int size, MealPlanInformation mpi) {
-        this.size = size;
+    Map<Integer, List<Alimento>> foodByCategory;
+    
+    
+    Population(int populationSize, MealPlanInformation mpi, Map<Integer, List<Alimento>> foodByCategory) {
+        this.populationSize = populationSize;
         this.mpi = mpi;
+        this.foodByCategory = foodByCategory;
     }
     
     public void generatePopulation() {
-        
-    }
-    
-    public static void main(String[] args) {
-        ConstantMealDistribution cmd = new ConstantMealDistribution(3);
-        MealPlanInformation mpi = new MealPlanInformation(0, cmd.getTiempos());
-        Population population = new Population(1000, mpi);
-        population.generatePopulation();
+        Map<Double, Individual> initialPopulation = new TreeMap<>();
+        for (int i = 0; i < this.populationSize; i++) {
+            Individual x = new Individual(mpi,foodByCategory);
+            x.calculateHability();
+            initialPopulation.put(x.getAptitud(), x);
+        }
     }
 }

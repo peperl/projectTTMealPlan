@@ -9,15 +9,17 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
-import mx.ipn.www.finalproject.controller.geneticAlgorithm.planDistribution.ConstantMealDistribution;
+import mx.ipn.www.finalproject.controller.geneticAlgorithm.constants.ConstantMealDistribution;
 import mx.ipn.www.finalproject.model.Alimento;
 import mx.ipn.www.finalproject.model.CategoriaalimentoKey;
 import mx.ipn.www.finalproject.model.Planalimenticio;
 import mx.ipn.www.finalproject.model.dao.AlimentoDAO;
 import mx.ipn.www.finalproject.model.orm.AlimentoDAOImpl;
 import mx.ipn.www.finalproject.utils.ConnectionByPayaraSource;
-//import mx.ipn.www.finalproject.utils.ConnectionByJDBC;
 
 /**
  *
@@ -25,47 +27,49 @@ import mx.ipn.www.finalproject.utils.ConnectionByPayaraSource;
  */
 public class GeneticAlgorithm {
     
-    ConstantMealDistribution cmd;
-    Meal [] shellMeal;
-    HashMap<Integer, List<Alimento>> foodByCategory = new HashMap<Integer, List<Alimento>>();
+    private Map<Integer, List<Alimento>> foodByCategory;
+    private Population population;
     
-    public GeneticAlgorithm() throws ServletException, SQLException {
-
-        ConnectionByPayaraSource connectionClass = new ConnectionByPayaraSource();
-
-        this.cmd = new ConstantMealDistribution(3);
-        this.shellMeal = cmd.getTiempos();
-        Connection conn = connectionClass.initConnection();
+    public GeneticAlgorithm(int populationSize) throws ServletException {
+        foodByCategory = new HashMap<>();
+        ConnectionByPayaraSource connector = new ConnectionByPayaraSource();
+        ConstantMealDistribution cmd = new ConstantMealDistribution(3);
+        Meal [] shellMeal = cmd.getTiempos();
+        Connection conn = connector.initConnection();
         AlimentoDAO alimentoDAO = new AlimentoDAOImpl();
         
-        for (Meal meal : this.shellMeal) {
+        for (Meal meal : shellMeal) {
             for (Integer idCategoria : meal.getCategoria()) {
-                if (!foodByCategory.containsKey(idCategoria)) {
-                    List<Alimento> a = alimentoDAO.loadByCategory(new CategoriaalimentoKey(idCategoria), conn);
-                    foodByCategory.put(idCategoria, a);
+                try {
+                    if (!foodByCategory.containsKey(idCategoria)) {
+                        List<Alimento> a = alimentoDAO.loadByCategory(new CategoriaalimentoKey(idCategoria), conn);
+                        foodByCategory.put(idCategoria, a);
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(GeneticAlgorithm.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
-        connectionClass.destroy();
+        connector.destroy();
         
-        for (List<Alimento> value : foodByCategory.values()) {
-            System.out.println(value);
-            System.out.println();
-        }
+        MealPlanInformation mpi = new MealPlanInformation(shellMeal);
+        this.population = new Population(populationSize, mpi, foodByCategory);
+        
     }
     
     public Planalimenticio runAlgorithm() {
-        
+        this.population.generatePopulation();
         return null;
     }
     
-    private Individual mutation(Individual old, int foodNumber) {
-        return null;
-
+    public static void main(String[] args) {
+        try {
+            GeneticAlgorithm ga = new GeneticAlgorithm(10000000);
+            ga.runAlgorithm();
+        } catch (ServletException ex) {
+            Logger.getLogger(GeneticAlgorithm.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
-    private Individual crossing(Individual a, Individual b) {
-        return null;
-    }
     
 }

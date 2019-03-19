@@ -1,10 +1,12 @@
-package mx.ipn.www.finalproject.controller.geneticAlgorithm.planDistribution;
+package mx.ipn.www.finalproject.controller.geneticAlgorithm.constants;
 
 import mx.ipn.www.finalproject.controller.geneticAlgorithm.beans.Meal;
 
 /**
  *
  * @author pepe
+ * Class dedicated to know the categories of each meal according
+ * with the quantity of the meals.
  */
 public class ConstantMealDistribution {
 
@@ -24,13 +26,13 @@ public class ConstantMealDistribution {
     public ConstantMealDistribution(int tiempos) {
         if (tiempos == 3) {
             Integer[] desayunoCategorias = {1,2,4,3,5};
-            Meal desayuno = new Meal(5 , desayunoCategorias );
+            Meal desayuno = new Meal(desayunoCategorias );
 
             Integer[] comidaCategorias = {2,4,6,5,3};
-            Meal comida = new Meal(5 , comidaCategorias );
+            Meal comida = new Meal(comidaCategorias );
 
             Integer[] cenaCategorias = {1,2,4,3,5};
-            Meal cena = new Meal(5 , cenaCategorias );
+            Meal cena = new Meal(cenaCategorias );
 
              this.tiempos = new Meal[3];
              this.tiempos[0] = desayuno;

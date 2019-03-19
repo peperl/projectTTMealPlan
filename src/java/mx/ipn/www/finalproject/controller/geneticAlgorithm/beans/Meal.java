@@ -11,20 +11,10 @@ package mx.ipn.www.finalproject.controller.geneticAlgorithm.beans;
  */
 public class Meal {
     
-    private int quantityOfDishes;
     private Integer[] categoria;
 
-    public Meal(int quantity, Integer[] categoria) {
-        this.quantityOfDishes = quantity;
+    public Meal(Integer[] categoria) {
         this.categoria = categoria;
-    }
-
-    public int getQuantityOfDishes() {
-        return quantityOfDishes;
-    }
-
-    public void setQuantityOfDishes(int quantityOfDishes) {
-        this.quantityOfDishes = quantityOfDishes;
     }
 
     public Integer[] getCategoria() {
