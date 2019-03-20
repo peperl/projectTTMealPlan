@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import mx.ipn.www.finalproject.controller.geneticAlgorithm.constants.ConstantMealDistribution;
 import mx.ipn.www.finalproject.controller.geneticAlgorithm.constants.ConstantSpeedLoseWeight;
@@ -32,13 +33,18 @@ public class GeneticAlgorithm {
     private Population population;
     private ObjectiveCalories objectiveCalories;
     
-    public GeneticAlgorithm(int populationSize, int kilocal, short speed) throws ServletException {
+    public GeneticAlgorithm(int populationSize, int kilocal, short speed) throws ServletException, NamingException {
         foodByCategory = new HashMap<>();
         objectiveCalories = new ObjectiveCalories(kilocal, speed);
         ConnectionByPayaraSource connector = new ConnectionByPayaraSource();
         ConstantMealDistribution cmd = new ConstantMealDistribution(3);
         Meal [] shellMeal = cmd.getTiempos();
-        Connection conn = connector.initConnection();
+        Connection conn = null;
+        try {
+            conn = connector.initConnection();
+        } catch (SQLException ex) {
+            Logger.getLogger(GeneticAlgorithm.class.getName()).log(Level.SEVERE, null, ex);
+        }
         AlimentoDAO alimentoDAO = new AlimentoDAOImpl();
         
         for (Meal meal : shellMeal) {
@@ -71,6 +77,8 @@ public class GeneticAlgorithm {
             ga = new GeneticAlgorithm(1000, 1900, ConstantSpeedLoseWeight.SLOW_SPEED);
             ga.runAlgorithm();
         } catch (ServletException ex) {
+            Logger.getLogger(GeneticAlgorithm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NamingException ex) {
             Logger.getLogger(GeneticAlgorithm.class.getName()).log(Level.SEVERE, null, ex);
         }
         

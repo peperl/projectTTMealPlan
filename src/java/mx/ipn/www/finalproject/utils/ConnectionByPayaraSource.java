@@ -6,6 +6,8 @@
 package mx.ipn.www.finalproject.utils;
 
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.sql.*;
 import javax.naming.*;
 import javax.servlet.ServletException;
@@ -20,22 +22,13 @@ public class ConnectionByPayaraSource {
     private DataSource ds = null;
     private Connection conn = null;
         
-  public Connection initConnection () throws ServletException {
-    try {
+  public Connection initConnection () throws ServletException, NamingException, NamingException, SQLException {
       ctx = new InitialContext();
       //MySqlConnector es el nombre que le di a mi recurso en payara
       ds = (DataSource) ctx.lookup("java:comp/DefaultDataSource");
         System.out.println("");
       conn = ds.getConnection();
       return conn;
-    }
-    catch (SQLException se) {
-      System.out.println("SQLException: "+se.getMessage());
-    }
-    catch (NamingException ne) {
-      System.out.println("NamingException: "+ne.getMessage());
-    }
-    return null;
   }
 
   public void destroy () {

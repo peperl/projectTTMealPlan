@@ -15,6 +15,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.naming.NamingException;
 import mx.ipn.www.finalproject.model.Nutricionista;
 import mx.ipn.www.finalproject.model.Usuario;
 import mx.ipn.www.finalproject.model.dao.NutricionistaDAO;
@@ -41,45 +42,52 @@ public class registerNutricionista extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        response.setContentType("text/html;charset=UTF-8");
-        String nombre = request.getParameter("nomD");
-        String apellido = request.getParameter("apeD");
-        String cedula = request.getParameter("cedula");
-        String escuela = request.getParameter("escuela");
-        String email = request.getParameter("email");
-        String telefono = request.getParameter("idTelefono");
-        String direccion = request.getParameter("idDireccion");
-        String password = request.getParameter("idPassword");
-        String confirmPassword = request.getParameter("idConfirm");
-        String termsCheck = request.getParameter("termsCheck");
-        
-        SimpleDateFormat format = new SimpleDateFormat("d/M/yyyy");
-        java.util.Date fechanacimiento = new java.util.Date();
         try {
-            fechanacimiento = format.parse(request.getParameter("nacimiento"));
-        } catch (ParseException ex) {
+            
+            response.setContentType("text/html;charset=UTF-8");
+            String nombre = request.getParameter("nomD");
+            String apellido = request.getParameter("apeD");
+            String cedula = request.getParameter("cedula");
+            String escuela = request.getParameter("escuela");
+            String email = request.getParameter("email");
+            String telefono = request.getParameter("idTelefono");
+            String direccion = request.getParameter("idDireccion");
+            String password = request.getParameter("idPassword");
+            String confirmPassword = request.getParameter("idConfirm");
+            String termsCheck = request.getParameter("termsCheck");
+            
+            SimpleDateFormat format = new SimpleDateFormat("d/M/yyyy");
+            java.util.Date fechanacimiento = new java.util.Date();
+            try {
+                fechanacimiento = format.parse(request.getParameter("nacimiento"));
+            } catch (ParseException ex) {
+                Logger.getLogger(registerNutricionista.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            java.util.Date fechaRegistro = new java.util.Date();
+            
+            ConnectionByPayaraSource connectionClass = new ConnectionByPayaraSource();
+            Connection con = connectionClass.initConnection();
+            Usuario usuario = new Usuario(email, password);
+            UsuarioDAO usuarioDAO = new UsuarioDAOImpl();
+            Nutricionista nutricionista;
+            NutricionistaDAO nutricionistaDAO = new NutricionistaDAOImpl();
+            
+            try {
+                usuarioDAO.create(usuario, con);
+                usuario = usuarioDAO.loadByData(usuario, con);
+                nutricionista =  new Nutricionista(usuario.getIdusuario(), nombre + " " + apellido, cedula, fechanacimiento, escuela, telefono, direccion, 0, fechaRegistro);
+                nutricionistaDAO.create(nutricionista, con);
+            } catch (SQLException ex) {
+                Logger.getLogger(registerNutricionista.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            connectionClass.destroy();
+            response.sendRedirect("/projectTTMealPlan/pages/login.html?registerN=successful");
+        } catch (NamingException ex) {
             Logger.getLogger(registerNutricionista.class.getName()).log(Level.SEVERE, null, ex);
-        }
-                
-                
-        java.util.Date fechaRegistro = new java.util.Date();
-        
-        ConnectionByPayaraSource connectionClass = new ConnectionByPayaraSource();
-        Connection con = connectionClass.initConnection();
-        Usuario usuario = new Usuario(email, password);
-        UsuarioDAO usuarioDAO = new UsuarioDAOImpl();
-        Nutricionista nutricionista;
-        NutricionistaDAO nutricionistaDAO = new NutricionistaDAOImpl();
-        
-        try {
-            usuarioDAO.create(usuario, con);
-            usuario = usuarioDAO.loadByData(usuario, con);
-            nutricionista =  new Nutricionista(usuario.getIdusuario(), nombre + " " + apellido, cedula, fechanacimiento, escuela, telefono, direccion, 0, fechaRegistro);
-            nutricionistaDAO.create(nutricionista, con);
         } catch (SQLException ex) {
             Logger.getLogger(registerNutricionista.class.getName()).log(Level.SEVERE, null, ex);
         }
-        connectionClass.destroy();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
