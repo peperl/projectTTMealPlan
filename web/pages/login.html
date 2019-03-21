@@ -336,6 +336,29 @@
       setFormValidation('#LoginF');
     });
   </script>
+  <script>
+    var pathname = window.location.href;
+    console.log(window.location);
+    var url = new URL(pathname);
+    var c = url.searchParams.get("registerN");
+    var result = c.localeCompare("successful");
+    if (result == 0) {
+        $.notify({
+            title: '<strong>Registro exitoso</strong>',
+            message: 'Se realizó el registro con éxito.'
+        },{
+            type: 'success',
+            delay: 5000,
+            placement: {
+		from: "top",
+		align: "left"
+            }            
+        }
+        );
+    }
+    
+      
+  </script>
 </body>
 
 </html>
