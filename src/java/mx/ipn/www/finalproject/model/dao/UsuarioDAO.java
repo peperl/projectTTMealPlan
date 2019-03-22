@@ -41,6 +41,14 @@ public interface UsuarioDAO {
     public Usuario loadByData(Usuario usuario, Connection conn) throws SQLException;
 
     /**
+     * Retrive a record from Database.
+     * @param beanKey   The PK Object to be retrived.
+     * @param conn      JDBC Connection.
+     * @exception       SQLException if something is wrong.
+     */
+    public Usuario loadForLogin(Usuario usuario, Connection conn) throws SQLException;
+    
+    /**
      * Update a record in Database.
      * @param bean   The Object to be saved.
      * @param conn   JDBC Connection.

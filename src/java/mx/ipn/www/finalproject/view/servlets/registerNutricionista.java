@@ -82,7 +82,7 @@ public class registerNutricionista extends HttpServlet {
                 Logger.getLogger(registerNutricionista.class.getName()).log(Level.SEVERE, null, ex);
             }
             connectionClass.destroy();
-            response.sendRedirect("/projectTTMealPlan/pages/login.html?registerN=successful");
+            response.sendRedirect("./pages/login.html?registerN=successful");
         } catch (NamingException ex) {
             Logger.getLogger(registerNutricionista.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {

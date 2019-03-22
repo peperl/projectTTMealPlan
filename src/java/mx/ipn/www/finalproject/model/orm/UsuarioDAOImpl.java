@@ -43,6 +43,13 @@ public class UsuarioDAOImpl implements UsuarioDAO {
         + "FROM Usuario WHERE "
         + "Correo = ? AND Pass = ?";
 
+    /* SQL to select data without id*/
+    private static final String SQL_SELECT_FOR_LOGIN_NUTRICIONISTA =
+        "SELECT "
+        + "Usuario.idUsuario, Usuario.Correo, Usuario.Pass FROM Usuario INNER JOIN Nutricionista " +
+        "ON Usuario.idUsuario = Nutricionista.Usuario_idUsuario WHERE "
+        + "Usuario.Correo = ? AND Usuario.Pass = ?";
+
     /* SQL to update data */
     private static final String SQL_UPDATE =
         "UPDATE Usuario SET "
@@ -123,6 +130,31 @@ public class UsuarioDAOImpl implements UsuarioDAO {
         }
     }    
     
+    /**
+     * Retrive a record from Database.
+     * @param beanKey   The PK Object to be retrived.
+     * @param conn      JDBC Connection.
+     * @exception       SQLException if something is wrong.
+     */
+    public Usuario loadForLogin(Usuario usuario, Connection conn) throws SQLException {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            ps = conn.prepareStatement(SQL_SELECT_FOR_LOGIN_NUTRICIONISTA);
+            ps.setString(1, usuario.getCorreo());
+            ps.setString(2, usuario.getPass());
+            rs = ps.executeQuery();
+            List results = getResults(rs);
+            if (results.size() > 0)
+                return (Usuario) results.get(0);
+            else
+                return null;
+        }finally {
+            close(rs);
+            close(ps);
+        }
+    }    
+
     /**
      * Update a record in Database.
      * @param bean   The Object to be saved.
