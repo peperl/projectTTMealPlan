@@ -96,68 +96,38 @@
 
 
       <!-- Navbar -->
-			<nav class="navbar navbar-transparent navbar-absolute">
+			<nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top " id="navigation-example">
 			    <div class="container-fluid">
-			        <div class="navbar-minimize">
-			            <button id="minimizeSidebar" class="btn btn-round btn-white btn-fill btn-just-icon">
-			                <i class="material-icons visible-on-sidebar-regular">more_vert</i>
-			                <i class="material-icons visible-on-sidebar-mini">view_list</i>
-			            </button>
-			        </div>
-			        <div class="navbar-header">
-			            <button type="button" class="navbar-toggle" data-toggle="collapse">
-			                <span class="sr-only">Toggle navigation</span>
-			                <span class="icon-bar"></span>
-			                <span class="icon-bar"></span>
-			                <span class="icon-bar"></span>
-			            </button>
-			            <a class="navbar-brand" href="#"> Wizard </a>
-			        </div>
-			        <div class="collapse navbar-collapse">
+                                <div class="navbar-wrapper">
+                                    <div class="navbar-minimize">
+                                      <button id="minimizeSidebar" class="btn btn-just-icon btn-white btn-fab btn-round">
+                                        <i class="material-icons text_align-center visible-on-sidebar-regular">more_vert</i>
+                                        <i class="material-icons design_bullet-list-67 visible-on-sidebar-mini">view_list</i>
+                                      </button>
+                                    </div>
+                                    <a class="navbar-brand" href="#pablo">Lista de Pacientes</a>
+                                </div>
+                                <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation" data-target="#navigation-example">
+                                  <span class="sr-only">Toggle navigation</span>
+                                  <span class="navbar-toggler-icon icon-bar"></span>
+                                  <span class="navbar-toggler-icon icon-bar"></span>
+                                  <span class="navbar-toggler-icon icon-bar"></span>
+                                </button>
+			        <div class="collapse navbar-collapse justify-content-end">
 			            <ul class="nav navbar-nav navbar-right">
-			                <li>
-			                    <a href="#pablo" class="dropdown-toggle" data-toggle="dropdown">
-			                        <i class="material-icons">dashboard</i>
-			                        <p class="hidden-lg hidden-md">Dashboard</p>
-			                    </a>
-			                </li>
-			                <li class="dropdown">
-			                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-			                        <i class="material-icons">notifications</i>
-			                        <span class="notification">5</span>
-			                        <p class="hidden-lg hidden-md">
-			                            Notifications
-			                            <b class="caret"></b>
-			                        </p>
-			                    </a>
-			                    <ul class="dropdown-menu">
-			                        <li><a href="#">Mike John responded to your email</a></li>
-			                        <li><a href="#">You have 5 new tasks</a></li>
-			                        <li><a href="#">You're now friend with Andrew</a></li>
-			                        <li><a href="#">Another Notification</a></li>
-			                        <li><a href="#">Another One</a></li>
-			                    </ul>
-			                </li>
-			                <li>
-			                    <a href="#pablo" class="dropdown-toggle" data-toggle="dropdown">
-			                       <i class="material-icons">person</i>
-			                       <p class="hidden-lg hidden-md">Profile</p>
-			                    </a>
-			                </li>
-
-			                <li class="separator hidden-lg hidden-md"></li>
-			            </ul>
-
-
-			            <form class="navbar-form navbar-right" role="search">
-			                <div class="form-group form-search is-empty">
-			                    <input type="text" class="form-control" placeholder=" Search ">
-			                    <span class="material-input"></span>
-			                </div>
-			                <button type="submit" class="btn btn-white btn-round btn-just-icon">
-			                    <i class="material-icons">search</i><div class="ripple-container"></div>
-			                </button>
-			            </form>
+                                        <li class="nav-item dropdown">
+                                          <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="material-icons">person</i>
+                                            <p class="d-lg-none d-md-block">
+                                              Cuenta
+                                            </p>
+                                          </a>
+                                          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                            <a class="dropdown-item" href="#"><i class="material-icons">edit</i>Editar Perfil</a>
+                                            <a class="dropdown-item" href="#"><i class="material-icons">exit_to_app</i>Cerrar Sesión</a>
+                                          </div>
+                                        </li>
+                                    </ul>
 			        </div>
 			    </div>
 			</nav>
@@ -171,7 +141,7 @@
             <!--      Wizard container        -->
             <div class="wizard-container">
               <div class="card card-wizard" data-color="rose" id="wizardProfile">
-                <form method = "POST" action = "muestraCodigo.html">
+                <form method = "POST" action = "../RegistroPaciente">
                   <!--        You can switch " data-color="primary" "  with one of the next bright colors: "green", "orange", "red", "blue"       -->
                   <div class="card-header text-center">
                     <h3 class="card-title">
@@ -208,7 +178,9 @@
                       <div class="tab-pane active" id="personales">
                         <h5 class="info-text"> Introduzca la información personal del paciente</h5>
                         <div class="row justify-content-center">
+                            
                           <div class="col-sm-6">
+                              <!--Nombre-->
                             <div class="input-group form-control-lg">
                               <div class="input-group-prepend">
                                 <span class="input-group-text">
@@ -217,9 +189,10 @@
                               </div>
                               <div class="form-group">
                                 <label for="exampleInput1" class="bmd-label-floating">Nombre</label>
-                                <input type="text" class="form-control" id="exampleInput1" name="firstname" required>
+                                <input type="text" class="form-control" id="firstname" name="firstname" required>
                               </div>
                             </div>
+                              <!--Fecha de nacimiento-->
                             <div class="input-group form-control-lg">
                               <div class="input-group-prepend">
                                 <span class="input-group-text">
@@ -228,23 +201,10 @@
                               </div>
                               <div class="form-group">
                                 <label class="label-control">Fecha de Nacimiento</label>
-                                <input type="text" class="form-control datepicker" value="10/06/2000">
+                                <input type="text" class="form-control datepicker" id="dateBirth" name="dateBirth" value="10/06/2000">
                               </div>
                             </div>
-                            <div class="input-group form-control-lg">
-                              <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                  <i class="material-icons">school</i>
-                                </span>
-                              </div>
-                              <div class="form-group">
-                                <select class="selectpicker" data-style="select-with-transition" title="Escolaridad">
-                                  <option value="2">Paris </option>
-                                  <option value="3">Bucharest</option>
-                                  
-                                </select>
-                              </div>
-                            </div>
+                              <!--Telefono-->
                             <div class="input-group form-control-lg">
                               <div class="input-group-prepend">
                                 <span class="input-group-text">
@@ -253,11 +213,12 @@
                               </div>
                               <div class="form-group">
                                 <label for="exampleInput1" class="bmd-label-floating">Teléfono</label>
-                                <input type="tel" class="form-control" id="exampleInput1" name="firstname">
+                                <input type="tel" class="form-control" id="telephone" name="telephone">
                               </div>
                             </div>
                           </div>
                           <div class="col-sm-6">
+                              <!--Apellidos-->
                             <div class="input-group form-control-lg">
                               <div class="input-group-prepend">
                                 <span class="input-group-text">
@@ -266,9 +227,10 @@
                               </div>
                               <div class="form-group">
                                 <label for="exampleInput1" class="bmd-label-floating">Apellidos</label>
-                                <input type="text" class="form-control" id="exampleInput1" name="firstname">
+                                <input type="text" class="form-control" id="lastname" name="lastname">
                               </div>
                             </div>
+                              <!--Estado Civil-->
                             <div class="input-group form-control-lg">
                               <div class="input-group-prepend">
                                 <span class="input-group-text">
@@ -285,6 +247,7 @@
                                 </select>
                               </div>
                             </div>
+                              <!--Ocupación-->
                             <div class="input-group form-control-lg">
                               <div class="input-group-prepend">
                                 <span class="input-group-text">
@@ -293,9 +256,10 @@
                               </div>
                               <div class="form-group">
                                 <label for="exampleInput1" class="bmd-label-floating">Ocupación</label>
-                                <input type="text" class="form-control" id="exampleInput1" name="firstname">
+                                <input type="text" class="form-control" id="ocupacion" name="ocupacion">
                               </div>
                             </div>
+                              <!--email-->
                             <div class="input-group form-control-lg">
                               <div class="input-group-prepend">
                                 <span class="input-group-text">
@@ -304,7 +268,7 @@
                               </div>
                               <div class="form-group">
                                 <label for="exampleInput1" class="bmd-label-floating">Correo electrónico</label>
-                                <input type="email" class="form-control" id="exampleInput1" name="firstname">
+                                <input type="email" class="form-control" id="correo" name="correo">
                               </div>
                             </div>
                           </div>
@@ -317,10 +281,11 @@
                               </div>
                               <div class="form-group">
                                 <label for="exampleInput1" class="bmd-label-floating">Dirección</label>
-                                <input type="text" class="form-control" id="a" name="hh">
+                                <input type="text" class="form-control" id="address" name="address">
                               </div>
                             </div>
                           </div>
+                            
                         </div>
                       </div>
                       <div class="tab-pane" id="medidas">
@@ -335,7 +300,7 @@
                               </div>
                               <div class="form-group">
                                 <label for="exampleInput1" class="bmd-label-floating">Peso (3 meses antes)</label>
-                                <input type="text" class="form-control" id="a" name="a">
+                                <input type="number" class="form-control" id="weightBefore" name="weightBefore">
                               </div>
                             </div>
                             <div class="input-group form-control-lg">
@@ -346,7 +311,7 @@
                               </div>
                               <div class="form-group">
                                 <label for="exampleInput1" class="bmd-label-floating">Circunferencia Braquial</label>
-                                <input type="text" class="form-control" id="v" name="v">
+                                <input type="text" class="form-control" id="branquial" name="branquial">
                               </div>
                             </div>
                           </div>
@@ -359,7 +324,7 @@
                               </div>
                               <div class="form-group">
                                 <label for="exampleInput1" class="bmd-label-floating">Estatura</label>
-                                <input type="text" class="form-control" id="v" name="v">
+                                <input type="text" class="form-control" id="height" name="height">
                               </div>
                             </div>
                             <div class="input-group form-control-lg">
@@ -370,14 +335,14 @@
                               </div>
                               <div class="form-group">
                                 <label for="exampleInput1" class="bmd-label-floating">Circunferencia Pantorrilla</label>
-                                <input type="text" class="form-control" id="v" name="v">
+                                <input type="text" class="form-control" id="Pantorrilla" name="Pantorrilla">
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
                       <div class="tab-pane" id="antecedentes">
-                        <h5>Introduzac los antecedentes del paciente</h5>
+                        <h5>Introduzca los antecedentes del paciente</h5>
                         <div class="row justify-content-center">
                           <div class="col-sm-6">
                             <div class="input-group form-control-lg">
@@ -388,7 +353,7 @@
                               </div>
                               <div class="form-group">
                                 <label for="exampleInput1" class="bmd-label-floating">Actividad Física</label>
-                                <input type="text" class="form-control" id="a" name="a">
+                                <input type="text" class="form-control" id="phisicalActivity" name="phisicalActivity">
                               </div>
                             </div>
                           </div>
@@ -401,7 +366,7 @@
                               </div>
                               <div class="form-group">
                                 <label for="exampleInput1" class="bmd-label-floating">No. Comidas Actuales</label>
-                                <input type="text" class="form-control" id="a" name="a">
+                                <input type="text" class="form-control" id="actualMealsQty" name="actualMealsQty">
                               </div>
                             </div>
                           </div>
@@ -412,7 +377,7 @@
                             <div class="input-group form-control-lg">
                               <div class="form-group">
                                 <label for="exampleInput1" class="bmd-label-floating">Proteínas</label>
-                                <input type="text" class="form-control" id="a" name="a">
+                                <input type="text" class="form-control" id="actualProteins" name="actualProteins">
                               </div>
                             </div>
                           </div>
@@ -420,7 +385,7 @@
                             <div class="input-group form-control-lg">
                               <div class="form-group">
                                 <label for="exampleInput1" class="bmd-label-floating">Carbohidratos</label>
-                                <input type="text" class="form-control" id="a" name="a">
+                                <input type="text" class="form-control" id="actualCarbo" name="actualCarbo">
                               </div>
                             </div>
                           </div>
@@ -428,7 +393,7 @@
                             <div class="input-group form-control-lg">
                               <div class="form-group">
                                 <label for="exampleInput1" class="bmd-label-floating">Lípidos</label>
-                                <input type="text" class="form-control" id="a" name="a">
+                                <input type="text" class="form-control" id="actualLipid" name="actualLipid">
                               </div>
                             </div>
                           </div>
@@ -438,7 +403,7 @@
                             <div class="row">
                               <div class="col-sm-6">
                                 <div class="choice" data-toggle="wizard-checkbox" id="difC">
-                                  <input type="checkbox" name="Aextras" value="Design">
+                                    <input type="checkbox" id="Aextras" name="Aextras" value="Design">
                                   <div class="icon">
                                     <i class="fa fa-cutlery"></i>
                                   </div>
@@ -447,7 +412,7 @@
                               </div>
                               <div class="col-sm-6">
                                 <div class="choice" data-toggle="wizard-checkbox" id="enfT">
-                                  <input type="checkbox" name="Aextras" value="Code">
+                                    <input type="checkbox" id="AextrasDisease" name="AextrasDisease"  value="Code">
                                   <div class="icon">
                                     <i class="fa fa-heartbeat"></i>
                                   </div>
@@ -467,7 +432,7 @@
                               </div>
                               <div class="form-group">
                                 <label for="exampleInput1" class="bmd-label-floating">Dificultades Para Comer</label>
-                                <textarea class="form-control"></textarea> 
+                                <textarea id="difficultiesToEat" name="difficultiesToEat" class="form-control"></textarea> 
                               </div>
                             </div>
                           </div>
@@ -482,7 +447,7 @@
                               </div>
                               <div class="form-group">
                                 <label for="exampleInput1" class="bmd-label-floating">Enfermedades</label>
-                                <textarea class="form-control"></textarea> 
+                                <textarea id="diseases" name="diseases" class="form-control"></textarea> 
                               </div>
                             </div>
                           </div>
@@ -495,7 +460,7 @@
                               </div>
                               <div class="form-group">
                                 <label for="exampleInput1" class="bmd-label-floating">Tratamiento</label>
-                                <textarea class="form-control"></textarea> 
+                                <textarea id="treatment" name="treatment" class="form-control"></textarea> 
                               </div>
                             </div>
                           </div>
@@ -513,7 +478,7 @@
                               </div>
                               <div class="form-group">
                                 <label for="exampleInput1" class="bmd-label-floating">Comidas al día</label>
-                                <input type="text" class="form-control" id="a" name="a">
+                                <input type="text" class="form-control" id="newMealsQty" name="newMealsQty">
                               </div>
                             </div>
                             <div class="input-group form-control-lg">
@@ -524,7 +489,7 @@
                               </div>
                               <div class="form-group">
                                 <label for="exampleInput1" class="bmd-label-floating">Duración</label>
-                                <input type="text" class="form-control" id="v" name="v">
+                                <input type="text" class="form-control" id="timePlan" name="timePlan">
                               </div>
                             </div>
                             <div class="input-group form-control-lg">
@@ -534,14 +499,30 @@
                                 </span>
                               </div>
                               <div class="form-group">
-                                <select class="selectpicker" data-style="select-with-transition" title="velocidad de resultados">
-                                  <option value="2">Paris </option>
-                                  <option value="3">Bucharest</option>
-                                  
+                                  <select class="selectpicker" id="speed" name="speed" data-style="select-with-transition" title="velocidad de resultados">
+                                  <option value="Lento">Lento</option>
+                                  <option value="Normal">Normal</option>
+                                  <option value="Rapido">Rápido</option>
                                 </select>
                               </div>
                             </div>
                           </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
                           <div class="col-sm-6">
                             <h6><i class="material-icons">fastfood</i>Alimentos Evitados</h6>
                             <div class="row">
