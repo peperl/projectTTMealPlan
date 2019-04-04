@@ -44,7 +44,7 @@ public class AlimentoDAOImpl implements AlimentoDAO {
         + "idAlimento, Nombre, Cantidad, Unidad, Proteinas, Lipidos, Carbohidratos, Estado, "
         + "Categoria "
         + "FROM Alimento WHERE "
-        + "Categoria = ?";
+        + "Categoria = ? AND  Estado=1"; //Falta agregarle el left join para los alimentos que no quiere el usuario
 
     /* SQL to update data */
     private static final String SQL_UPDATE =

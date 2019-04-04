@@ -55,7 +55,7 @@
       <!--   you can change the color of the filter page using: data-color="blue | purple | green | orange | red | rose " -->
       <div class="container">
         <div class="col-lg-4 col-md-6 col-sm-6 ml-auto mr-auto">
-          <form id="LoginF" class="form" method="post" action="/projectTTMealPlans/Login">
+          <form id="LoginF" class="form" method="post" action="../Login">
             <div class="card card-login card-hidden">
               <div class="card-header card-header-rose text-center">
                 <h4 class="card-title">Iniciar Sesión</h4>
@@ -338,7 +338,6 @@
   </script>
   <script>
     var pathname = window.location.href;
-    console.log(window.location);
     var url = new URL(pathname);
     var c = url.searchParams.get("registerN");
     var result = c.localeCompare("successful");
@@ -356,8 +355,26 @@
         }
         );
     }
-    
-      
+  </script>
+  <script>
+    var pathname = window.location.href;
+    var url = new URL(pathname);
+    var c = url.searchParams.get("loginError");
+    var result = c.localeCompare("yes");
+    if (result == 0) {
+        $.notify({
+            title: '<strong>Acceso Negado</strong>',
+            message: 'El usuario y/o contraseña no son válidos.'
+        },{
+            type: 'danger',
+            delay: 5000,
+            placement: {
+		from: "top",
+		align: "left"
+            }            
+        }
+        );
+    }
   </script>
 </body>
 

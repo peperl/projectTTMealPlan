@@ -94,7 +94,7 @@
                     </div>
                   </div>
                   <div class="col-md-6 mr-auto">
-                    <form id="regForm" class="form" method="get" action="/projectTTMealPlan/registerNutricionista">
+                    <form id="regForm" class="form" method="get" action="../registerNutricionista">
                       <div class="form-group has-default">
                         <div class="input-group">
                           <div class="input-group-prepend">
@@ -122,7 +122,7 @@
                               <i class="material-icons">calendar_today</i>
                             </span>
                           </div>
-                            <input type="text" id="nacimiento" name="nacimiento" class="form-control timepicker" placeholder="FECHA DE NACIMIENTO" required>
+                            <input type="text" id="nacimiento" name="nacimiento" class="form-control datepicker" placeholder="FECHA DE NACIMIENTO" value="10/06/2000" required>
                         </div>
                       </div>                        
                       <div class="form-group has-default">
@@ -468,11 +468,13 @@
     });
   </script>
         <script type="text/javascript">
-            $(function () {
-                $('#nacimiento').datetimepicker({
-                    format: 'D/M/YYYY'
-                });
-            });
+    $(document).ready(function() {
+      // initialise Datetimepicker and Sliders
+      md.initFormExtendedDatetimepickers();
+      if ($('.slider').length != 0) {
+        md.initSliders();
+      }
+    });
         </script>  
 </body>
 

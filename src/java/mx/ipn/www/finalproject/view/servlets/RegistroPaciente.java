@@ -7,25 +7,16 @@ package mx.ipn.www.finalproject.view.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import mx.ipn.www.finalproject.model.Usuario;
-import mx.ipn.www.finalproject.model.dao.UsuarioDAO;
-import mx.ipn.www.finalproject.model.orm.UsuarioDAOImpl;
-import mx.ipn.www.finalproject.utils.ConnectionByPayaraSource;
 
 /**
  *
  * @author pepe
  */
-public class Login extends HttpServlet {
+public class RegistroPaciente extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,43 +29,19 @@ public class Login extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         response.setContentType("text/html;charset=UTF-8");
-        String correo = request.getParameter("emailadress");
-        String pass = request.getParameter("password");
-        Usuario result = null;
-        try {        
-            Usuario usuario = new Usuario(correo, pass);
-            ConnectionByPayaraSource connector = new ConnectionByPayaraSource();
-            Connection conn;
-
-            conn = connector.initConnection();
-            UsuarioDAO usuarioDAO = new UsuarioDAOImpl();
-            result = usuarioDAO.loadForLogin(usuario, conn);
-            connector.destroy();
-        } catch (NamingException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        if (result != null) {
-            response.sendRedirect("./pages/Nutricionista/BlankN.html");
-            //out.println("Funcionó");
-        } else {
-            response.sendRedirect("./pages/login.html?loginError=yes");
-        }
-        /*try (PrintWriter out = response.getWriter()) {
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Login</title>");            
+            out.println("<title>Servlet RegistroPaciente</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Login at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet RegistroPaciente at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
-        }*/
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -117,5 +84,3 @@ public class Login extends HttpServlet {
     }// </editor-fold>
 
 }
-
-
