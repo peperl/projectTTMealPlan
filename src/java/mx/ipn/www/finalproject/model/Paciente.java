@@ -7,6 +7,8 @@
 
 package mx.ipn.www.finalproject.model;
 
+import java.util.Date;
+
 /*
  * For Table paciente
  */
@@ -50,7 +52,7 @@ public class Paciente implements java.io.Serializable, Cloneable {
     protected double cirbraquial;
 
     /* CirPantorrilla */
-    protected String cirpantorrilla;
+    protected double cirpantorrilla;
 
     /* DificultadesAliment */
     protected String dificultadesaliment;
@@ -82,6 +84,34 @@ public class Paciente implements java.io.Serializable, Cloneable {
     /* Estado */
     protected int estado;
 
+    public Paciente(int usuarioIdusuario, int nutricionistaIdnutricionista, String nombre, String apellidos, Date fechanacimiento, String ocupacion, String telefono, String direccion, double pesoanterior, double estatura, double cirbraquial, double cirpantorrilla, String dificultadesaliment, String enfermedades, String tratamiento, double proteinaanterior, double lipidosanterior, double carbohidratosanterior, double comidasanterior, double actividadfisica) {
+        this.usuarioIdusuario = usuarioIdusuario;
+        this.nutricionistaIdnutricionista = nutricionistaIdnutricionista;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.fechanacimiento = fechanacimiento;
+        this.ocupacion = ocupacion;
+        this.telefono = telefono;
+        this.direccion = direccion;
+        this.pesoanterior = pesoanterior;
+        this.estatura = estatura;
+        this.cirbraquial = cirbraquial;
+        this.cirpantorrilla = cirpantorrilla;
+        this.dificultadesaliment = dificultadesaliment;
+        this.enfermedades = enfermedades;
+        this.tratamiento = tratamiento;
+        this.proteinaanterior = proteinaanterior;
+        this.lipidosanterior = lipidosanterior;
+        this.carbohidratosanterior = carbohidratosanterior;
+        this.comidasanterior = comidasanterior;
+        this.actividadfisica = actividadfisica;
+    }
+
+    public Paciente() {
+    }
+
+    
+    
     /* Return the key object. */
     public PacienteKey getKeyObject() {
         return _key;
@@ -209,12 +239,12 @@ public class Paciente implements java.io.Serializable, Cloneable {
     }
 
     /* CirPantorrilla */
-    public String getCirpantorrilla() {
+    public double getCirpantorrilla() {
         return cirpantorrilla;
     }
 
     /* CirPantorrilla */
-    public void setCirpantorrilla(String cirpantorrilla) {
+    public void setCirpantorrilla(double cirpantorrilla) {
         this.cirpantorrilla = cirpantorrilla;
     }
 
@@ -388,11 +418,7 @@ public class Paciente implements java.io.Serializable, Cloneable {
         if (this.cirbraquial != bean.cirbraquial)
             return false;
 
-        if (this.cirpantorrilla == null) {
-            if (bean.cirpantorrilla != null)
-                return false;
-        }
-        else if (!this.cirpantorrilla.equals(bean.cirpantorrilla)) 
+        if (this.cirpantorrilla != bean.cirpantorrilla)
             return false;
 
         if (this.dificultadesaliment == null) {

@@ -82,7 +82,7 @@ public class PacienteDAOImpl implements PacienteDAO {
             ps.setDouble(10, bean.getPesoanterior());
             ps.setDouble(11, bean.getEstatura());
             ps.setDouble(12, bean.getCirbraquial());
-            ps.setString(13, bean.getCirpantorrilla());
+            ps.setDouble(13, bean.getCirpantorrilla());
             ps.setString(14, bean.getDificultadesaliment());
             ps.setString(15, bean.getEnfermedades());
             ps.setString(16, bean.getTratamiento());
@@ -147,7 +147,7 @@ public class PacienteDAOImpl implements PacienteDAO {
             ps.setDouble(9, bean.getPesoanterior());
             ps.setDouble(10, bean.getEstatura());
             ps.setDouble(11, bean.getCirbraquial());
-            ps.setString(12, bean.getCirpantorrilla());
+            ps.setDouble(12, bean.getCirpantorrilla());
             ps.setString(13, bean.getDificultadesaliment());
             ps.setString(14, bean.getEnfermedades());
             ps.setString(15, bean.getTratamiento());
@@ -204,7 +204,7 @@ public class PacienteDAOImpl implements PacienteDAO {
             bean.setPesoanterior(rs.getDouble("PesoAnterior"));
             bean.setEstatura(rs.getDouble("Estatura"));
             bean.setCirbraquial(rs.getDouble("CirBraquial"));
-            bean.setCirpantorrilla(rs.getString("CirPantorrilla"));
+            bean.setCirpantorrilla(rs.getDouble("CirPantorrilla"));
             bean.setDificultadesaliment(rs.getString("DificultadesAliment"));
             bean.setEnfermedades(rs.getString("Enfermedades"));
             bean.setTratamiento(rs.getString("Tratamiento"));

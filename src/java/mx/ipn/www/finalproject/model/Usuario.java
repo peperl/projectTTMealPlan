@@ -23,6 +23,11 @@ public class Usuario implements java.io.Serializable, Cloneable {
     protected String pass;
 
     public Usuario() {
+        
+    }
+
+    public Usuario(String correo) {
+        this.correo = correo;
     }
 
     public Usuario(String correo, String pass) {
