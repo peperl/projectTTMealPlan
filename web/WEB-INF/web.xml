@@ -6,7 +6,7 @@
     </servlet>
     <servlet>
         <servlet-name>registerNutricionista</servlet-name>
-        <servlet-class>mx.ipn.www.finalproject.view.servlets.registerNutricionista</servlet-class>
+        <servlet-class>mx.ipn.www.finalproject.view.servlets.RegisterNutricionista</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>RegistroPaciente</servlet-name>

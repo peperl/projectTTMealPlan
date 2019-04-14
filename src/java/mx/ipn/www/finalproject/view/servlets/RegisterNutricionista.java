@@ -28,7 +28,7 @@ import mx.ipn.www.finalproject.utils.ConnectionByPayaraSource;
  *
  * @author pepe
  */
-public class registerNutricionista extends HttpServlet {
+public class RegisterNutricionista extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -61,7 +61,7 @@ public class registerNutricionista extends HttpServlet {
             try {
                 fechanacimiento = format.parse(request.getParameter("nacimiento"));
             } catch (ParseException ex) {
-                Logger.getLogger(registerNutricionista.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(RegisterNutricionista.class.getName()).log(Level.SEVERE, null, ex);
             }
             
             java.util.Date fechaRegistro = new java.util.Date();
@@ -79,14 +79,14 @@ public class registerNutricionista extends HttpServlet {
                 nutricionista =  new Nutricionista(usuario.getIdusuario(), nombre + " " + apellido, cedula, fechanacimiento, escuela, telefono, direccion, 0, fechaRegistro);
                 nutricionistaDAO.create(nutricionista, con);
             } catch (SQLException ex) {
-                Logger.getLogger(registerNutricionista.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(RegisterNutricionista.class.getName()).log(Level.SEVERE, null, ex);
             }
             connectionClass.destroy();
             response.sendRedirect("./pages/login.html?registerN=successful");
         } catch (NamingException ex) {
-            Logger.getLogger(registerNutricionista.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RegisterNutricionista.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(registerNutricionista.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RegisterNutricionista.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
