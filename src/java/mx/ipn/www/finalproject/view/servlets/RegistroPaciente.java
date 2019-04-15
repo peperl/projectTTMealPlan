@@ -9,6 +9,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -55,6 +58,38 @@ public class RegistroPaciente extends HttpServlet {
             &speed=Lento
             &finish=Guardar
         */
+        
+        
+        /*
+        Sin enfermeddes de dificultades para comer
+        
+            firstname=Pepe
+            dateBirth=10%2F06%2F2000
+        &telephone=5532530978
+        &lastname=Reyes&estadoCivil=Soltero
+        &ocupacion=Estudiante
+        &correo=pepe_2500%40hotmail.com
+        &address=Av+Juan+de+Dios+Batiz
+        &weightBefore=58
+        &branquial=25
+        &height=1.63
+        &Pantorrilla=10
+        &phisicalActivity=0
+        &actualMealsQty=3
+        &actualProteins=400
+        &actualCarbo=800
+        &actualLipid=100
+        &difficultiesToEat=
+        &diseases=
+        &treatment=
+        &newMealsQty=3
+        &timePlan=4
+        &speed=Lento
+        &alimentosEvitados=Leche
+        &alimEv=Huevo%2CLeche
+        &finish=Guardar        
+        
+        */
             
         String email = request.getParameter("correo");
         
@@ -62,7 +97,12 @@ public class RegistroPaciente extends HttpServlet {
         int nutricionistaIdnutricionista;
         String nombre = request.getParameter("firstname");
         String apellidos = request.getParameter("lastname");
-        Date fechanacimiento;
+        String fechaNacimientoString = request.getParameter("dateBirth");
+        
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+        LocalDate fechaNacimientoLocalDate = LocalDate.parse(fechaNacimientoString, formatter);
+        
+        Date fechanacimiento = Date.from(fechaNacimientoLocalDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
         String ocupacion = request.getParameter("ocupacion");
         String telefono = request.getParameter("telephone");
         String direccion = request.getParameter("address");
@@ -91,6 +131,7 @@ public class RegistroPaciente extends HttpServlet {
         } catch (SQLException ex) {
             Logger.getLogger(RegistroPaciente.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
