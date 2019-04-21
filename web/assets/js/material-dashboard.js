@@ -346,29 +346,29 @@ md = {
 
   initSliders: function() {
     // Sliders for demo purpose
-    $("#prot").html("30%");
-    $("#carb").html("50%");
-    $("#lip").html("20%");
     var slider1 = document.getElementById('slider1');
-
+    
     noUiSlider.create(slider1, {
-      start: 30,
+      start: 18,
       connect: [true, false],
-      step: 5,
+      step: 1,
       range: {
         min: 0,
         max: 100
       }
     });
     slider1.noUiSlider.on('update', function (values, handle) {
-      $("#prot").html(values[handle]+"%");
+        $("#proteinPercent").val(values[handle]);
+        $("#prot").html(values[handle]+"%");
     });
+    
+    
     var slider2 = document.getElementById('slider2');
 
     noUiSlider.create(slider2, {
       start: 50,
       connect: [true, false],
-      step: 5,
+      step: 1,
       range: {
         min: 0,
         max: 100
@@ -376,13 +376,14 @@ md = {
     });
     slider2.noUiSlider.on('update', function (values, handle) {
       $("#carb").html(values[handle]+"%");
+      $("#CarboPercent").val(values[handle]);
     });
     var slider3 = document.getElementById('slider3');
 
     noUiSlider.create(slider3, {
-      start: 20,
+      start: 32,
       connect: [true, false],
-      step: 5,
+      step: 1,
       range: {
         min: 0,
         max: 100
@@ -390,6 +391,7 @@ md = {
     });
     slider3.noUiSlider.on('update', function (values, handle) {
       $("#lip").html(values[handle]+"%");
+      $("#lipPercent").val(values[handle]);
     });
   },
 

@@ -19,6 +19,17 @@ public class Alimentosexcluidos implements java.io.Serializable, Cloneable {
     /* Alimento_idAlimento, PK */
     protected int alimentoIdalimento;
 
+    public Alimentosexcluidos(int pacienteIdpaciente, int alimentoIdalimento) {
+        this.pacienteIdpaciente = pacienteIdpaciente;
+        this.alimentoIdalimento = alimentoIdalimento;
+    }
+
+    public Alimentosexcluidos() {
+    }
+    
+    
+    
+
     /* Return the key object. */
     public AlimentosexcluidosKey getKeyObject() {
         return _key;

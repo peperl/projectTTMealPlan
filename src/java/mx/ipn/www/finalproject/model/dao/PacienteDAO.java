@@ -31,6 +31,8 @@ public interface PacienteDAO {
      * @exception       SQLException if something is wrong.
      */
     public Paciente load(PacienteKey key, Connection conn) throws SQLException;
+    
+    public Paciente loadByName(Paciente paciente, Connection conn) throws SQLException;
 
     /**
      * Update a record in Database.

@@ -7,6 +7,8 @@
 
 package mx.ipn.www.finalproject.model;
 
+import java.util.Date;
+
 /*
  * For Table planalimenticio
  */
@@ -25,9 +27,12 @@ public class Planalimenticio implements java.io.Serializable, Cloneable {
     /* Duracion */
     protected int duracion;
 
-    /* GastoCalorico */
-    protected double gastocalorico;
+    /* NoComidas */
+    protected int nocomidas;
 
+    /* Estado */
+    protected int estado;
+    
     /* Proteinas */
     protected double proteinas;
 
@@ -37,14 +42,26 @@ public class Planalimenticio implements java.io.Serializable, Cloneable {
     /* Carbohidratos */
     protected double carbohidratos;
 
-    /* NoComidas */
-    protected int nocomidas;
-
-    /* Estado */
-    protected int estado;
+    /* GastoCalorico */
+    protected double gastocalorico;
 
     /* TMR */
     protected double tmr;
+
+    public Planalimenticio() {
+
+    }
+    
+    public Planalimenticio(int pacienteIdpaciente, Date fechacreacion, int duracion, int nocomidas, int estado, double proteinas, double lipidos, double carbohidratos) {
+        this.pacienteIdpaciente = pacienteIdpaciente;
+        this.fechacreacion = fechacreacion;
+        this.duracion = duracion;
+        this.nocomidas = nocomidas;
+        this.estado = estado;
+        this.proteinas = proteinas;
+        this.lipidos = lipidos;
+        this.carbohidratos = carbohidratos;
+    }
 
     /* Return the key object. */
     public PlanalimenticioKey getKeyObject() {
@@ -239,13 +256,13 @@ public class Planalimenticio implements java.io.Serializable, Cloneable {
         sb.append("[").append("idplanalimenticio").append(" = ").append(idplanalimenticio).append("]").append(sep);
         sb.append("[").append("pacienteIdpaciente").append(" = ").append(pacienteIdpaciente).append("]").append(sep);
         sb.append("[").append("fechacreacion").append(" = ").append(fechacreacion).append("]").append(sep);
+        sb.append("[").append("nocomidas").append(" = ").append(nocomidas).append("]").append(sep);
         sb.append("[").append("duracion").append(" = ").append(duracion).append("]").append(sep);
-        sb.append("[").append("gastocalorico").append(" = ").append(gastocalorico).append("]").append(sep);
+        sb.append("[").append("estado").append(" = ").append(estado).append("]").append(sep);        
         sb.append("[").append("proteinas").append(" = ").append(proteinas).append("]").append(sep);
         sb.append("[").append("lipidos").append(" = ").append(lipidos).append("]").append(sep);
         sb.append("[").append("carbohidratos").append(" = ").append(carbohidratos).append("]").append(sep);
-        sb.append("[").append("nocomidas").append(" = ").append(nocomidas).append("]").append(sep);
-        sb.append("[").append("estado").append(" = ").append(estado).append("]").append(sep);
+        sb.append("[").append("gastocalorico").append(" = ").append(gastocalorico).append("]").append(sep);
         sb.append("[").append("tmr").append(" = ").append(tmr).append("]").append(sep);
         return sb.toString();
     }

@@ -25,7 +25,7 @@ import mx.ipn.www.finalproject.model.dao.AlimentosexcluidosDAO;
 public class AlimentosexcluidosDAOImpl implements AlimentosexcluidosDAO {
     /* SQL to insert data */
     private static final String SQL_INSERT =
-        "INSERT INTO alimentosexcluidos ("
+        "INSERT INTO AlimentosExcluidos ("
         + "Paciente_idPaciente, Alimento_idAlimento"
         + ") VALUES (?, ?)";
 
@@ -33,18 +33,18 @@ public class AlimentosexcluidosDAOImpl implements AlimentosexcluidosDAO {
     private static final String SQL_SELECT =
         "SELECT "
         + "Paciente_idPaciente, Alimento_idAlimento "
-        + "FROM alimentosexcluidos WHERE "
+        + "FROM AlimentosExcluidos WHERE "
         + "Paciente_idPaciente = ? AND Alimento_idAlimento = ?";
 
     /* SQL to update data */
     private static final String SQL_UPDATE =
-        "UPDATE alimentosexcluidos SET "
+        "UPDATE AlimentosExcluidos SET "
         + "WHERE "
         + "Paciente_idPaciente = ? AND Alimento_idAlimento = ?";
 
     /* SQL to delete data */
     private static final String SQL_DELETE =
-        "DELETE FROM alimentosexcluidos WHERE "
+        "DELETE FROM AlimentosExcluidos WHERE "
         + "Paciente_idPaciente = ? AND Alimento_idAlimento = ?";
 
     /**
