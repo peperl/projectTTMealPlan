@@ -6,11 +6,15 @@
     </servlet>
     <servlet>
         <servlet-name>registerNutricionista</servlet-name>
-        <servlet-class>mx.ipn.www.finalproject.view.servlets.registerNutricionista</servlet-class>
+        <servlet-class>mx.ipn.www.finalproject.view.servlets.RegisterNutricionista</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>RegistroPaciente</servlet-name>
         <servlet-class>mx.ipn.www.finalproject.view.servlets.RegistroPaciente</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>getAllFood</servlet-name>
+        <servlet-class>mx.ipn.www.finalproject.view.servlets.services.getAllFood</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>RegistroPaciente</servlet-name>
         <url-pattern>/RegistroPaciente</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>getAllFood</servlet-name>
+        <url-pattern>/getAllFood</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

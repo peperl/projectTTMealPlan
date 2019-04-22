@@ -25,9 +25,9 @@ import mx.ipn.www.finalproject.model.dao.PlanalimenticioDAO;
 public class PlanalimenticioDAOImpl implements PlanalimenticioDAO {
     /* SQL to insert data */
     private static final String SQL_INSERT =
-        "INSERT INTO planalimenticio ("
+        "INSERT INTO PlanAlimenticio ("
         + "idPlanAlimenticio, Paciente_idPaciente, FechaCreacion, Duracion, GastoCalorico, Proteinas, Lipidos, "
-        + "Carbohidratos, NoComidas, Estado, TMR"
+        + "Carbohidratos, NoComidas, Estado, TMR "
         + ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     /* SQL to select data */
@@ -35,12 +35,12 @@ public class PlanalimenticioDAOImpl implements PlanalimenticioDAO {
         "SELECT "
         + "idPlanAlimenticio, Paciente_idPaciente, FechaCreacion, Duracion, GastoCalorico, Proteinas, Lipidos, "
         + "Carbohidratos, NoComidas, Estado, TMR "
-        + "FROM planalimenticio WHERE "
+        + "FROM PlanAlimenticio WHERE "
         + "idPlanAlimenticio = ?";
 
     /* SQL to update data */
     private static final String SQL_UPDATE =
-        "UPDATE planalimenticio SET "
+        "UPDATE PlanAlimenticio SET "
         + "Paciente_idPaciente = ?, FechaCreacion = ?, Duracion = ?, GastoCalorico = ?, Proteinas = ?, Lipidos = ?, Carbohidratos = ?,  "
         + "NoComidas = ?, Estado = ?, TMR = ? "
         + "WHERE "
@@ -48,7 +48,7 @@ public class PlanalimenticioDAOImpl implements PlanalimenticioDAO {
 
     /* SQL to delete data */
     private static final String SQL_DELETE =
-        "DELETE FROM planalimenticio WHERE "
+        "DELETE FROM PlanAlimenticio WHERE "
         + "idPlanAlimenticio = ?";
 
     /**
@@ -201,4 +201,5 @@ public class PlanalimenticioDAOImpl implements PlanalimenticioDAO {
             }catch(SQLException e){}
         }
     }
+
 }

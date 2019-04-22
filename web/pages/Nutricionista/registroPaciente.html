@@ -201,7 +201,7 @@
                               </div>
                               <div class="form-group">
                                 <label class="label-control">Fecha de Nacimiento</label>
-                                <input type="text" class="form-control datepicker" id="dateBirth" name="dateBirth" value="10/06/2000">
+                                <input type="text" class="form-control datepicker" id="dateBirth" name="dateBirth" value="10/06/2000" required>
                               </div>
                             </div>
                               <!--Telefono-->
@@ -213,7 +213,7 @@
                               </div>
                               <div class="form-group">
                                 <label for="exampleInput1" class="bmd-label-floating">Teléfono</label>
-                                <input type="tel" class="form-control" id="telephone" name="telephone">
+                                <input type="tel" class="form-control" id="telephone" name="telephone" required>
                               </div>
                             </div>
                           </div>
@@ -227,36 +227,22 @@
                               </div>
                               <div class="form-group">
                                 <label for="exampleInput1" class="bmd-label-floating">Apellidos</label>
-                                <input type="text" class="form-control" id="lastname" name="lastname">
+                                <input type="text" class="form-control" id="lastname" name="lastname" required>
                               </div>
                             </div>
-                              <!--Estado Civil-->
+                              <!--Sexo-->
                             <div class="input-group form-control-lg">
                               <div class="input-group-prepend">
                                 <span class="input-group-text">
-                                  <i class="material-icons">record_voice_over</i>
+                                  <i class="material-icons">wc</i>
                                 </span>
                               </div>
                               <div class="form-group">
-                                  <select class="selectpicker" id="estadoCIvil" name="estadoCivil" data-style="select-with-transition" title="Estado Civil">
-                                  <option value="Soltero">Soltero</option>
-                                  <option value="Casado">Casado</option>
-                                  <option value="Divorciado">Divorciado</option>
-                                  <option value="Viudo">Viudo</option>
-                                  
-                                </select>
-                              </div>
-                            </div>
-                              <!--Ocupación-->
-                            <div class="input-group form-control-lg">
-                              <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                  <i class="material-icons">work</i>
-                                </span>
-                              </div>
-                              <div class="form-group">
-                                <label for="exampleInput1" class="bmd-label-floating">Ocupación</label>
-                                <input type="text" class="form-control" id="ocupacion" name="ocupacion">
+                                  <select class="selectpicker" id="sexo" name="sexo" data-style="select-with-transition" title="Sexo" required>
+                                    <option value="F">Femenino</option>
+                                    <option value="M">Masculino</option>
+                                  </select>
+                                
                               </div>
                             </div>
                               <!--email-->
@@ -268,7 +254,7 @@
                               </div>
                               <div class="form-group">
                                 <label for="exampleInput1" class="bmd-label-floating">Correo electrónico</label>
-                                <input type="email" class="form-control" id="correo" name="correo">
+                                <input type="email" class="form-control" id="correo" name="correo" required>
                               </div>
                             </div>
                           </div>
@@ -281,7 +267,7 @@
                               </div>
                               <div class="form-group">
                                 <label for="exampleInput1" class="bmd-label-floating">Dirección</label>
-                                <input type="text" class="form-control" id="address" name="address">
+                                <input type="text" class="form-control" id="address" name="address" required>
                               </div>
                             </div>
                           </div>
@@ -299,8 +285,8 @@
                                 </span>
                               </div>
                               <div class="form-group">
-                                <label for="exampleInput1" class="bmd-label-floating">Peso (3 meses antes)</label>
-                                <input type="number" class="form-control" id="weightBefore" name="weightBefore">
+                                <label for="exampleInput1" class="bmd-label-floating">Peso 3 meses antes (kg)</label>
+                                <input type="number" class="form-control" id="weightBefore" name="weightBefore" required>
                               </div>
                             </div>
                             <div class="input-group form-control-lg">
@@ -310,8 +296,8 @@
                                 </span>
                               </div>
                               <div class="form-group">
-                                <label for="exampleInput1" class="bmd-label-floating">Circunferencia Braquial</label>
-                                <input type="text" class="form-control" id="branquial" name="branquial">
+                                <label for="exampleInput1" class="bmd-label-floating">Circunferencia Braquial (cm)</label>
+                                <input type="text" class="form-control" id="branquial" name="branquial" required>
                               </div>
                             </div>
                           </div>
@@ -323,8 +309,8 @@
                                 </span>
                               </div>
                               <div class="form-group">
-                                <label for="exampleInput1" class="bmd-label-floating">Estatura</label>
-                                <input type="text" class="form-control" id="height" name="height">
+                                <label for="exampleInput1" class="bmd-label-floating">Estatura (m)</label>
+                                <input type="text" class="form-control" id="height" name="height" required>
                               </div>
                             </div>
                             <div class="input-group form-control-lg">
@@ -334,8 +320,8 @@
                                 </span>
                               </div>
                               <div class="form-group">
-                                <label for="exampleInput1" class="bmd-label-floating">Circunferencia Pantorrilla</label>
-                                <input type="text" class="form-control" id="Pantorrilla" name="Pantorrilla">
+                                <label for="exampleInput1" class="bmd-label-floating">Circunferencia Pantorrilla (cm)</label>
+                                <input type="text" class="form-control" id="Pantorrilla" name="Pantorrilla" required>
                               </div>
                             </div>
                           </div>
@@ -352,8 +338,14 @@
                                 </span>
                               </div>
                               <div class="form-group">
-                                <label for="exampleInput1" class="bmd-label-floating">Actividad Física</label>
-                                <input type="text" class="form-control" id="phisicalActivity" name="phisicalActivity">
+                                  <select class="selectpicker" id="phisicalActivity" name="phisicalActivity" data-style="select-with-transition" title="Actividad Física" required>
+                                    <option value="0">Nula</option>
+                                    <option value="1">Ligera</option>
+                                    <option value="2">Moderada</option>
+                                    <option value="3">Alta</option>
+                                  </select>
+                                <!--<label for="exampleInput1" class="bmd-label-floating">Actividad Física (%)</label>-->
+                                <!--<input type="number" class="form-control" id="phisicalActivity" name="phisicalActivity" required>-->
                               </div>
                             </div>
                           </div>
@@ -366,7 +358,7 @@
                               </div>
                               <div class="form-group">
                                 <label for="exampleInput1" class="bmd-label-floating">No. Comidas Actuales</label>
-                                <input type="text" class="form-control" id="actualMealsQty" name="actualMealsQty">
+                                <input type="text" class="form-control" id="actualMealsQty" name="actualMealsQty" required>
                               </div>
                             </div>
                           </div>
@@ -377,7 +369,7 @@
                             <div class="input-group form-control-lg">
                               <div class="form-group">
                                 <label for="exampleInput1" class="bmd-label-floating">Proteínas</label>
-                                <input type="text" class="form-control" id="actualProteins" name="actualProteins">
+                                <input type="text" class="form-control" id="actualProteins" name="actualProteins" required>
                               </div>
                             </div>
                           </div>
@@ -385,7 +377,7 @@
                             <div class="input-group form-control-lg">
                               <div class="form-group">
                                 <label for="exampleInput1" class="bmd-label-floating">Carbohidratos</label>
-                                <input type="text" class="form-control" id="actualCarbo" name="actualCarbo">
+                                <input type="text" class="form-control" id="actualCarbo" name="actualCarbo" required>
                               </div>
                             </div>
                           </div>
@@ -393,7 +385,7 @@
                             <div class="input-group form-control-lg">
                               <div class="form-group">
                                 <label for="exampleInput1" class="bmd-label-floating">Lípidos</label>
-                                <input type="text" class="form-control" id="actualLipid" name="actualLipid">
+                                <input type="text" class="form-control" id="actualLipid" name="actualLipid" required>
                               </div>
                             </div>
                           </div>
@@ -478,7 +470,7 @@
                               </div>
                               <div class="form-group">
                                 <label for="exampleInput1" class="bmd-label-floating">Comidas al día</label>
-                                <input type="text" class="form-control" id="newMealsQty" name="newMealsQty">
+                                <input type="text" class="form-control" id="newMealsQty" name="newMealsQty" required>
                               </div>
                             </div>
                             <div class="input-group form-control-lg">
@@ -489,7 +481,7 @@
                               </div>
                               <div class="form-group">
                                 <label for="exampleInput1" class="bmd-label-floating">Duración</label>
-                                <input type="text" class="form-control" id="timePlan" name="timePlan">
+                                <input type="text" class="form-control" id="timePlan" name="timePlan" required>
                               </div>
                             </div>
                             <div class="input-group form-control-lg">
@@ -499,30 +491,14 @@
                                 </span>
                               </div>
                               <div class="form-group">
-                                  <select class="selectpicker" id="speed" name="speed" data-style="select-with-transition" title="velocidad de resultados">
-                                  <option value="Lento">Lento</option>
-                                  <option value="Normal">Normal</option>
-                                  <option value="Rapido">Rápido</option>
-                                </select>
+                                    <select class="selectpicker" id="speed" name="speed" data-style="select-with-transition" title="velocidad de resultados" required>
+                                        <option value="Lento">Lento</option>
+                                        <option value="Normal">Normal</option>
+                                        <option value="Rapido">Rápido</option>
+                                    </select>
                               </div>
                             </div>
                           </div>
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
                           <div class="col-sm-6">
                             <h6><i class="material-icons">fastfood</i>Alimentos Evitados</h6>
                             <div class="row">
@@ -534,9 +510,7 @@
                                     </span>
                                   </div>
                                   <div class="form-group">
-                                    <select class="selectpicker" data-style="select-with-transition" title="alimentos" id="alimentos">
-                                      <option value="Huevo">Huevo </option>
-                                      <option value="Leche">Leche</option>
+                                      <select class="selectpicker" data-style="select-with-transition" title="alimentos" id="alimentosEvitados" name="alimentosEvitados">
                                     </select>
                                   </div>
 
@@ -546,7 +520,7 @@
                                 </div>
                               </div>
                             </div>
-                            <input type="text" value="" class="form-control tagsinput" data-role="tagsinput" data-color="info" id="alimEv">
+                            <input type="text" value="" class="form-control tagsinput" data-role="tagsinput" data-color="info" id="alimEv" name="alimEv" >
                           </div>
                         </div>
                         <div class="row justify-content-center">
@@ -556,18 +530,21 @@
                               <p>Proteína(<span id="prot"></span>)</p><br>
                               <div class="col-sm-8">
                                 <div id="slider1" class="slider slider-rose"></div>
+                                <input type="hidden" id="proteinPercent" name="proteinPercent" value="18" />
                               </div>
                             </div>
                             <div class="row">
                               <p>Carbohidratos(<span id="carb"></span>)</p><br>
                               <div class="col-sm-8">
                                 <div id="slider2" class="slider"></div>
+                                <input type="hidden" id="CarboPercent" name="CarboPercent" value="50"/>
                               </div>
                             </div>
                             <div class="row">
                               <p>Lípidos(<span id="lip"></span>)</p><br>
                               <div class="col-sm-8">
                                 <div id="slider3" class="slider slider-info"></div>
+                                <input type="hidden" id="lipPercent" name="lipPercent" value="32"/>
                               </div>
                             </div>
                           </div>
@@ -682,7 +659,7 @@
   <!-- Library for adding dinamically elements -->
   <script src="../../assets/js/plugins/arrive.min.js"></script>
   <!--  Google Maps Plugin    -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+  <!--<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>-->
   <!-- Chartist JS -->
   <script src="../../assets/js/plugins/chartist.min.js"></script>
   <!--  Notifications Plugin    -->
@@ -716,12 +693,26 @@
 
         }
 
+        $.get("../../getAllFood", function(responseJson) {    // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response JSON...
+            $.each(responseJson, function(index, item) { // Iterate over the JSON array.
+                ($("#alimentosEvitados")).append("<option value=" + item.idalimento +">" + item.nombre + "</option>");
+            });
+            $('#alimentosEvitados').selectpicker('refresh');
+        });
+        
+  
+  
+
         $('#addA').click( function(){          
           var list = $('#alimEv').val();
           //$('#alimEv').val(list+','+algo);
-          $('#alimEv').tagsinput('add', $('#alimentos').val());
+          $('#alimEv').tagsinput('add', $('#alimentosEvitados').val());
           //$('#alimEv').val(list+','+$('#alimentos').val());
         });
+        
+        
+        
+        
 
         $('#difC').click( function(){          
           if($('#difC').hasClass('active')) {

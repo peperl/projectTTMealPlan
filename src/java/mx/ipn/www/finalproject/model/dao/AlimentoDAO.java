@@ -40,6 +40,14 @@ public interface AlimentoDAO {
      * @param conn      JDBC Connection.
      * @exception       SQLException if something is wrong.
      */
+    public List<Alimento> loadAll(Connection conn) throws SQLException;
+
+    /**
+     * Retrive a record from Database.
+     * @param beanKey   The PK Object to be retrived.
+     * @param conn      JDBC Connection.
+     * @exception       SQLException if something is wrong.
+     */
     public List<Alimento> loadByCategory(CategoriaalimentoKey key, Connection conn) throws SQLException;
 
     /**

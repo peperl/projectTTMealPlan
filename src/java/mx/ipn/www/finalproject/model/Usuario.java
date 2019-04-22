@@ -23,6 +23,11 @@ public class Usuario implements java.io.Serializable, Cloneable {
     protected String pass;
 
     public Usuario() {
+        
+    }
+
+    public Usuario(String correo) {
+        this.correo = correo;
     }
 
     public Usuario(String correo, String pass) {
@@ -113,7 +118,8 @@ public class Usuario implements java.io.Serializable, Cloneable {
         sb.append(this.getClass().getName()).append(sep);
         sb.append("[").append("idusuario").append(" = ").append(idusuario).append("]").append(sep);
         sb.append("[").append("correo").append(" = ").append(correo).append("]").append(sep);
-        sb.append("[").append("pass").append(" = ").append(pass).append("]").append(sep);
+        if (pass != null)
+            sb.append("[").append("pass").append(" = ").append(pass).append("]").append(sep);
         return sb.toString();
     }
 }

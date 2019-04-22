@@ -46,6 +46,14 @@ public class AlimentoDAOImpl implements AlimentoDAO {
         + "FROM Alimento WHERE "
         + "Categoria = ? AND  Estado=1"; //Falta agregarle el left join para los alimentos que no quiere el usuario
 
+    /* SQL to select data */
+    private static final String SQL_SELECT_ALL =
+        "SELECT "
+        + "idAlimento, Nombre, Cantidad, Unidad, Proteinas, Lipidos, Carbohidratos, Estado, "
+        + "Categoria "
+        + "FROM Alimento WHERE "
+        + "Estado=1"; //Falta agregarle el left join para los alimentos que no quiere el usuario
+
     /* SQL to update data */
     private static final String SQL_UPDATE =
         "UPDATE Alimento SET "
@@ -134,6 +142,25 @@ public class AlimentoDAOImpl implements AlimentoDAO {
         }
     }
 
+    @Override
+    public List<Alimento> loadAll(Connection conn) throws SQLException {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            ps = conn.prepareStatement(SQL_SELECT_ALL);
+            rs = ps.executeQuery();
+            List results = getResults(rs);
+            if (results.size() > 0)
+                return results;
+            else
+                return null;
+        }finally {
+            close(rs);
+            close(ps);
+        }        
+        
+    }
+    
     /**
      * Update a record in Database.
      * @param bean   The Object to be saved.
@@ -223,5 +250,6 @@ public class AlimentoDAOImpl implements AlimentoDAO {
             }catch(SQLException e){}
         }
     }
+
 
 }

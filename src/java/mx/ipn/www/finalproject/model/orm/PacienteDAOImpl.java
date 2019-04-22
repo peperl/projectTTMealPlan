@@ -25,8 +25,8 @@ import mx.ipn.www.finalproject.model.dao.PacienteDAO;
 public class PacienteDAOImpl implements PacienteDAO {
     /* SQL to insert data */
     private static final String SQL_INSERT =
-        "INSERT INTO paciente ("
-        + "idPaciente, Usuario_idUsuario, Nutricionista_idNutricionista, Nombre, Apellidos, FechaNacimiento, Ocupacion, "
+        "INSERT INTO Paciente ("
+        + "idPaciente, Usuario_idUsuario, Nutricionista_idNutricionista, Nombre, Apellidos, FechaNacimiento, Sexo, "
         + "Telefono, Direccion, PesoAnterior, Estatura, CirBraquial, CirPantorrilla, DificultadesAliment, "
         + "Enfermedades, Tratamiento, ProteinaAnterior, LipidosAnterior, CarbohidratosAnterior, ComidasAnterior, ActividadFisica, "
         + "FechaRegistro, Estado"
@@ -35,17 +35,27 @@ public class PacienteDAOImpl implements PacienteDAO {
     /* SQL to select data */
     private static final String SQL_SELECT =
         "SELECT "
-        + "idPaciente, Usuario_idUsuario, Nutricionista_idNutricionista, Nombre, Apellidos, FechaNacimiento, Ocupacion, "
+        + "idPaciente, Usuario_idUsuario, Nutricionista_idNutricionista, Nombre, Apellidos, FechaNacimiento, Sexo, "
         + "Telefono, Direccion, PesoAnterior, Estatura, CirBraquial, CirPantorrilla, DificultadesAliment, "
         + "Enfermedades, Tratamiento, ProteinaAnterior, LipidosAnterior, CarbohidratosAnterior, ComidasAnterior, ActividadFisica, "
         + "FechaRegistro, Estado "
-        + "FROM paciente WHERE "
+        + "FROM Paciente WHERE "
         + "idPaciente = ?";
 
+    /* SQL to select data */
+    private static final String SQL_SELECT_BY_IDUSUARIO =
+        "SELECT "
+        + "idPaciente, Usuario_idUsuario, Nutricionista_idNutricionista, Nombre, Apellidos, FechaNacimiento, Sexo, "
+        + "Telefono, Direccion, PesoAnterior, Estatura, CirBraquial, CirPantorrilla, DificultadesAliment, "
+        + "Enfermedades, Tratamiento, ProteinaAnterior, LipidosAnterior, CarbohidratosAnterior, ComidasAnterior, ActividadFisica, "
+        + "FechaRegistro, Estado "
+        + "FROM Paciente WHERE "
+        + "Usuario_idUsuario = ?";
+    
     /* SQL to update data */
     private static final String SQL_UPDATE =
-        "UPDATE paciente SET "
-        + "Usuario_idUsuario = ?, Nutricionista_idNutricionista = ?, Nombre = ?, Apellidos = ?, FechaNacimiento = ?, Ocupacion = ?, Telefono = ?,  "
+        "UPDATE Paciente SET "
+        + "Usuario_idUsuario = ?, Nutricionista_idNutricionista = ?, Nombre = ?, Apellidos = ?, FechaNacimiento = ?, Sexo = ?, Telefono = ?,  "
         + "Direccion = ?, PesoAnterior = ?, Estatura = ?, CirBraquial = ?, CirPantorrilla = ?, DificultadesAliment = ?, Enfermedades = ?,  "
         + "Tratamiento = ?, ProteinaAnterior = ?, LipidosAnterior = ?, CarbohidratosAnterior = ?, ComidasAnterior = ?, ActividadFisica = ?, FechaRegistro = ?,  "
         + "Estado = ? "
@@ -54,7 +64,7 @@ public class PacienteDAOImpl implements PacienteDAO {
 
     /* SQL to delete data */
     private static final String SQL_DELETE =
-        "DELETE FROM paciente WHERE "
+        "DELETE FROM Paciente WHERE "
         + "idPaciente = ?";
 
     /**
@@ -76,13 +86,13 @@ public class PacienteDAOImpl implements PacienteDAO {
                 ps.setDate(6, new java.sql.Date(bean.getFechanacimiento().getTime()));
             else
                 ps.setNull(6, Types.DATE);
-            ps.setString(7, bean.getOcupacion());
+            ps.setString(7, bean.getSexo());
             ps.setString(8, bean.getTelefono());
             ps.setString(9, bean.getDireccion());
             ps.setDouble(10, bean.getPesoanterior());
             ps.setDouble(11, bean.getEstatura());
             ps.setDouble(12, bean.getCirbraquial());
-            ps.setString(13, bean.getCirpantorrilla());
+            ps.setDouble(13, bean.getCirpantorrilla());
             ps.setString(14, bean.getDificultadesaliment());
             ps.setString(15, bean.getEnfermedades());
             ps.setString(16, bean.getTratamiento());
@@ -91,7 +101,10 @@ public class PacienteDAOImpl implements PacienteDAO {
             ps.setDouble(19, bean.getCarbohidratosanterior());
             ps.setDouble(20, bean.getComidasanterior());
             ps.setDouble(21, bean.getActividadfisica());
-            ps.setString(22, bean.getFecharegistro());
+            if (bean.getFechanacimiento() != null)
+                ps.setDate(22, new java.sql.Date(bean.getFecharegistro().getTime()));
+            else
+                ps.setNull(22, Types.DATE);            
             ps.setInt(23, bean.getEstado());
             ps.executeUpdate();
         }finally {
@@ -123,6 +136,26 @@ public class PacienteDAOImpl implements PacienteDAO {
         }
     }
 
+    @Override
+    public Paciente loadByName(Paciente paciente, Connection conn) throws SQLException {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            ps = conn.prepareStatement(SQL_SELECT_BY_IDUSUARIO);
+            ps.setInt(1, paciente.getUsuarioIdusuario());
+            rs = ps.executeQuery();
+            List results = getResults(rs);
+            if (results.size() > 0)
+                return (Paciente) results.get(0);
+            else
+                return null;
+        }finally {
+            close(rs);
+            close(ps);
+        }        
+    }
+
+
     /**
      * Update a record in Database.
      * @param bean   The Object to be saved.
@@ -141,13 +174,13 @@ public class PacienteDAOImpl implements PacienteDAO {
                 ps.setDate(5, new java.sql.Date(bean.getFechanacimiento().getTime()));
             else
                 ps.setNull(5, Types.DATE);
-            ps.setString(6, bean.getOcupacion());
+            ps.setString(6, bean.getSexo());
             ps.setString(7, bean.getTelefono());
             ps.setString(8, bean.getDireccion());
             ps.setDouble(9, bean.getPesoanterior());
             ps.setDouble(10, bean.getEstatura());
             ps.setDouble(11, bean.getCirbraquial());
-            ps.setString(12, bean.getCirpantorrilla());
+            ps.setDouble(12, bean.getCirpantorrilla());
             ps.setString(13, bean.getDificultadesaliment());
             ps.setString(14, bean.getEnfermedades());
             ps.setString(15, bean.getTratamiento());
@@ -156,7 +189,10 @@ public class PacienteDAOImpl implements PacienteDAO {
             ps.setDouble(18, bean.getCarbohidratosanterior());
             ps.setDouble(19, bean.getComidasanterior());
             ps.setDouble(20, bean.getActividadfisica());
-            ps.setString(21, bean.getFecharegistro());
+            if (bean.getFechanacimiento() != null)
+                ps.setDate(21, new java.sql.Date(bean.getFecharegistro().getTime()));
+            else
+                ps.setNull(21, Types.DATE);            
             ps.setInt(22, bean.getEstado());
             ps.setInt(23, bean.getIdpaciente());
             ps.executeUpdate();
@@ -198,13 +234,13 @@ public class PacienteDAOImpl implements PacienteDAO {
             bean.setNombre(rs.getString("Nombre"));
             bean.setApellidos(rs.getString("Apellidos"));
             bean.setFechanacimiento(rs.getDate("FechaNacimiento"));
-            bean.setOcupacion(rs.getString("Ocupacion"));
+            bean.setSexo(rs.getString("Sexo"));
             bean.setTelefono(rs.getString("Telefono"));
             bean.setDireccion(rs.getString("Direccion"));
             bean.setPesoanterior(rs.getDouble("PesoAnterior"));
             bean.setEstatura(rs.getDouble("Estatura"));
             bean.setCirbraquial(rs.getDouble("CirBraquial"));
-            bean.setCirpantorrilla(rs.getString("CirPantorrilla"));
+            bean.setCirpantorrilla(rs.getDouble("CirPantorrilla"));
             bean.setDificultadesaliment(rs.getString("DificultadesAliment"));
             bean.setEnfermedades(rs.getString("Enfermedades"));
             bean.setTratamiento(rs.getString("Tratamiento"));
@@ -213,7 +249,7 @@ public class PacienteDAOImpl implements PacienteDAO {
             bean.setCarbohidratosanterior(rs.getDouble("CarbohidratosAnterior"));
             bean.setComidasanterior(rs.getDouble("ComidasAnterior"));
             bean.setActividadfisica(rs.getDouble("ActividadFisica"));
-            bean.setFecharegistro(rs.getString("FechaRegistro"));
+            bean.setFecharegistro(rs.getDate("FechaRegistro"));
             bean.setEstado(rs.getInt("Estado"));
             results.add(bean);
         }
@@ -243,4 +279,5 @@ public class PacienteDAOImpl implements PacienteDAO {
             }catch(SQLException e){}
         }
     }
+
 }

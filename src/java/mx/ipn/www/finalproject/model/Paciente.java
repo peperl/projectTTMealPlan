@@ -7,6 +7,8 @@
 
 package mx.ipn.www.finalproject.model;
 
+import java.util.Date;
+
 /*
  * For Table paciente
  */
@@ -32,7 +34,7 @@ public class Paciente implements java.io.Serializable, Cloneable {
     protected java.util.Date fechanacimiento;
 
     /* Ocupacion */
-    protected String ocupacion;
+    protected String sexo;
 
     /* Telefono */
     protected String telefono;
@@ -50,7 +52,7 @@ public class Paciente implements java.io.Serializable, Cloneable {
     protected double cirbraquial;
 
     /* CirPantorrilla */
-    protected String cirpantorrilla;
+    protected double cirpantorrilla;
 
     /* DificultadesAliment */
     protected String dificultadesaliment;
@@ -77,11 +79,43 @@ public class Paciente implements java.io.Serializable, Cloneable {
     protected double actividadfisica;
 
     /* FechaRegistro */
-    protected String fecharegistro;
+    protected Date fecharegistro;
 
     /* Estado */
     protected int estado;
 
+    public Paciente(int usuarioIdusuario, int nutricionistaIdnutricionista, String nombre, String apellidos, Date fechanacimiento, String sexo, String telefono, String direccion, double pesoanterior, double estatura, double cirbraquial, double cirpantorrilla, String dificultadesaliment, String enfermedades, String tratamiento, double proteinaanterior, double lipidosanterior, double carbohidratosanterior, double comidasanterior, double actividadfisica, Date fecharegistro, int estado) {
+        this.usuarioIdusuario = usuarioIdusuario;
+        this.nutricionistaIdnutricionista = nutricionistaIdnutricionista;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.fechanacimiento = fechanacimiento;
+        this.sexo = sexo;
+        this.telefono = telefono;
+        this.direccion = direccion;
+        this.pesoanterior = pesoanterior;
+        this.estatura = estatura;
+        this.cirbraquial = cirbraquial;
+        this.cirpantorrilla = cirpantorrilla;
+        this.dificultadesaliment = dificultadesaliment;
+        this.enfermedades = enfermedades;
+        this.tratamiento = tratamiento;
+        this.proteinaanterior = proteinaanterior;
+        this.lipidosanterior = lipidosanterior;
+        this.carbohidratosanterior = carbohidratosanterior;
+        this.comidasanterior = comidasanterior;
+        this.actividadfisica = actividadfisica;
+        this.fecharegistro = fecharegistro;
+        this.estado = estado;
+    }
+
+    
+
+    public Paciente() {
+    }
+
+    
+    
     /* Return the key object. */
     public PacienteKey getKeyObject() {
         return _key;
@@ -149,13 +183,13 @@ public class Paciente implements java.io.Serializable, Cloneable {
     }
 
     /* Ocupacion */
-    public String getOcupacion() {
-        return ocupacion;
+    public String getSexo() {
+        return sexo;
     }
 
     /* Ocupacion */
-    public void setOcupacion(String ocupacion) {
-        this.ocupacion = ocupacion;
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
     }
 
     /* Telefono */
@@ -209,12 +243,12 @@ public class Paciente implements java.io.Serializable, Cloneable {
     }
 
     /* CirPantorrilla */
-    public String getCirpantorrilla() {
+    public double getCirpantorrilla() {
         return cirpantorrilla;
     }
 
     /* CirPantorrilla */
-    public void setCirpantorrilla(String cirpantorrilla) {
+    public void setCirpantorrilla(double cirpantorrilla) {
         this.cirpantorrilla = cirpantorrilla;
     }
 
@@ -298,16 +332,14 @@ public class Paciente implements java.io.Serializable, Cloneable {
         this.actividadfisica = actividadfisica;
     }
 
-    /* FechaRegistro */
-    public String getFecharegistro() {
+    public Date getFecharegistro() {
         return fecharegistro;
     }
 
-    /* FechaRegistro */
-    public void setFecharegistro(String fecharegistro) {
+    public void setFecharegistro(Date fecharegistro) {
         this.fecharegistro = fecharegistro;
     }
-
+    
     /* Estado */
     public int getEstado() {
         return estado;
@@ -358,11 +390,11 @@ public class Paciente implements java.io.Serializable, Cloneable {
         else if (!this.fechanacimiento.equals(bean.fechanacimiento)) 
             return false;
 
-        if (this.ocupacion == null) {
-            if (bean.ocupacion != null)
+        if (this.sexo == null) {
+            if (bean.sexo != null)
                 return false;
         }
-        else if (!this.ocupacion.equals(bean.ocupacion)) 
+        else if (!this.sexo.equals(bean.sexo)) 
             return false;
 
         if (this.telefono == null) {
@@ -388,11 +420,7 @@ public class Paciente implements java.io.Serializable, Cloneable {
         if (this.cirbraquial != bean.cirbraquial)
             return false;
 
-        if (this.cirpantorrilla == null) {
-            if (bean.cirpantorrilla != null)
-                return false;
-        }
-        else if (!this.cirpantorrilla.equals(bean.cirpantorrilla)) 
+        if (this.cirpantorrilla != bean.cirpantorrilla)
             return false;
 
         if (this.dificultadesaliment == null) {
@@ -455,7 +483,7 @@ public class Paciente implements java.io.Serializable, Cloneable {
         bean.apellidos = this.apellidos;
         if (this.fechanacimiento != null)
             bean.fechanacimiento = (java.util.Date) this.fechanacimiento.clone();
-        bean.ocupacion = this.ocupacion;
+        bean.sexo = this.sexo;
         bean.telefono = this.telefono;
         bean.direccion = this.direccion;
         bean.pesoanterior = this.pesoanterior;
@@ -486,7 +514,7 @@ public class Paciente implements java.io.Serializable, Cloneable {
         sb.append("[").append("nombre").append(" = ").append(nombre).append("]").append(sep);
         sb.append("[").append("apellidos").append(" = ").append(apellidos).append("]").append(sep);
         sb.append("[").append("fechanacimiento").append(" = ").append(fechanacimiento).append("]").append(sep);
-        sb.append("[").append("ocupacion").append(" = ").append(ocupacion).append("]").append(sep);
+        sb.append("[").append("ocupacion").append(" = ").append(sexo).append("]").append(sep);
         sb.append("[").append("telefono").append(" = ").append(telefono).append("]").append(sep);
         sb.append("[").append("direccion").append(" = ").append(direccion).append("]").append(sep);
         sb.append("[").append("pesoanterior").append(" = ").append(pesoanterior).append("]").append(sep);

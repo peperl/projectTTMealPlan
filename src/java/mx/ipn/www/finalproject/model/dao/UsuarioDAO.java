@@ -39,6 +39,8 @@ public interface UsuarioDAO {
      * @exception       SQLException if something is wrong.
      */
     public Usuario loadByData(Usuario usuario, Connection conn) throws SQLException;
+    
+    public Usuario loadByEmail(Usuario usuario, Connection conn) throws SQLException;
 
     /**
      * Retrive a record from Database.

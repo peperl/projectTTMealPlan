@@ -42,13 +42,19 @@ public class UsuarioDAOImpl implements UsuarioDAO {
         + "idUsuario, Correo, Pass "
         + "FROM Usuario WHERE "
         + "Correo = ? AND Pass = ?";
+    
+    private static final String SQL_SELECT_BY_EMAIL =
+        "SELECT "
+        + "idUsuario, Correo, Pass "
+        + "FROM Usuario WHERE "
+        + "Correo = ?";
 
     /* SQL to select data without id*/
     private static final String SQL_SELECT_FOR_LOGIN_NUTRICIONISTA =
         "SELECT "
         + "Usuario.idUsuario, Usuario.Correo, Usuario.Pass FROM Usuario INNER JOIN Nutricionista " +
         "ON Usuario.idUsuario = Nutricionista.Usuario_idUsuario WHERE "
-        + "Usuario.Correo = ? AND Usuario.Pass = ?";
+        + "Usuario.Correo = ?";
 
     /* SQL to update data */
     private static final String SQL_UPDATE =
@@ -130,6 +136,25 @@ public class UsuarioDAOImpl implements UsuarioDAO {
         }
     }    
     
+    @Override
+    public Usuario loadByEmail(Usuario usuario, Connection conn) throws SQLException {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            ps = conn.prepareStatement(SQL_SELECT_BY_EMAIL);
+            ps.setString(1, usuario.getCorreo());
+            rs = ps.executeQuery();
+            List results = getResults(rs);
+            if (results.size() > 0)
+                return (Usuario) results.get(0);
+            else
+                return null;
+        }finally {
+            close(rs);
+            close(ps);
+        }
+    }
+    
     /**
      * Retrive a record from Database.
      * @param beanKey   The PK Object to be retrived.
@@ -142,7 +167,6 @@ public class UsuarioDAOImpl implements UsuarioDAO {
         try {
             ps = conn.prepareStatement(SQL_SELECT_FOR_LOGIN_NUTRICIONISTA);
             ps.setString(1, usuario.getCorreo());
-            ps.setString(2, usuario.getPass());
             rs = ps.executeQuery();
             List results = getResults(rs);
             if (results.size() > 0)
@@ -203,7 +227,10 @@ public class UsuarioDAOImpl implements UsuarioDAO {
             Usuario bean = new Usuario();
             bean.setIdusuario(rs.getInt("idUsuario"));
             bean.setCorreo(rs.getString("Correo"));
-            bean.setPass(rs.getString("Pass"));
+            String auxPass = rs.getString("Pass");
+            if (auxPass != null) {
+                bean.setPass(rs.getString("Pass"));
+            }
             results.add(bean);
         }
         return results;
@@ -232,4 +259,5 @@ public class UsuarioDAOImpl implements UsuarioDAO {
             }catch(SQLException e){}
         }
     }
+
 }
