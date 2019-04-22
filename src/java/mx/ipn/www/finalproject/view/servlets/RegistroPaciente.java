@@ -6,7 +6,6 @@
 package mx.ipn.www.finalproject.view.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -18,10 +17,12 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import mx.ipn.www.finalproject.model.Alimentosexcluidos;
 import mx.ipn.www.finalproject.model.Paciente;
 import mx.ipn.www.finalproject.model.Planalimenticio;
@@ -35,6 +36,7 @@ import mx.ipn.www.finalproject.model.orm.PacienteDAOImpl;
 import mx.ipn.www.finalproject.model.orm.PlanalimenticioDAOImpl;
 import mx.ipn.www.finalproject.model.orm.UsuarioDAOImpl;
 import mx.ipn.www.finalproject.utils.ConnectionByPayaraSource;
+import mx.ipn.www.finalproject.utils.QRgenerator;
 
 /**
  *
@@ -156,9 +158,16 @@ public class RegistroPaciente extends HttpServlet {
                     alimentosexcluidosDAO.create(alimentosexcluido, con);
                 }
             }
-            
-            
             connectionClass.destroy();
+            String qr = QRgenerator.generateQRContent(usuarioIdusuario + "");
+            QRgenerator.generateQRImage(qr, usuarioIdusuario + "");
+            
+            HttpSession session = request.getSession();
+            session.setAttribute("qrid", usuarioIdusuario);
+            session.setAttribute("namePaciente", paciente.getNombre() + " " + paciente.getApellidos());
+            ServletContext sc = request.getServletContext();
+            String path = sc.getContextPath();
+            response.sendRedirect( path + "/pages/Nutricionista/muestraCodigo.jsp");
         }   catch (NamingException | SQLException ex) {
             Logger.getLogger(RegistroPaciente.class.getName()).log(Level.SEVERE, null, ex);
         }

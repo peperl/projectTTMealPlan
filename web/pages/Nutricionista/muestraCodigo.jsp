@@ -1,3 +1,10 @@
+<%-- 
+    Document   : muestraCodigo
+    Created on : Apr 21, 2019, 3:03:42 PM
+    Author     : pepe
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +14,7 @@
   <link rel="icon" type="image/png" href="../../assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
-    Material Dashboard PRO by Creative Tim
+    Asociar con paciente
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
@@ -35,8 +42,8 @@
                 
               </div>
               <div class="card-body ">
-                <p class="card-description text-center">Paciente: Josué Durán Martínez</p>
-                <center><img src="../../assets/img/qr.png"></center>
+                <p class="card-description text-center">Paciente: <%out.print(session.getAttribute("namePaciente"));%></p>
+                <center><img id="qrcontainer"></center>
               </div>
               <div class="card-footer justify-content-center">
                 <a href="generandoPlan.html" class="btn btn-rose btn-link btn-lg">Lets Go</a>
@@ -88,8 +95,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
   <!-- Library for adding dinamically elements -->
   <script src="../../assets/js/plugins/arrive.min.js"></script>
-  <!--  Google Maps Plugin    -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
   <!-- Chartist JS -->
   <script src="../../assets/js/plugins/chartist.min.js"></script>
   <!--  Notifications Plugin    -->
@@ -98,6 +103,11 @@
   <script src="../../assets/js/material-dashboard.js?v=2.0.2" type="text/javascript"></script>
   <!-- Material Dashboard DEMO methods, don't include it in your project! -->
   <script src="../../assets/demo/demo.js"></script>
+    <script>
+    $(document).ready(function() {
+        $("#qrcontainer").attr("src","../../qr/".concat(<%out.print(session.getAttribute("qrid"));%>,".png"));
+    });
+    </script>
   
 </body>
 

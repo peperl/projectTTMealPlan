@@ -26,11 +26,11 @@ public class QRgenerator {
     private static final int qrTamAncho = 400;
     private static final int qrTamAlto = 400;
     private static final String formato = "png";
-    private static final String ruta = "Codes/";
+    private static final String ruta = "web/qr/";
     private static final int randomMin = 100;
     private static final int randomMax = 998;
     
-    private static String generateQRContent(String user){
+    public static String generateQRContent(String user){
         String result = user;
         try {
             int numero = (int)(Math.random()*(randomMin-randomMax+1)+randomMax);
@@ -48,7 +48,7 @@ public class QRgenerator {
         return result;
     }
     
-    private static void generateQRImage(String content){
+    public static void generateQRImage(String content, String name){
         try{
             Writer writer = new QRCodeWriter();
             BitMatrix matriz = writer.encode(content, BarcodeFormat.QR_CODE, qrTamAncho, qrTamAlto);
@@ -59,7 +59,7 @@ public class QRgenerator {
                     imagen.setRGB(x, y, (valor == 0 ? 0 : 0xFFFFFF));
                 }
             }
-            FileOutputStream qrCode = new FileOutputStream(ruta+content+"_QR.png");
+            FileOutputStream qrCode = new FileOutputStream(ruta+name+".png");
             ImageIO.write(imagen, formato, qrCode);
             qrCode.close();
         }catch(Exception e){
