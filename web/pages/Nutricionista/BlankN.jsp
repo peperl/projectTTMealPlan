@@ -1,5 +1,12 @@
+<%-- 
+    Document   : BlankN
+    Created on : Apr 26, 2019, 1:24:38 AM
+    Author     : pepe
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="utf-8" />
@@ -7,7 +14,7 @@
   <link rel="icon" type="image/png" href="../../assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
-    Material Dashboard PRO by Creative Tim
+    Dashboard
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
@@ -40,7 +47,13 @@
           <div class="user-info">
             <a data-toggle="collapse" href="#collapseExample" class="username">
               <span>
-                Dr. Tania Andrew
+                  <%
+                        if (session.getAttribute("nameNutricionista") == null) {
+                              response.sendRedirect("../../login.html");
+                        } else {
+                            out.println(session.getAttribute("nameNutricionista"));
+                        }
+                  %>
                 <b class="caret"></b>
               </span>
             </a>
@@ -63,26 +76,26 @@
           </div>
         </div>
         <ul class="nav">
-          <li class="nav-item">
-            <a class="nav-link" href="BlankN.html">
+          <li class="nav-item active">
+            <a class="nav-link" href="BlankN.jsp">
               <i class="material-icons">home</i>
               <p> Inicio </p>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="registroPaciente.html">
+            <a class="nav-link" href="registroPaciente.jsp">
               <i class="material-icons">face</i>
               <p> Registrar Paciente </p>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="listaPacientes.html">
+            <a class="nav-link" href="listaPacientes.jsp">
               <i class="material-icons">favorite_border</i>
               <p> Lista de Pacientes </p>
             </a>
           </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="agregarAlimento.html">
+          <li class="nav-item">
+            <a class="nav-link" href="agregarAlimento.jsp">
               <i class="material-icons">restaurant</i>
               <p> Registrar Alimento </p>
             </a>
@@ -105,7 +118,7 @@
                 <i class="material-icons design_bullet-list-67 visible-on-sidebar-mini">view_list</i>
               </button>
             </div>
-            <a class="navbar-brand" href="#pablo">Registrar Alimento</a>
+            <a class="navbar-brand" href="#pablo">Bienvenida</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation" data-target="#navigation-example">
             <span class="sr-only">Toggle navigation</span>
@@ -137,98 +150,13 @@
       <div class="content">
         <div class="container-fluid">
           <div class="col-md-8 col-12 mr-auto ml-auto">
-            <div class="card">
-              <div class="card-header card-header-primary card-header-icon">
-                <div class="card-icon">
-                  <i class="material-icons">restaurant</i>
-                </div>
-                <h4 class="card-title">Registrar Alimento</h4>
-              </div>
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="input-group form-control-lg">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text">
-                          <i class="material-icons">fastfood</i>
-                        </span>
-                      </div>
-                      <div class="form-group">
-                        <label for="exampleInput1" class="bmd-label-floating">Nombre</label>
-                        <input type="text" class="form-control" id="v" name="v">
-                      </div>
-                    </div>
-                    <div class="input-group form-control-lg">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text">
-                          <i class="material-icons">kitchen</i>
-                        </span>
-                      </div>
-                      <div class="form-group">
-                        <label for="exampleInput1" class="bmd-label-floating">Cantidad</label>
-                        <input type="text" class="form-control" id="v" name="v">
-                      </div>
-                    </div>
-                    <div class="input-group form-control-lg">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text">
-                          <i class="material-icons">list</i>
-                        </span>
-                      </div>
-                      <div class="form-group">
-                        <div class="form-group">
-                          <select class="selectpicker" data-style="select-with-transition" title="Categoría">
-                            <option value="2">Desayuno </option>
-                            <option value="3">Comida</option>
-                                  
-                          </select>
-                        </div>
-                      </div>
-                    </div>
+            <div class="alert alert-primary alert-with-icon" data-notify="container">
+                    <i class="material-icons" data-notify="icon">notifications</i>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <i class="material-icons">close</i>
+                    </button>
+                    <span data-notify="message">El ajuste de Josué Durán está próximo. <a class="btn btn-rose" href=""> Dar Seguimiento</a></span>
                   </div>
-                  <div class="col-md-6">
-                    <div class="input-group form-control-lg">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text">
-                          <i class="material-icons">local_dining</i>
-                        </span>
-                      </div>
-                      <div class="form-group">
-                        <label for="exampleInput1" class="bmd-label-floating">Proteínas</label>
-                        <input type="text" class="form-control" id="v" name="v">
-                      </div>
-                    </div>
-                    <div class="input-group form-control-lg">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text">
-                          <i class="material-icons">local_dining</i>
-                        </span>
-                      </div>
-                      <div class="form-group">
-                        <label for="exampleInput1" class="bmd-label-floating">Carbohidratos</label>
-                        <input type="text" class="form-control" id="v" name="v">
-                      </div>
-                    </div>
-                    <div class="input-group form-control-lg">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text">
-                          <i class="material-icons">local_dining</i>
-                        </span>
-                      </div>
-                      <div class="form-group">
-                        <label for="exampleInput1" class="bmd-label-floating">Lípidos</label>
-                        <input type="text" class="form-control" id="v" name="v">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-12">
-                    <center><input type="submit" class="btn btn-finish btn-fill btn-rose btn-wd" name="finish" value="Guardar"></center>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>

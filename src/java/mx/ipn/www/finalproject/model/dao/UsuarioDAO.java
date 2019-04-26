@@ -48,7 +48,7 @@ public interface UsuarioDAO {
      * @param conn      JDBC Connection.
      * @exception       SQLException if something is wrong.
      */
-    public Usuario loadForLogin(Usuario usuario, Connection conn) throws SQLException;
+    public Usuario loadForLoginNuricionista(Usuario usuario, Connection conn) throws SQLException;
     
     /**
      * Update a record in Database.

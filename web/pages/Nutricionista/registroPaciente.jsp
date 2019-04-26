@@ -1,5 +1,12 @@
+<%-- 
+    Document   : registroPaciente
+    Created on : Apr 26, 2019, 1:34:47 AM
+    Author     : pepe
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="utf-8" />
@@ -7,7 +14,7 @@
   <link rel="icon" type="image/png" href="../../assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
-    Material Dashboard PRO by Creative Tim
+    Registro de Paciente
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
@@ -40,7 +47,13 @@
           <div class="user-info">
             <a data-toggle="collapse" href="#collapseExample" class="username">
               <span>
-                Dr. Tania Andrew
+                  <%
+                        if (session.getAttribute("nameNutricionista") == null) {
+                              response.sendRedirect("../../login.html");
+                        } else {
+                            out.println(session.getAttribute("nameNutricionista"));
+                        }
+                  %>
                 <b class="caret"></b>
               </span>
             </a>
@@ -64,25 +77,25 @@
         </div>
         <ul class="nav ">
           <li class="nav-item">
-            <a class="nav-link" href="BlankN.html">
+            <a class="nav-link" href="BlankN.jsp">
               <i class="material-icons">home</i>
               <p> Inicio </p>
             </a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="registroPaciente.html">
+            <a class="nav-link" href="registroPaciente.jsp">
               <i class="material-icons">face</i>
               <p> Registrar Paciente </p>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="listaPacientes.html">
+            <a class="nav-link" href="listaPacientes.jsp">
               <i class="material-icons">favorite_border</i>
               <p> Lista de Pacientes </p>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="agregarAlimento.html">
+            <a class="nav-link" href="agregarAlimento.jsp">
               <i class="material-icons">restaurant</i>
               <p> Registrar Alimento </p>
             </a>

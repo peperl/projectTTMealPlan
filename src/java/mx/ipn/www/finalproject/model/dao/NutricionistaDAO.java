@@ -11,6 +11,7 @@ import mx.ipn.www.finalproject.model.Nutricionista;
 import mx.ipn.www.finalproject.model.NutricionistaKey;
 import java.sql.Connection;
 import java.sql.SQLException;
+import mx.ipn.www.finalproject.model.UsuarioKey;
 
 /**
  * This interface provides methods to populate DB Table of nutricionista
@@ -32,6 +33,7 @@ public interface NutricionistaDAO {
      */
     public Nutricionista load(NutricionistaKey key, Connection conn) throws SQLException;
 
+    public Nutricionista loadByUser(UsuarioKey key, Connection conn) throws SQLException;
     /**
      * Update a record in Database.
      * @param bean   The Object to be saved.

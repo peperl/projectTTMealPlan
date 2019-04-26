@@ -81,8 +81,5 @@ public class GeneticAlgorithm {
         } catch (NamingException ex) {
             Logger.getLogger(GeneticAlgorithm.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     }
-    
-    
 }

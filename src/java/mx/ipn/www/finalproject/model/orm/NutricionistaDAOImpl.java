@@ -17,6 +17,7 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.List;
 import java.util.ArrayList;
+import mx.ipn.www.finalproject.model.UsuarioKey;
 import mx.ipn.www.finalproject.model.dao.NutricionistaDAO;
 
 /**
@@ -38,6 +39,14 @@ public class NutricionistaDAOImpl implements NutricionistaDAO {
         + "FROM Nutricionista WHERE "
         + "idNutricionista = ?";
 
+    /* SQL to select data */
+    private static final String SQL_SELECT_BY_IDUSUARIO =
+        "SELECT "
+        + "idNutricionista, Usuario_idUsuario, Nombre, Cedula, FechaNacimiento, EscuelaProcedencia, Telefono, "
+        + "Direccion, Estado, FechaRegistro, FechaAceptado "
+        + "FROM Nutricionista WHERE "
+        + "Usuario_idUsuario = ?";    
+    
     /* SQL to update data */
     private static final String SQL_UPDATE =
         "UPDATE Nutricionista SET "
@@ -95,6 +104,30 @@ public class NutricionistaDAOImpl implements NutricionistaDAO {
         try {
             ps = conn.prepareStatement(SQL_SELECT);
             ps.setInt(1, key.getIdnutricionista());
+            rs = ps.executeQuery();
+            List results = getResults(rs);
+            if (results.size() > 0)
+                return (Nutricionista) results.get(0);
+            else
+                return null;
+        }finally {
+            close(rs);
+            close(ps);
+        }
+    }
+
+    /**
+     * Retrive a record from Database.
+     * @param beanKey   The PK Object to be retrived.
+     * @param conn      JDBC Connection.
+     * @exception       SQLException if something is wrong.
+     */
+    public Nutricionista loadByUser(UsuarioKey key, Connection conn) throws SQLException {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            ps = conn.prepareStatement(SQL_SELECT_BY_IDUSUARIO);
+            ps.setInt(1, key.getIdusuario());
             rs = ps.executeQuery();
             List results = getResults(rs);
             if (results.size() > 0)
