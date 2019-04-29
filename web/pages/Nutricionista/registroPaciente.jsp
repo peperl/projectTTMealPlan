@@ -49,7 +49,7 @@
               <span>
                   <%
                         if (session.getAttribute("nameNutricionista") == null) {
-                              response.sendRedirect("../../login.html");
+                              response.sendRedirect("../login.html");
                         } else {
                             out.println(session.getAttribute("nameNutricionista"));
                         }

@@ -16,6 +16,10 @@
         <servlet-name>getAllFood</servlet-name>
         <servlet-class>mx.ipn.www.finalproject.view.servlets.services.getAllFood</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ListaPacientes</servlet-name>
+        <servlet-class>mx.ipn.www.finalproject.view.servlets.services.ListaPacientes</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>getAllFood</servlet-name>
         <url-pattern>/getAllFood</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListaPacientes</servlet-name>
+        <url-pattern>/ListaPacientes</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

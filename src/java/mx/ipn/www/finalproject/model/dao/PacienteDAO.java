@@ -11,6 +11,8 @@ import mx.ipn.www.finalproject.model.PacienteKey;
 import mx.ipn.www.finalproject.model.Paciente;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
+import mx.ipn.www.finalproject.model.NutricionistaKey;
 
 /**
  * This interface provides methods to populate DB Table of paciente
@@ -33,6 +35,8 @@ public interface PacienteDAO {
     public Paciente load(PacienteKey key, Connection conn) throws SQLException;
     
     public Paciente loadByName(Paciente paciente, Connection conn) throws SQLException;
+    
+    public List<Paciente> loadByNutricionista(NutricionistaKey key, Connection conn) throws SQLException;
 
     /**
      * Update a record in Database.

@@ -7,6 +7,7 @@ package mx.ipn.www.finalproject.view.servlets.services;
 
 import com.google.gson.Gson;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
@@ -17,16 +18,18 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import mx.ipn.www.finalproject.model.Alimento;
-import mx.ipn.www.finalproject.model.dao.AlimentoDAO;
-import mx.ipn.www.finalproject.model.orm.AlimentoDAOImpl;
+import javax.servlet.http.HttpSession;
+import mx.ipn.www.finalproject.model.Nutricionista;
+import mx.ipn.www.finalproject.model.Paciente;
+import mx.ipn.www.finalproject.model.dao.PacienteDAO;
+import mx.ipn.www.finalproject.model.orm.PacienteDAOImpl;
 import mx.ipn.www.finalproject.utils.ConnectionByPayaraSource;
 
 /**
  *
  * @author pepe
  */
-public class getAllFood extends HttpServlet {
+public class ListaPacientes extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,13 +42,18 @@ public class getAllFood extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         response.setContentType("application/json;charset=UTF-8");
         try {
+            HttpSession session = request.getSession(false);
+            int idNutricionista = (int) session.getAttribute("idNutricionista");
+            Nutricionista nutricionista = new Nutricionista();
+            nutricionista.setIdnutricionista(idNutricionista);
+            
             ConnectionByPayaraSource connector = new ConnectionByPayaraSource();
             Connection conn = connector.initConnection();
-            AlimentoDAO dao = new AlimentoDAOImpl();
-            List<Alimento> list = dao.loadAll(conn);
+            PacienteDAO dao = new PacienteDAOImpl();
+            List<Paciente> list = dao.loadByNutricionista(nutricionista.getKeyObject(), conn);
+            
             String json = new Gson().toJson(list);
             response.getWriter().write(json);
             connector.destroy();
@@ -54,7 +62,6 @@ public class getAllFood extends HttpServlet {
         } catch (SQLException ex) {
             Logger.getLogger(getAllFood.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
