@@ -143,7 +143,7 @@ public class RegistroPaciente extends HttpServlet {
             planalimenticioDAO.create(planalimenticio, con);
             
             String[] alimEv = request.getParameter("alimEv").split(",");
-                if (!alimEv[0].equals("") | alimEv[0] != null) {
+            if (!alimEv[0].equals("") & alimEv[0] != null) {
                 int[] alimentoIdalimentos =  new int[alimEv.length];
                 int cont = 0;
                 for (String string : alimEv) {
@@ -159,8 +159,10 @@ public class RegistroPaciente extends HttpServlet {
                 }
             }
             connectionClass.destroy();
+            
             String qr = QRgenerator.generateQRContent(usuarioIdusuario + "");
-            QRgenerator.generateQRImage(qr, usuarioIdusuario + "");
+            
+            QRgenerator.generateQRImage(qr, "/home/pepe/NetBeansProjects/projectTTMealPlans/web/qr/" + usuarioIdusuario);
             
             HttpSession session = request.getSession();
             session.setAttribute("qrid", usuarioIdusuario);
