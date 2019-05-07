@@ -20,6 +20,14 @@
         <servlet-name>ListaPacientes</servlet-name>
         <servlet-class>mx.ipn.www.finalproject.view.servlets.services.ListaPacientes</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>getProposePlan</servlet-name>
+        <servlet-class>mx.ipn.www.finalproject.view.servlets.services.getProposePlan</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RegisterAntopometricData</servlet-name>
+        <servlet-class>mx.ipn.www.finalproject.view.servlets.RegisterAntopometricData</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -40,9 +48,17 @@
         <servlet-name>ListaPacientes</servlet-name>
         <url-pattern>/ListaPacientes</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>getProposePlan</servlet-name>
+        <url-pattern>/getProposePlan</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegisterAntopometricData</servlet-name>
+        <url-pattern>/RegisterAntopometricData</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
-            10
+            30
         </session-timeout>
     </session-config>
 </web-app>

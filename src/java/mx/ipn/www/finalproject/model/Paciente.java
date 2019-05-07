@@ -76,7 +76,7 @@ public class Paciente implements java.io.Serializable, Cloneable {
     protected double comidasanterior;
 
     /* ActividadFisica */
-    protected double actividadfisica;
+    protected int actividadfisica;
 
     /* FechaRegistro */
     protected Date fecharegistro;
@@ -84,7 +84,7 @@ public class Paciente implements java.io.Serializable, Cloneable {
     /* Estado */
     protected int estado;
 
-    public Paciente(int usuarioIdusuario, int nutricionistaIdnutricionista, String nombre, String apellidos, Date fechanacimiento, String sexo, String telefono, String direccion, double pesoanterior, double estatura, double cirbraquial, double cirpantorrilla, String dificultadesaliment, String enfermedades, String tratamiento, double proteinaanterior, double lipidosanterior, double carbohidratosanterior, double comidasanterior, double actividadfisica, Date fecharegistro, int estado) {
+    public Paciente(int usuarioIdusuario, int nutricionistaIdnutricionista, String nombre, String apellidos, Date fechanacimiento, String sexo, String telefono, String direccion, double pesoanterior, double estatura, double cirbraquial, double cirpantorrilla, String dificultadesaliment, String enfermedades, String tratamiento, double proteinaanterior, double lipidosanterior, double carbohidratosanterior, double comidasanterior, int actividadfisica, Date fecharegistro, int estado) {
         this.usuarioIdusuario = usuarioIdusuario;
         this.nutricionistaIdnutricionista = nutricionistaIdnutricionista;
         this.nombre = nombre;
@@ -323,12 +323,12 @@ public class Paciente implements java.io.Serializable, Cloneable {
     }
 
     /* ActividadFisica */
-    public double getActividadfisica() {
+    public int getActividadfisica() {
         return actividadfisica;
     }
 
     /* ActividadFisica */
-    public void setActividadfisica(double actividadfisica) {
+    public void setActividadfisica(int actividadfisica) {
         this.actividadfisica = actividadfisica;
     }
 

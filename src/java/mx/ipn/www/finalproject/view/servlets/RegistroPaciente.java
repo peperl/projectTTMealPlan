@@ -83,7 +83,7 @@ public class RegistroPaciente extends HttpServlet {
         double lipidosanterior = Double.parseDouble(request.getParameter("actualCarbo"));
         double carbohidratosanterior = Double.parseDouble(request.getParameter("actualLipid"));
         double comidasanterior = Double.parseDouble(request.getParameter("actualMealsQty"));
-        double actividadfisica = Double.parseDouble(request.getParameter("phisicalActivity"));
+        int actividadfisica = Integer.parseInt(request.getParameter("phisicalActivity"));
         Date fechaRegistro = new Date();
         
         int pacienteIdpaciente; //listo
@@ -141,6 +141,7 @@ public class RegistroPaciente extends HttpServlet {
             Planalimenticio planalimenticio = new Planalimenticio(pacienteIdpaciente, fechacreacion, duracion, nocomidas, estado, proteinas, lipidos, carbohidratos);
             PlanalimenticioDAO planalimenticioDAO = new PlanalimenticioDAOImpl();
             planalimenticioDAO.create(planalimenticio, con);
+            planalimenticio = planalimenticioDAO.loadLastPlan(planalimenticio, con);
             
             String[] alimEv = request.getParameter("alimEv").split(",");
             if (!alimEv[0].equals("") & alimEv[0] != null) {
@@ -166,6 +167,8 @@ public class RegistroPaciente extends HttpServlet {
             
             HttpSession session = request.getSession();
             session.setAttribute("qrid", usuarioIdusuario);
+            session.setAttribute("pacienteIdpaciente", paciente);
+            session.setAttribute("idPlanAlimenticio", planalimenticio);
             session.setAttribute("namePaciente", paciente.getNombre() + " " + paciente.getApellidos());
             ServletContext sc = request.getServletContext();
             String path = sc.getContextPath();

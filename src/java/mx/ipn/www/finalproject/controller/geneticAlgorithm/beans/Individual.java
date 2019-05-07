@@ -41,15 +41,32 @@ public class Individual {
         //ints.forEach(System.out::println);        
     }
     
+    Individual(MealPlanInformation mpi, Map<Integer, List<Alimento>> foodByCategory, ObjectiveCalories objectiveCalories, int id) {
+        this.binarySelection = new BinarySelection();
+        this.mpi = mpi;
+        this.foodByCategory = foodByCategory;
+        this.objectiveCalories = objectiveCalories;
+        this.id = id;
+        
+        //4 bits de alimento
+        //2 de cantidad
+        
+        // generate stream of 5 ints between 1 to 100
+        //IntStream ints = random.ints(5, 1, 100);
+        //ints.forEach(System.out::println);        
+    }
+
     public void calculateHability() {
         double prot = 0,lip = 0,carb = 0;
         double objective = objectiveCalories.getCarb()+objectiveCalories.getLip() + objectiveCalories.getProt();
         double result;
+        diet = new ArrayList<>();
         for (Meal mealDistribution : mpi.getMealDistribution()) {
             List<Alimento> aux = new ArrayList<>();
+            int selector = 0;
             for (Integer category : mealDistribution.getCategoria()) {
-                int food = binarySelection.getAlimento(id, 0);
-                int qty = binarySelection.getCantidad(id, 0);
+                int food = binarySelection.getAlimento(id, selector);
+                int qty = binarySelection.getCantidad(id, selector++);
                 List<Alimento> alimentos = foodByCategory.get(category);
                 Alimento alimento = alimentos.get(food % alimentos.size());
                 prot+= alimento.getProteinas() * qty;
@@ -64,7 +81,7 @@ public class Individual {
             result *= -1;
         }
         this.aptitud = result;
-        if (aptitud < 0.30) {
+        if (aptitud < 0.08) {
             System.out.println("aptitud " + aptitud);
             System.out.println(prot + " " + lip + " " + carb );
             System.out.print(objectiveCalories.getProt() +" ");
@@ -81,5 +98,62 @@ public class Individual {
     public void setAptitud(float aptitud) {
         this.aptitud = aptitud;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public MealPlanInformation getMpi() {
+        return mpi;
+    }
+
+    public void setMpi(MealPlanInformation mpi) {
+        this.mpi = mpi;
+    }
+
+    public BinarySelection getBinarySelection() {
+        return binarySelection;
+    }
+
+    public void setBinarySelection(BinarySelection binarySelection) {
+        this.binarySelection = binarySelection;
+    }
+
+    public Map<Integer, List<Alimento>> getFoodByCategory() {
+        return foodByCategory;
+    }
+
+    public void setFoodByCategory(Map<Integer, List<Alimento>> foodByCategory) {
+        this.foodByCategory = foodByCategory;
+    }
+
+    public List<List<Alimento>> getDiet() {
+        return diet;
+    }
+
+    public void setDiet(List<List<Alimento>> diet) {
+        this.diet = diet;
+    }
+
+    public ObjectiveCalories getObjectiveCalories() {
+        return objectiveCalories;
+    }
+
+    public void setObjectiveCalories(ObjectiveCalories objectiveCalories) {
+        this.objectiveCalories = objectiveCalories;
+    }
+
+    
+    
+    @Override
+    public String toString() {
+        return "Individual{" + "id=" + id + ", aptitud=" + aptitud + ", mpi=" + mpi + ", binarySelection=" + binarySelection + ", foodByCategory=" + foodByCategory + ", diet=" + diet + ", objectiveCalories=" + objectiveCalories + '}';
+    }
+    
+    
 }
 

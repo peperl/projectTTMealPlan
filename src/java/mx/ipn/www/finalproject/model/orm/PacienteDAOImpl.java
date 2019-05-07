@@ -111,7 +111,7 @@ public class PacienteDAOImpl implements PacienteDAO {
             ps.setDouble(18, bean.getLipidosanterior());
             ps.setDouble(19, bean.getCarbohidratosanterior());
             ps.setDouble(20, bean.getComidasanterior());
-            ps.setDouble(21, bean.getActividadfisica());
+            ps.setInt(21, bean.getActividadfisica());
             if (bean.getFechanacimiento() != null)
                 ps.setDate(22, new java.sql.Date(bean.getFecharegistro().getTime()));
             else
@@ -217,7 +217,7 @@ public class PacienteDAOImpl implements PacienteDAO {
             ps.setDouble(17, bean.getLipidosanterior());
             ps.setDouble(18, bean.getCarbohidratosanterior());
             ps.setDouble(19, bean.getComidasanterior());
-            ps.setDouble(20, bean.getActividadfisica());
+            ps.setInt(20, bean.getActividadfisica());
             if (bean.getFechanacimiento() != null)
                 ps.setDate(21, new java.sql.Date(bean.getFecharegistro().getTime()));
             else
@@ -277,7 +277,7 @@ public class PacienteDAOImpl implements PacienteDAO {
             bean.setLipidosanterior(rs.getDouble("LipidosAnterior"));
             bean.setCarbohidratosanterior(rs.getDouble("CarbohidratosAnterior"));
             bean.setComidasanterior(rs.getDouble("ComidasAnterior"));
-            bean.setActividadfisica(rs.getDouble("ActividadFisica"));
+            bean.setActividadfisica(rs.getInt("ActividadFisica"));
             bean.setFecharegistro(rs.getDate("FechaRegistro"));
             bean.setEstado(rs.getInt("Estado"));
             results.add(bean);

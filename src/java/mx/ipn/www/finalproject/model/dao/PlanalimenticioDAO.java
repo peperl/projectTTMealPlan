@@ -32,6 +32,7 @@ public interface PlanalimenticioDAO {
      */
     public Planalimenticio load(PlanalimenticioKey key, Connection conn) throws SQLException;
 
+    public Planalimenticio loadLastPlan(Planalimenticio plan, Connection conn) throws SQLException;
     /**
      * Update a record in Database.
      * @param bean   The Object to be saved.

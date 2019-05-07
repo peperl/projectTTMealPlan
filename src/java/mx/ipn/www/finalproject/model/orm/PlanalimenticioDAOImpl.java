@@ -38,6 +38,14 @@ public class PlanalimenticioDAOImpl implements PlanalimenticioDAO {
         + "FROM PlanAlimenticio WHERE "
         + "idPlanAlimenticio = ?";
 
+    /* SQL to select data */
+    private static final String SQL_SELECT_LASTPLAN_PACIENTE =
+        "SELECT "
+        + "idPlanAlimenticio, Paciente_idPaciente, FechaCreacion, Duracion, GastoCalorico, Proteinas, Lipidos, "
+        + "Carbohidratos, NoComidas, Estado, TMR "
+        + "FROM PlanAlimenticio WHERE "
+        + "Paciente_idPaciente = ? ORDER BY FechaCreacion desc;";    
+    
     /* SQL to update data */
     private static final String SQL_UPDATE =
         "UPDATE PlanAlimenticio SET "
@@ -105,6 +113,24 @@ public class PlanalimenticioDAOImpl implements PlanalimenticioDAO {
         }
     }
 
+    public Planalimenticio loadLastPlan(Planalimenticio plan, Connection conn) throws SQLException {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            ps = conn.prepareStatement(SQL_SELECT_LASTPLAN_PACIENTE);
+            ps.setInt(1, plan.getPacienteIdpaciente());
+            rs = ps.executeQuery();
+            List results = getResults(rs);
+            if (results.size() > 0)
+                return (Planalimenticio) results.get(0);
+            else
+                return null;
+        }finally {
+            close(rs);
+            close(ps);
+        }
+    }    
+    
     /**
      * Update a record in Database.
      * @param bean   The Object to be saved.

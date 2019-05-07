@@ -25,27 +25,27 @@ import mx.ipn.www.finalproject.model.dao.HistorialantropometricoDAO;
 public class HistorialantropometricoDAOImpl implements HistorialantropometricoDAO {
     /* SQL to insert data */
     private static final String SQL_INSERT =
-        "INSERT INTO historialantropometrico ("
-        + "idRegistro, Paciente_idPaciente, Fecha, Peso, IMC, Grasa"
-        + ") VALUES (?, ?, ?, ?, ?, ?)";
+        "INSERT INTO HistorialAntropometrico ("
+        + "Paciente_idPaciente, Fecha, Peso, IMC, Grasa"
+        + ") VALUES (?, ?, ?, ?, ?)";
 
     /* SQL to select data */
     private static final String SQL_SELECT =
         "SELECT "
         + "idRegistro, Paciente_idPaciente, Fecha, Peso, IMC, Grasa "
-        + "FROM historialantropometrico WHERE "
+        + "FROM HistorialAntropometrico WHERE "
         + "idRegistro = ?";
 
     /* SQL to update data */
     private static final String SQL_UPDATE =
-        "UPDATE historialantropometrico SET "
+        "UPDATE HistorialAntropometrico SET "
         + "Paciente_idPaciente = ?, Fecha = ?, Peso = ?, IMC = ?, Grasa = ? "
         + "WHERE "
         + "idRegistro = ?";
 
     /* SQL to delete data */
     private static final String SQL_DELETE =
-        "DELETE FROM historialantropometrico WHERE "
+        "DELETE FROM HistorialAntropometrico WHERE "
         + "idRegistro = ?";
 
     /**
@@ -58,15 +58,14 @@ public class HistorialantropometricoDAOImpl implements HistorialantropometricoDA
         PreparedStatement ps = null;
         try {
             ps = conn.prepareStatement(SQL_INSERT);
-            ps.setInt(1, bean.getIdregistro());
-            ps.setInt(2, bean.getPacienteIdpaciente());
+            ps.setInt(1, bean.getPacienteIdpaciente());
             if (bean.getFecha() != null)
-                ps.setDate(3, new java.sql.Date(bean.getFecha().getTime()));
+                ps.setDate(2, new java.sql.Date(bean.getFecha().getTime()));
             else
-                ps.setNull(3, Types.DATE);
-            ps.setDouble(4, bean.getPeso());
-            ps.setDouble(5, bean.getImc());
-            ps.setDouble(6, bean.getGrasa());
+                ps.setNull(2, Types.DATE);
+            ps.setDouble(3, bean.getPeso());
+            ps.setDouble(4, bean.getImc());
+            ps.setDouble(5, bean.getGrasa());
             ps.executeUpdate();
         }finally {
             close(ps);
