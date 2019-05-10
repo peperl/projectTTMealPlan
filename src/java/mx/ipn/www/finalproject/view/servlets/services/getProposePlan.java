@@ -1,16 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mx.ipn.www.finalproject.view.servlets.services;
 
 import com.google.gson.Gson;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
@@ -21,9 +17,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import mx.ipn.www.finalproject.controller.geneticAlgorithm.beans.GeneticAlgorithm;
 import mx.ipn.www.finalproject.controller.geneticAlgorithm.beans.Individual;
+import mx.ipn.www.finalproject.controller.geneticAlgorithm.beans.Meal;
+import mx.ipn.www.finalproject.controller.geneticAlgorithm.constants.ConstantMealDistribution;
 import mx.ipn.www.finalproject.controller.geneticAlgorithm.constants.ConstantSpeedLoseWeight;
 import mx.ipn.www.finalproject.model.Alimento;
-import mx.ipn.www.finalproject.model.Paciente;
+import mx.ipn.www.finalproject.model.CategoriaalimentoKey;
 import mx.ipn.www.finalproject.model.Planalimenticio;
 import mx.ipn.www.finalproject.model.dao.AlimentoDAO;
 import mx.ipn.www.finalproject.model.orm.AlimentoDAOImpl;
@@ -50,27 +48,44 @@ public class getProposePlan extends HttpServlet {
             HttpSession session = request.getSession(false);
             Planalimenticio planalimenticio = (Planalimenticio) session.getAttribute("idPlanAlimenticio");
             GeneticAlgorithm ga;
+
+            
+        Map <Integer, List<Alimento>> foodByCategory = new HashMap<>();    
+        ConstantMealDistribution cmd = new ConstantMealDistribution(planalimenticio.getNocomidas());
+        ConnectionByPayaraSource connectionByPayaraSource = new ConnectionByPayaraSource();
+        Connection conn = null;
         try {
-            double a = planalimenticio.getGastocalorico() + planalimenticio.getTmr();
-            Logger.getGlobal().info("calorias: " + a);
-            ga = new GeneticAlgorithm(1000, planalimenticio.getGastocalorico() + planalimenticio.getTmr(), ConstantSpeedLoseWeight.SLOW_SPEED);
-            Individual individual = ga.runAlgorithm();
-            if (individual == null) {
-                
-            } else {
-                List list = individual.getDiet();
-                String json = new Gson().toJson(list);
-                response.getWriter().write(json);
-            }
-                    
+            conn = connectionByPayaraSource.initConnection();
         } catch (NamingException ex) {
             Logger.getLogger(getProposePlan.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(getProposePlan.class.getName()).log(Level.SEVERE, null, ex);
         }
+        Meal [] shellMeal = cmd.getTiempos();
+        AlimentoDAO alimentoDAO = new AlimentoDAOImpl();
+        for (Meal meal : shellMeal) {
+            for (Integer idCategoria : meal.getCategoria()) {
+                try {
+                    if (!foodByCategory.containsKey(idCategoria)) {
+                        List<Alimento> a = alimentoDAO.loadByCategory(new CategoriaalimentoKey(idCategoria), conn);
+                        foodByCategory.put(idCategoria, a);
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(GeneticAlgorithm.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }            
             
-
-            
+        double a = planalimenticio.getGastocalorico() + planalimenticio.getTmr();
+        Logger.getGlobal().info("calorias: " + a);
+        ga = new GeneticAlgorithm(1000, planalimenticio.getGastocalorico() + planalimenticio.getTmr(), ConstantSpeedLoseWeight.SLOW_SPEED, 100, foodByCategory, planalimenticio.getNocomidas());
+        Individual individual = ga.runAlgorithm();
+        if (individual == null) {
+        } else {
+            List list = individual.getDiet();
+            String json = new Gson().toJson(list);
+            response.getWriter().write(json);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
