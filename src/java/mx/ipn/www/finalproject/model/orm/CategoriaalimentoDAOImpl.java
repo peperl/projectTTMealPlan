@@ -25,7 +25,7 @@ import mx.ipn.www.finalproject.model.dao.CategoriaalimentoDAO;
 public class CategoriaalimentoDAOImpl implements CategoriaalimentoDAO {
     /* SQL to insert data */
     private static final String SQL_INSERT =
-        "INSERT INTO categoriaalimento ("
+        "INSERT INTO CategoriaAlimento ("
         + "category_id, NombreCategoria"
         + ") VALUES (?, ?)";
 
@@ -33,19 +33,24 @@ public class CategoriaalimentoDAOImpl implements CategoriaalimentoDAO {
     private static final String SQL_SELECT =
         "SELECT "
         + "category_id, NombreCategoria "
-        + "FROM categoriaalimento WHERE "
+        + "FROM CategoriaAlimento WHERE "
         + "category_id = ?";
+
+    private static final String SQL_SELECT_ALL =
+        "SELECT "
+        + "category_id, NombreCategoria "
+        + "FROM CategoriaAlimento";
 
     /* SQL to update data */
     private static final String SQL_UPDATE =
-        "UPDATE categoriaalimento SET "
+        "UPDATE CategoriaAlimento SET "
         + "NombreCategoria = ? "
         + "WHERE "
         + "category_id = ?";
 
     /* SQL to delete data */
     private static final String SQL_DELETE =
-        "DELETE FROM categoriaalimento WHERE "
+        "DELETE FROM CategoriaAlimento WHERE "
         + "category_id = ?";
 
     /**
@@ -90,6 +95,23 @@ public class CategoriaalimentoDAOImpl implements CategoriaalimentoDAO {
         }
     }
 
+public List<Categoriaalimento> loadAll(Connection conn) throws SQLException {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            ps = conn.prepareStatement(SQL_SELECT_ALL);
+            rs = ps.executeQuery();
+            List results = getResults(rs);
+            if (results.size() > 0)
+                return results;
+            else
+                return null;
+        }finally {
+            close(rs);
+            close(ps);
+        }
+    }    
+    
     /**
      * Update a record in Database.
      * @param bean   The Object to be saved.

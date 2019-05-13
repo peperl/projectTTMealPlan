@@ -158,6 +158,7 @@
                 <h4 class="card-title">Registrar Alimento</h4>
               </div>
               <div class="card-body">
+                <form class="form" method = "GET" action = "../../AgregarAlimento">
                 <div class="row">
                   <div class="col-md-6">
                     <div class="input-group form-control-lg">
@@ -168,7 +169,7 @@
                       </div>
                       <div class="form-group">
                         <label for="exampleInput1" class="bmd-label-floating">Nombre</label>
-                        <input type="text" class="form-control" id="v" name="v">
+                        <input type="text" class="form-control" id="nombre" name="nombre" required>
                       </div>
                     </div>
                     <div class="input-group form-control-lg">
@@ -179,7 +180,7 @@
                       </div>
                       <div class="form-group">
                         <label for="exampleInput1" class="bmd-label-floating">Cantidad</label>
-                        <input type="text" class="form-control" id="v" name="v">
+                        <input type="number" class="form-control" id="cantidad" name="cantidad" required>
                       </div>
                     </div>
                     <div class="input-group form-control-lg">
@@ -189,15 +190,22 @@
                         </span>
                       </div>
                       <div class="form-group">
-                        <div class="form-group">
-                          <select class="selectpicker" data-style="select-with-transition" title="Categoría">
-                            <option value="2">Desayuno </option>
-                            <option value="3">Comida</option>
-                                  
-                          </select>
-                        </div>
+                          <select class="selectpicker" data-style="select-with-transition" title="Categoría" id="categorias" required>
+                        </select>
                       </div>
                     </div>
+                    <div class="input-group form-control-lg">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="material-icons">rounded_corner</i>
+                        </span>
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInput1" class="bmd-label-floating">Unidad</label>
+                        <input type="text" class="form-control" id="unidad" name="unidad" required>
+                      </div>
+                    </div>
+                      
                   </div>
                   <div class="col-md-6">
                     <div class="input-group form-control-lg">
@@ -208,7 +216,7 @@
                       </div>
                       <div class="form-group">
                         <label for="exampleInput1" class="bmd-label-floating">Proteínas</label>
-                        <input type="text" class="form-control" id="v" name="v">
+                        <input type="text" class="form-control" id="proteinas" name="proteinas" required>
                       </div>
                     </div>
                     <div class="input-group form-control-lg">
@@ -219,7 +227,7 @@
                       </div>
                       <div class="form-group">
                         <label for="exampleInput1" class="bmd-label-floating">Carbohidratos</label>
-                        <input type="text" class="form-control" id="v" name="v">
+                        <input type="text" class="form-control" id="carbohidratos" name="carbohidratos" required>
                       </div>
                     </div>
                     <div class="input-group form-control-lg">
@@ -230,7 +238,7 @@
                       </div>
                       <div class="form-group">
                         <label for="exampleInput1" class="bmd-label-floating">Lípidos</label>
-                        <input type="text" class="form-control" id="v" name="v">
+                        <input type="text" class="form-control" id="lipidos" name="lipidos" required>
                       </div>
                     </div>
                   </div>
@@ -240,6 +248,8 @@
                     <center><input type="submit" class="btn btn-finish btn-fill btn-rose btn-wd" name="finish" value="Guardar"></center>
                   </div>
                 </div>
+                </form>                  
+                  
               </div>
             </div>
           </div>
@@ -455,6 +465,51 @@
       }, 600);
     });
   </script>
+  <script>
+    $.get("../../getCategoria", function(responseJson) {    // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response JSON...
+        $.each(responseJson, function(index, item) { // Iterate over the JSON array.
+            ($("#categorias")).append("<option value=" + item.categoryId +">" + item.nombrecategoria + "</option>");
+        });
+        $('#categorias').selectpicker('refresh');
+    });
+    
+    
+  </script>
+  <script>
+    var pathname = window.location.href;
+    var url = new URL(pathname);
+    var c = url.searchParams.get("success");
+    var result = c.localeCompare("yes");
+    if (result == 0) {
+        $.notify({
+            title: '<strong>Registro no exitoso</strong>',
+            message: 'Error al registrar el alimento.'
+        },{
+            type: 'danger',
+            delay: 5000,
+            placement: {
+		from: "top",
+		align: "left"
+            }            
+        }
+        );
+    } else {
+        $.notify({
+            title: '<strong>Registro exitoso</strong>',
+            message: 'Alimento registrado correctamente.'
+        },{
+            type: 'success',
+            delay: 5000,
+            placement: {
+		from: "top",
+		align: "left"
+            }            
+        }
+        );
+        
+    }
+  </script>  
+  
 </body>
 
 </html>

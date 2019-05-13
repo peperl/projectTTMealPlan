@@ -45,7 +45,7 @@ public class getAllFood extends HttpServlet {
             ConnectionByPayaraSource connector = new ConnectionByPayaraSource();
             Connection conn = connector.initConnection();
             AlimentoDAO dao = new AlimentoDAOImpl();
-            List<Alimento> list = dao.loadAll(conn);
+            List<Alimento> list = dao.loadAllActive(conn);
             String json = new Gson().toJson(list);
             response.getWriter().write(json);
             connector.destroy();

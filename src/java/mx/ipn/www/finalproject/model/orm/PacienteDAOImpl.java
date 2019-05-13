@@ -60,7 +60,7 @@ public class PacienteDAOImpl implements PacienteDAO {
         + "Enfermedades, Tratamiento, ProteinaAnterior, LipidosAnterior, CarbohidratosAnterior, ComidasAnterior, ActividadFisica, "
         + "FechaRegistro, Estado "
         + "FROM Paciente WHERE "
-        + "Nutricionista_idNutricionista = ?";
+        + "Nutricionista_idNutricionista = ? AND Estado=1";
 
 
     /* SQL to update data */

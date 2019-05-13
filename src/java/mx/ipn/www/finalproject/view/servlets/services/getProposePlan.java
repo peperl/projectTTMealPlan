@@ -45,10 +45,15 @@ public class getProposePlan extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("application/json;charset=UTF-8");
-            HttpSession session = request.getSession(false);
-            Planalimenticio planalimenticio = (Planalimenticio) session.getAttribute("idPlanAlimenticio");
-            GeneticAlgorithm ga;
-
+        HttpSession session = request.getSession(false);
+        //Planalimenticio planalimenticio = (Planalimenticio) session.getAttribute("idPlanAlimenticio");
+        Planalimenticio planalimenticio = new Planalimenticio(); 
+        planalimenticio.setNocomidas(3);
+        planalimenticio.setGastocalorico(1000);
+        planalimenticio.setTmr(800);
+        
+        
+        GeneticAlgorithm ga;
             
         Map <Integer, List<Alimento>> foodByCategory = new HashMap<>();    
         ConstantMealDistribution cmd = new ConstantMealDistribution(planalimenticio.getNocomidas());
@@ -81,6 +86,7 @@ public class getProposePlan extends HttpServlet {
         ga = new GeneticAlgorithm(1000, planalimenticio.getGastocalorico() + planalimenticio.getTmr(), ConstantSpeedLoseWeight.SLOW_SPEED, 100, foodByCategory, planalimenticio.getNocomidas());
         Individual individual = ga.runAlgorithm();
         if (individual == null) {
+            Logger.getGlobal().info("Individuo Nulo");
         } else {
             List list = individual.getDiet();
             String json = new Gson().toJson(list);

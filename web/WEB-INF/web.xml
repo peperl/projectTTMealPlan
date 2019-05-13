@@ -28,6 +28,26 @@
         <servlet-name>RegisterAntopometricData</servlet-name>
         <servlet-class>mx.ipn.www.finalproject.view.servlets.RegisterAntopometricData</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>InicioSesion</servlet-name>
+        <servlet-class>mx.ipn.www.finalproject.view.servlets.services.android.InicioSesion</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AgregarAlimento</servlet-name>
+        <servlet-class>mx.ipn.www.finalproject.view.servlets.AgregarAlimento</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>getCategoria</servlet-name>
+        <servlet-class>mx.ipn.www.finalproject.view.servlets.services.getCategoria</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BorrarPaciente</servlet-name>
+        <servlet-class>mx.ipn.www.finalproject.view.servlets.BorrarPaciente</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetPaciente</servlet-name>
+        <servlet-class>mx.ipn.www.finalproject.view.servlets.services.GetPaciente</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -55,6 +75,26 @@
     <servlet-mapping>
         <servlet-name>RegisterAntopometricData</servlet-name>
         <url-pattern>/RegisterAntopometricData</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InicioSesion</servlet-name>
+        <url-pattern>/InicioSesion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AgregarAlimento</servlet-name>
+        <url-pattern>/AgregarAlimento</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>getCategoria</servlet-name>
+        <url-pattern>/getCategoria</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BorrarPaciente</servlet-name>
+        <url-pattern>/BorrarPaciente</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetPaciente</servlet-name>
+        <url-pattern>/GetPaciente</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

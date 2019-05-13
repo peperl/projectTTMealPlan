@@ -11,6 +11,8 @@ import mx.ipn.www.finalproject.model.RelComidaKey;
 import mx.ipn.www.finalproject.model.RelComida;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
+import mx.ipn.www.finalproject.model.ComidaKey;
 
 /**
  * This interface provides methods to populate DB Table of rel_comida
@@ -31,6 +33,8 @@ public interface RelComidaDAO {
      * @exception       SQLException if something is wrong.
      */
     public RelComida load(RelComidaKey key, Connection conn) throws SQLException;
+    
+    public List<RelComida> loadByComida(ComidaKey key, Connection conn) throws SQLException;
 
     /**
      * Update a record in Database.

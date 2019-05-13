@@ -7,7 +7,6 @@ package mx.ipn.www.finalproject.view.servlets.services;
 
 import com.google.gson.Gson;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
@@ -18,18 +17,16 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import mx.ipn.www.finalproject.model.Nutricionista;
-import mx.ipn.www.finalproject.model.Paciente;
-import mx.ipn.www.finalproject.model.dao.PacienteDAO;
-import mx.ipn.www.finalproject.model.orm.PacienteDAOImpl;
+import mx.ipn.www.finalproject.model.Categoriaalimento;
+import mx.ipn.www.finalproject.model.dao.CategoriaalimentoDAO;
+import mx.ipn.www.finalproject.model.orm.CategoriaalimentoDAOImpl;
 import mx.ipn.www.finalproject.utils.ConnectionByPayaraSource;
 
 /**
  *
  * @author pepe
  */
-public class ListaPacientes extends HttpServlet {
+public class getCategoria extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,23 +41,18 @@ public class ListaPacientes extends HttpServlet {
             throws ServletException, IOException {
         try {
             response.setContentType("application/json;charset=UTF-8");
-            HttpSession session = request.getSession(false);
-            int idNutricionista = (int) session.getAttribute("idNutricionista");
-            Nutricionista nutricionista = new Nutricionista();
-            nutricionista.setIdnutricionista(idNutricionista);
-            
             ConnectionByPayaraSource connector = new ConnectionByPayaraSource();
             Connection conn = connector.initConnection();
-            PacienteDAO dao = new PacienteDAOImpl();
-            List<Paciente> list = dao.loadByNutricionista(nutricionista.getKeyObject(), conn);
+            CategoriaalimentoDAO dao = new CategoriaalimentoDAOImpl();
             
+            List<Categoriaalimento> list = dao.loadAll(conn);
             String json = new Gson().toJson(list);
             response.getWriter().write(json);
             connector.destroy();
-        } catch (NamingException ex) {
-            Logger.getLogger(ListaPacientes.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(ListaPacientes.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(getCategoria.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NamingException ex) {
+            Logger.getLogger(getCategoria.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

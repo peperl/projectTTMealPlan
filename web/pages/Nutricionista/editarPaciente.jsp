@@ -1,3 +1,10 @@
+<%-- 
+    Document   : editarPaciente
+    Created on : May 12, 2019, 4:27:06 PM
+    Author     : pepe
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -7,7 +14,7 @@
   <link rel="icon" type="image/png" href="../../assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
-    Material Dashboard PRO by Creative Tim
+    Editar información del paciente
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
@@ -64,25 +71,25 @@
         </div>
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="BlankN.html">
+            <a class="nav-link" href="BlankN.jsp">
               <i class="material-icons">home</i>
               <p> Inicio </p>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="registroPaciente.html">
+            <a class="nav-link" href="registroPaciente.jsp">
               <i class="material-icons">face</i>
               <p> Registrar Paciente </p>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="listaPacientes.html">
+            <a class="nav-link" href="listaPacientes.jsp">
               <i class="material-icons">favorite_border</i>
               <p> Lista de Pacientes </p>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="agregarAlimento.html">
+            <a class="nav-link" href="agregarAlimento.jsp">
               <i class="material-icons">restaurant</i>
               <p> Registrar Alimento </p>
             </a>
@@ -105,7 +112,7 @@
                 <i class="material-icons design_bullet-list-67 visible-on-sidebar-mini">view_list</i>
               </button>
             </div>
-            <a class="navbar-brand" href="#pablo">Seguimiento de Paciente</a>
+            <a class="navbar-brand" href="#pablo">Editar Paciente</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation" data-target="#navigation-example">
             <span class="sr-only">Toggle navigation</span>
@@ -136,219 +143,8 @@
       <!-- CONTENEDOR -->
       <div class="content">
         <div class="container-fluid">
-          <div class="row">
-            <div class="col-md-12 col-12 mr-auto ml-auto">
-              <div class="card">
-                <div class="card-header card-header-info card-header-icon">
-                  <div class="card-icon">
-                    <i class="material-icons">face</i>
-                  </div>
-                  <h4 class="card-title">Información del Paciente</h4>
-                </div>
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <p><i class="material-icons">sentiment_satisfied_alt</i>Angélica Ramos</p>
-                      <p><i class="material-icons">call</i>56-31-16-11</p>
-                      <p><i class="material-icons">email</i>angeram@gmail.com</p>
-                      <p><i class="material-icons">room</i>Estado de Nuevo León No.269 Col. Providencia Del. Gustavo a Madero</p>
-                      <p><i class="material-icons">local_dining</i>Dificultades para Comer: Ninguna</p>
-                      <p><i class="material-icons">fastfood</i>Alimentos Evitados: Leche, Jitomáte</p>
-                    </div>
-                    <div class="col-md-6">
-                      <p><i class="material-icons">accessibility</i>168 cm</p>
-                      <p><i class="material-icons">straighten</i>Cir. Braquial: 30 cm</p>
-                      <p><i class="material-icons">straighten</i>Cir. Pantorrilla: 20 cm</p>
-                      <p><i class="material-icons">fitness_center</i>Yoga (3 días por semana)</p>
-                      <p><i class="material-icons">favorite_border</i>Enfermedades: Ninguna</p>
-                      <p><i class="material-icons">favorite</i>Tratamiento: Ninguno</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-8 col-12 mr-auto ml-auto">
-              <div class="card">
-                <div class="card-header card-header-rose card-header-icon">
-                  <div class="card-icon">
-                    <i class="material-icons">show_chart</i>
-                  </div>
-                  <h4 class="card-title">Avance</h4>
-                </div>
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div id="colouredBarsChart" class="ct-chart"></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="card-footer">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <i class="fa fa-circle text-info"></i> Peso
-                      <i class="fa fa-circle text-warning"></i> Músculo
-                      <i class="fa fa-circle text-danger"></i> Grasa
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="row">
-                <div class="card">
-                  <div class="card-header card-header-primary card-header-icon">
-                    <div class="card-icon">
-                      <i class="material-icons">update</i>
-                    </div>
-                    <h4 class="card-title">Ajustar Plan Alimenticio</h4>
-                  </div>
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-md-12">
-                        <p>Fecha Establecida de Ajuste: 24/01/2019</p>
-                        <center><input type="submit" class="btn btn-finish btn-fill btn-rose btn-wd" name="finish" value="Ajustar"></center>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="card card-chart">
-                  <div class="card-header card-header-info">
-                    <div id="roundedLineChart" class="ct-chart"></div>
-                  </div>
-                  <div class="card-body">
-                    <h4 class="card-title">Apego al Plan</h4>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12 col-12 mr-auto ml-auto">
-              <div class="card">
-                <div class="card-header card-header-primary card-header-icon">
-                  <div class="card-icon">
-                    <i class="material-icons">calendar_today</i>
-                  </div>
-                  <h4 class="card-title">Búsqueda de Plan</h4>
-                  <div class="input-group form-control-lg">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">
-                        <i class="material-icons">list</i>
-                      </span>
-                    </div>
-                    <div class="form-group">
-                      <div class="form-group">
-                        <select class="selectpicker" data-style="select-with-transition" title="Plan Alimenticio">
-                          <option value="2">Plan 1 </option>
-                          <option value="3">Plan 2</option>                                
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <p>Inicio del Plan: 24/12/2017</p>
-                      <p>Duración: 8 semanas</p>
-                      <p>Dieta de <b>1500 kcal</b>. <i class="fa fa-circle text-success"></i>Carbohidratos(50%) <i class="fa fa-circle text-primary"></i>Proteína(20%) <i class="fa fa-circle text-info"></i> Lípidos(30%)</p>
-                      <div class="progress">
-                        <div class="progress-bar progress-bar-success" role="progressbar" style="width: 50%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
-                        <div class="progress-bar progress-bar-primary" role="progressbar" style="width: 20%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-                        <div class="progress-bar progress-bar-info" role="progressbar" style="width: 30%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-7">
-                      <div class="material-datatables">
-                        <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
-                          <thead>
-                            <tr>
-                              <th>Fecha</th>
-                              <th class="disabled-sorting">Comida</th>
-                              <th class="disabled-sorting">Alimento</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td>4/12/2018</td>
-                              <td>Desayuno</td>
-                              <td>Barbacoa</td>
-                            </tr>
-                            <tr>
-                              <td>4/12/2018</td>
-                              <td>Comida</td>
-                              <td>Tacos Suadero</td>
-                            </tr>
-                            <tr>
-                              <td>16/12/2018</td>
-                              <td>Cena</td>
-                              <td>Pizza</td>
-                            </tr>
-                            <tr>
-                              <td>5/12/2018</td>
-                              <td>Desayuno</td>
-                              <td>Birria</td>
-                            </tr>
-                            <tr>
-                              <td>8/12/2018</td>
-                              <td>Comida</td>
-                              <td>Tacos Pastor</td>
-                            </tr>
-                            <tr>
-                              <td>20/12/2018</td>
-                              <td>Desayuno</td>
-                              <td>Barbacoa</td>
-                            </tr>
-                            <tr>
-                              <td>21/12/2018</td>
-                              <td>Desayuno</td>
-                              <td>Barbacoa</td>
-                            </tr>
-                            <tr>
-                              <td>22/12/2018</td>
-                              <td>Desayuno</td>
-                              <td>Barbacoa</td>
-                            </tr>
-                            <tr>
-                              <td>4/12/2018</td>
-                              <td>Desayuno</td>
-                              <td>Barbacoa</td>
-                            </tr>
-                            <tr>
-                              <td>23/12/2018</td>
-                              <td>Desayuno</td>
-                              <td>Barbacoa</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                    <div class="col-md-5">
-                      <center>
-                      <div class="row">
-                        <div class="col-md-12">
-                          <h6>Porcentaje de Apego</h6>
-                          <i class="fa fa-circle text-info"></i> Cumplió
-                          <i class="fa fa-circle text-danger"></i> No Cumplió
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-12">
-                          <div id="chartPreferences" class="ct-chart"></div>
-                        </div>
-                      </div>
-                      </center>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div class="col-md-8 col-12 mr-auto ml-auto">
+            
           </div>
         </div>
       </div>
@@ -555,89 +351,11 @@
   </script>
   <script>
     $(document).ready(function() {
-      dataColouredBarsChart = {
-        labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto'],
-        series: [
-          [90, 88, 88, 87, 84, 85, 82, 81, 80],
-          [67, 65, 65, 62, 61, 63, 60, 59, 56],
-          [20, 21, 22, 22, 23, 20, 20, 21, 22]
-        ]
-      };
-
-      optionsColouredBarsChart = {
-        lineSmooth: Chartist.Interpolation.cardinal({
-          tension: 10
-        }),
-        axisY: {
-          showGrid: true,
-          offset: 40
-        },
-        axisX: {
-          showGrid: false,
-        },
-        low: 30,
-        high: 150,
-        showPoint: true,
-        height: '300px'
-      };
-
-
-      var colouredBarsChart = new Chartist.Line('#colouredBarsChart', dataColouredBarsChart, optionsColouredBarsChart);
-
-      md.startAnimationForLineChart(colouredBarsChart);
-
-
-      dataRoundedLineChart = {
-        labels: ['Plan 1', 'Plan 2', 'Plan 3', 'Plan 4', 'Plan 5'],
-        series: [
-          [98, 80, 90, 95, 78]
-        ]
-      };
-
-      optionsRoundedLineChart = {
-        lineSmooth: Chartist.Interpolation.cardinal({
-          tension: 10
-        }),
-        axisX: {
-          showGrid: false,
-        },
-        low: 60,
-        high: 100, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-        chartPadding: {
-          top: 0,
-          right: 0,
-          bottom: 0,
-          left: 0
-        },
-        showPoint: false
-      }
-
-      var RoundedLineChart = new Chartist.Line('#roundedLineChart', dataRoundedLineChart, optionsRoundedLineChart);
-
-      md.startAnimationForLineChart(RoundedLineChart);
-
-      var dataPreferences = {
-        labels: ['68%', '32%'],
-        series: [68, 32]
-      };
-
-      var optionsPreferences = {
-        height: '230px'
-      };
-
-      Chartist.Pie('#chartPreferences', dataPreferences, optionsPreferences);
-
-      $('#datatables').DataTable({
-        "pagingType": "numbers",
-        "pageLength": 5,
-        responsive: true,
-        language: {
-          search: "_INPUT_",
-          searchPlaceholder: "Búsqueda de Comidas",
-        }
-      });
-
-      var table = $('#datatable').DataTable();
+      // Initialise the wizard
+      demo.initMaterialWizard();
+      setTimeout(function() {
+        $('.card.card-wizard').addClass('active');
+      }, 600);
     });
   </script>
 </body>

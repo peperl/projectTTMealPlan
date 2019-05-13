@@ -11,6 +11,7 @@ import mx.ipn.www.finalproject.model.Categoriaalimento;
 import mx.ipn.www.finalproject.model.CategoriaalimentoKey;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * This interface provides methods to populate DB Table of categoriaalimento
@@ -31,6 +32,8 @@ public interface CategoriaalimentoDAO {
      * @exception       SQLException if something is wrong.
      */
     public Categoriaalimento load(CategoriaalimentoKey key, Connection conn) throws SQLException;
+    
+    public List<Categoriaalimento> loadAll(Connection conn) throws SQLException;
 
     /**
      * Update a record in Database.

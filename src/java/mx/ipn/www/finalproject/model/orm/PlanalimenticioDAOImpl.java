@@ -17,6 +17,7 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.List;
 import java.util.ArrayList;
+import mx.ipn.www.finalproject.model.PacienteKey;
 import mx.ipn.www.finalproject.model.dao.PlanalimenticioDAO;
 
 /**
@@ -46,6 +47,14 @@ public class PlanalimenticioDAOImpl implements PlanalimenticioDAO {
         + "FROM PlanAlimenticio WHERE "
         + "Paciente_idPaciente = ? ORDER BY FechaCreacion desc;";    
     
+    private static final String SQL_SELECT_BY_PACIENTE =
+        "SELECT "
+        + "idPlanAlimenticio, Paciente_idPaciente, FechaCreacion, Duracion, GastoCalorico, Proteinas, Lipidos, "
+        + "Carbohidratos, NoComidas, Estado, TMR "
+        + "FROM PlanAlimenticio WHERE "
+        + "Paciente_idPaciente = ?";
+
+
     /* SQL to update data */
     private static final String SQL_UPDATE =
         "UPDATE PlanAlimenticio SET "
@@ -131,6 +140,25 @@ public class PlanalimenticioDAOImpl implements PlanalimenticioDAO {
         }
     }    
     
+    @Override
+    public List<Planalimenticio> loadByPaciente(PacienteKey key, Connection conn) throws SQLException {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            ps = conn.prepareStatement(SQL_SELECT_BY_PACIENTE);
+            ps.setInt(1, key.getIdpaciente());
+            rs = ps.executeQuery();
+            List results = getResults(rs);
+            if (results.size() > 0)
+                return results;
+            else
+                return null;
+        }finally {
+            close(rs);
+            close(ps);
+        }
+    }
+
     /**
      * Update a record in Database.
      * @param bean   The Object to be saved.

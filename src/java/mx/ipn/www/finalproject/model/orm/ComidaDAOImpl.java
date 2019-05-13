@@ -17,6 +17,7 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.List;
 import java.util.ArrayList;
+import mx.ipn.www.finalproject.model.PlanalimenticioKey;
 import mx.ipn.www.finalproject.model.dao.ComidaDAO;
 
 /**
@@ -25,7 +26,7 @@ import mx.ipn.www.finalproject.model.dao.ComidaDAO;
 public class ComidaDAOImpl implements ComidaDAO {
     /* SQL to insert data */
     private static final String SQL_INSERT =
-        "INSERT INTO comida ("
+        "INSERT INTO Comida ("
         + "idComida, PlanAlimenticio_idPlanAlimenticio, Nombre, Dia, Numero, Hora"
         + ") VALUES (?, ?, ?, ?, ?, ?)";
 
@@ -33,19 +34,25 @@ public class ComidaDAOImpl implements ComidaDAO {
     private static final String SQL_SELECT =
         "SELECT "
         + "idComida, PlanAlimenticio_idPlanAlimenticio, Nombre, Dia, Numero, Hora "
-        + "FROM comida WHERE "
+        + "FROM Comida WHERE "
         + "idComida = ?";
+
+    private static final String SQL_SELECT_BY_PLAN =
+        "SELECT "
+        + "idComida, PlanAlimenticio_idPlanAlimenticio, Nombre, Dia, Numero, Hora "
+        + "FROM Comida WHERE "
+        + "PlanAlimenticio_idPlanAlimenticio = ?";
 
     /* SQL to update data */
     private static final String SQL_UPDATE =
-        "UPDATE comida SET "
+        "UPDATE Comida SET "
         + "PlanAlimenticio_idPlanAlimenticio = ?, Nombre = ?, Dia = ?, Numero = ?, Hora = ? "
         + "WHERE "
         + "idComida = ?";
 
     /* SQL to delete data */
     private static final String SQL_DELETE =
-        "DELETE FROM comida WHERE "
+        "DELETE FROM Comida WHERE "
         + "idComida = ?";
 
     /**
@@ -97,6 +104,25 @@ public class ComidaDAOImpl implements ComidaDAO {
         }
     }
 
+    @Override
+    public List<Comida> loadByPlanAlimenticio(PlanalimenticioKey key, Connection conn) throws SQLException {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            ps = conn.prepareStatement(SQL_SELECT_BY_PLAN);
+            ps.setInt(1, key.getIdplanalimenticio());
+            rs = ps.executeQuery();
+            List results = getResults(rs);
+            if (results.size() > 0)
+                return results;
+            else
+                return null;
+        }finally {
+            close(rs);
+            close(ps);
+        }
+    }
+    
     /**
      * Update a record in Database.
      * @param bean   The Object to be saved.

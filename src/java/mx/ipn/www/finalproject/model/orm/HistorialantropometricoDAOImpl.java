@@ -17,6 +17,7 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.List;
 import java.util.ArrayList;
+import mx.ipn.www.finalproject.model.PacienteKey;
 import mx.ipn.www.finalproject.model.dao.HistorialantropometricoDAO;
 
 /**
@@ -35,6 +36,12 @@ public class HistorialantropometricoDAOImpl implements HistorialantropometricoDA
         + "idRegistro, Paciente_idPaciente, Fecha, Peso, IMC, Grasa "
         + "FROM HistorialAntropometrico WHERE "
         + "idRegistro = ?";
+    
+    private static final String SQL_SELECT_BY_PACIENTE =
+        "SELECT "
+        + "idRegistro, Paciente_idPaciente, Fecha, Peso, IMC, Grasa "
+        + "FROM HistorialAntropometrico WHERE "
+        + "Paciente_idPaciente = ?";    
 
     /* SQL to update data */
     private static final String SQL_UPDATE =
@@ -88,6 +95,25 @@ public class HistorialantropometricoDAOImpl implements HistorialantropometricoDA
             List results = getResults(rs);
             if (results.size() > 0)
                 return (Historialantropometrico) results.get(0);
+            else
+                return null;
+        }finally {
+            close(rs);
+            close(ps);
+        }
+    }
+
+    @Override
+    public List<Historialantropometrico> loadByPaciente(PacienteKey keyObject, Connection conn)throws SQLException {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            ps = conn.prepareStatement(SQL_SELECT_BY_PACIENTE);
+            ps.setInt(1, keyObject.getIdpaciente());
+            rs = ps.executeQuery();
+            List results = getResults(rs);
+            if (results.size() > 0)
+                return results;
             else
                 return null;
         }finally {
@@ -182,4 +208,5 @@ public class HistorialantropometricoDAOImpl implements HistorialantropometricoDA
             }catch(SQLException e){}
         }
     }
+
 }

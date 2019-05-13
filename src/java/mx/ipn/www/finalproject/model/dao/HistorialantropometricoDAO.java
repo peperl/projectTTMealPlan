@@ -11,6 +11,8 @@ import mx.ipn.www.finalproject.model.HistorialantropometricoKey;
 import mx.ipn.www.finalproject.model.Historialantropometrico;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
+import mx.ipn.www.finalproject.model.PacienteKey;
 
 /**
  * This interface provides methods to populate DB Table of historialantropometrico
@@ -31,6 +33,8 @@ public interface HistorialantropometricoDAO {
      * @exception       SQLException if something is wrong.
      */
     public Historialantropometrico load(HistorialantropometricoKey key, Connection conn) throws SQLException;
+    
+    public List<Historialantropometrico> loadByPaciente(PacienteKey keyObject, Connection conn) throws SQLException;
 
     /**
      * Update a record in Database.

@@ -163,7 +163,11 @@
                 Está seguro de borrar a <span id="paciente"></span>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Borrar</button>
+                    <form method="get" action="../../BorrarPaciente">
+                        <input type="hidden" name="borrarPaciente" id="borrarPaciente"/>
+                        <input type="submit" class="btn btn-primary"/>
+                        <!--<button type="button" class="btn btn-primary" >Borrar</button>-->
+                    </form>
               </div>
             </div>
           </div>
@@ -189,7 +193,7 @@
                       <tfoot>
                         <tr>
                           <th>Nombre</th>
-                          <th class="text-right">Acción</th>
+                          <th class="disabled-sorting text-right">Acción</th>
                         </tr>
                       </tfoot>
                       <tbody id="idTable">
@@ -303,6 +307,7 @@
     $(document).on('click', '.remove', function () {
       var info = $(this).attr('infoP').split('/');
       $('#paciente').text(info[1]);
+      
     });
 
     $(document).ready(function() {
@@ -445,17 +450,16 @@
         $(document).ready(function() {
             $.get("../../ListaPacientes", function(responseJson) {    // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response JSON...
                 $.each(responseJson, function(index, item) { // Iterate over the JSON array.
-                    var all="<tr><td>";
-                    all = all + item.nombre + " " + item.apellidos +"</td>";
-                    all = all + "<td class='text-right'>" +
-                         "<a href='#' class='btn btn-link btn-info btn-just-icon like'><i class='material-icons'>assignment</i></a><a href='#' class='btn btn-link btn-warning btn-just-icon edit'><i class='material-icons'>edit</i></a>";
+                    var all="<a href='./getPaciente.jsp?id="+item.idpaciente  + "' class='btn btn-link btn-info btn-just-icon like'><i class='material-icons'>assignment</i></a>";
+                    all = all + "<a href='./editarPaciente.jsp?id="+item.idpaciente  + "' class='btn btn-link btn-warning btn-just-icon edit'><i class='material-icons'>edit</i></a>";
                     all = all + "<a href='#' class='btn btn-link btn-danger btn-just-icon remove' data-toggle='modal' data-target='#modalBorrado' ";
+                    all = all + "infoP='"+ item.idpaciente +"/"+ item.nombre + " " + item.apellidos +"'>";
+                    all = all + "<i class='material-icons'>delete_forever</i></a>";
+                    var table = $('#datatables').DataTable();
+                    table.row.add([item.nombre + " " + item.apellidos,all]).draw(false);
                     
-                    all = all + "infoP='1/"+ item.nombre + " " + item.apellidos +"'>";
-                    all = all + "<i class='material-icons'>delete_forever</i></a></td></tr>";
-                    ($("#idTable")).append(all);
+                    //($("#idTable")).append(all);
                 });
-                //$('#alimentosEvitados').selectpicker('refresh');
             });
         });
         

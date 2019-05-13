@@ -5,11 +5,11 @@
  */
 package mx.ipn.www.finalproject.view.servlets.services;
 
-import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,21 +19,35 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import mx.ipn.www.finalproject.model.Nutricionista;
+import mx.ipn.www.finalproject.model.Comida;
+import mx.ipn.www.finalproject.model.Historialantropometrico;
 import mx.ipn.www.finalproject.model.Paciente;
+import mx.ipn.www.finalproject.model.PacienteKey;
+import mx.ipn.www.finalproject.model.Planalimenticio;
+import mx.ipn.www.finalproject.model.RelComida;
+import mx.ipn.www.finalproject.model.dao.ComidaDAO;
+import mx.ipn.www.finalproject.model.dao.HistorialantropometricoDAO;
 import mx.ipn.www.finalproject.model.dao.PacienteDAO;
+import mx.ipn.www.finalproject.model.dao.PlanalimenticioDAO;
+import mx.ipn.www.finalproject.model.dao.RelComidaDAO;
+import mx.ipn.www.finalproject.model.orm.ComidaDAOImpl;
+import mx.ipn.www.finalproject.model.orm.HistorialantropometricoDAOImpl;
 import mx.ipn.www.finalproject.model.orm.PacienteDAOImpl;
+import mx.ipn.www.finalproject.model.orm.PlanalimenticioDAOImpl;
+import mx.ipn.www.finalproject.model.orm.RelComidaDAOImpl;
 import mx.ipn.www.finalproject.utils.ConnectionByPayaraSource;
 
 /**
  *
  * @author pepe
  */
-public class ListaPacientes extends HttpServlet {
+public class GetPaciente extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
+     * Clase usado de enlace entre listaPacientes y seguimiento paciente
+     * para insertar en la sesión todo lo necesario para crear la vista
      *
      * @param request servlet request
      * @param response servlet response
@@ -42,26 +56,50 @@ public class ListaPacientes extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession(false);
+        
+        int idPaciente = Integer.parseInt(request.getParameter("id"));
+        PacienteDAO pacienteDAO = new PacienteDAOImpl();
+        Paciente paciente;
+        
+        List<Historialantropometrico> historiales;
+        HistorialantropometricoDAO haDAO = new HistorialantropometricoDAOImpl();
+        
+        List<Planalimenticio> planes;
+        PlanalimenticioDAO planDAO = new PlanalimenticioDAOImpl();
+        
+        List<List<Comida>> comidasByPlanes = new ArrayList<>();
+        ComidaDAO comidaDAO = new ComidaDAOImpl();
+        
+        List<List<List<RelComida>>> relComidasByPlanes = new ArrayList<>();
+        RelComidaDAO relComidaDAO = new RelComidaDAOImpl();
+        
+        
+        ConnectionByPayaraSource cbps = new ConnectionByPayaraSource();
+        
         try {
-            response.setContentType("application/json;charset=UTF-8");
-            HttpSession session = request.getSession(false);
-            int idNutricionista = (int) session.getAttribute("idNutricionista");
-            Nutricionista nutricionista = new Nutricionista();
-            nutricionista.setIdnutricionista(idNutricionista);
+            Connection conn = cbps.initConnection();
+            paciente = pacienteDAO.load(new PacienteKey(idPaciente), conn);
+            historiales = haDAO.loadByPaciente(paciente.getKeyObject(), conn);
+            planes = planDAO.loadByPaciente(paciente.getKeyObject(), conn);
+            for (Planalimenticio plan : planes) {
+                List<Comida> aux = comidaDAO.loadByPlanAlimenticio(plan.getKeyObject(),conn);
+                comidasByPlanes.add(aux);
+            }
             
-            ConnectionByPayaraSource connector = new ConnectionByPayaraSource();
-            Connection conn = connector.initConnection();
-            PacienteDAO dao = new PacienteDAOImpl();
-            List<Paciente> list = dao.loadByNutricionista(nutricionista.getKeyObject(), conn);
-            
-            String json = new Gson().toJson(list);
-            response.getWriter().write(json);
-            connector.destroy();
+            for (List<Comida> comidasByPlane : comidasByPlanes) {
+                
+            }
         } catch (NamingException ex) {
-            Logger.getLogger(ListaPacientes.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GetPaciente.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(ListaPacientes.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GetPaciente.class.getName()).log(Level.SEVERE, null, ex);
         }
+        cbps.destroy();
+            //session.setAttribute("qrid", usuarioIdusuario);
+        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

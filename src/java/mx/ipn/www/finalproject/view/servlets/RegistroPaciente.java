@@ -163,7 +163,7 @@ public class RegistroPaciente extends HttpServlet {
             
             String qr = QRgenerator.generateQRContent(usuarioIdusuario + "");
             
-            QRgenerator.generateQRImage(qr, "/home/pepe/NetBeansProjects/projectTTMealPlans/web/qr/" + usuarioIdusuario);
+            QRgenerator.generateQRImage(qr, constanteQR.ConstanteQR.PATH_QR + usuarioIdusuario);
             
             HttpSession session = request.getSession();
             session.setAttribute("qrid", usuarioIdusuario);

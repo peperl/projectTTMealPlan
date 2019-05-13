@@ -3,65 +3,62 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mx.ipn.www.finalproject.view.servlets.services;
+package mx.ipn.www.finalproject.view.servlets;
 
-import com.google.gson.Gson;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import mx.ipn.www.finalproject.model.Nutricionista;
-import mx.ipn.www.finalproject.model.Paciente;
-import mx.ipn.www.finalproject.model.dao.PacienteDAO;
-import mx.ipn.www.finalproject.model.orm.PacienteDAOImpl;
+import mx.ipn.www.finalproject.model.Alimento;
+import mx.ipn.www.finalproject.model.dao.AlimentoDAO;
+import mx.ipn.www.finalproject.model.orm.AlimentoDAOImpl;
 import mx.ipn.www.finalproject.utils.ConnectionByPayaraSource;
 
 /**
  *
  * @author pepe
  */
-public class ListaPacientes extends HttpServlet {
+public class AgregarAlimento extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        Alimento alimento = new Alimento();
+        AlimentoDAO dao = new AlimentoDAOImpl();
+        alimento.setNombre(request.getParameter("nombre"));
+        alimento.setCategoria(Integer.parseInt(request.getParameter("categoria")));
+        alimento.setEstado(0);
+        alimento.setUnidad(request.getParameter("unidad"));
+        alimento.setCantidad(Integer.parseInt(request.getParameter("cantidad")));
+        alimento.setCarbohidratos(Double.parseDouble(request.getParameter("carbohidratos")));
+        alimento.setProteinas(Double.parseDouble(request.getParameter("proteinas")));
+        alimento.setLipidos(Double.parseDouble(request.getParameter("lipidos")));
+
+        ConnectionByPayaraSource connectionClass = new ConnectionByPayaraSource();
+        ServletContext sc = request.getServletContext();
+        String path = sc.getContextPath();
+
         try {
-            response.setContentType("application/json;charset=UTF-8");
-            HttpSession session = request.getSession(false);
-            int idNutricionista = (int) session.getAttribute("idNutricionista");
-            Nutricionista nutricionista = new Nutricionista();
-            nutricionista.setIdnutricionista(idNutricionista);
+            Connection con = connectionClass.initConnection();
+            dao.create(alimento, con);
+            connectionClass.destroy();
+            response.sendRedirect( path + "/pages/Nutricionista/agregarAlimento.jsp?success=yes");
             
-            ConnectionByPayaraSource connector = new ConnectionByPayaraSource();
-            Connection conn = connector.initConnection();
-            PacienteDAO dao = new PacienteDAOImpl();
-            List<Paciente> list = dao.loadByNutricionista(nutricionista.getKeyObject(), conn);
-            
-            String json = new Gson().toJson(list);
-            response.getWriter().write(json);
-            connector.destroy();
         } catch (NamingException ex) {
-            Logger.getLogger(ListaPacientes.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AgregarAlimento.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(ListaPacientes.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AgregarAlimento.class.getName()).log(Level.SEVERE, null, ex);
         }
+        connectionClass.destroy();
+        response.sendRedirect( path + "/pages/Nutricionista/agregarAlimento.jsp?success=no");
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
