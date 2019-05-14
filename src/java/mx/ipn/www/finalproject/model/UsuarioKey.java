@@ -11,6 +11,13 @@ public class UsuarioKey implements java.io.Serializable, Cloneable {
     /* idUsuario */
     protected int idusuario;
 
+    public UsuarioKey() {
+    }
+    
+    public UsuarioKey(int usuarioIdusuario) {
+        this.idusuario = usuarioIdusuario;
+    }
+
     /* idUsuario */
     public int getIdusuario() {
         return idusuario;

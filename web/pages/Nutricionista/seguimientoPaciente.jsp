@@ -4,11 +4,20 @@
     Author     : pepe
 --%>
 
+<%@page import="mx.ipn.www.finalproject.model.Alimento"%>
+<%@page import="java.util.List"%>
+<%@page import="mx.ipn.www.finalproject.model.Usuario"%>
+<%@page import="mx.ipn.www.finalproject.model.Paciente"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
+    <%Paciente paciente = (Paciente) session.getAttribute("pacienteGeneralInformation");%>
+    <%Usuario usuario = (Usuario) session.getAttribute("pacienteGIUsuario");%>
+    <%List<Alimento> alimentosEvitados = (List<Alimento>) session.getAttribute("pacienteGIAlimentosEvitados");%>
+    
   <meta charset="utf-8" />
   <link rel="apple-touch-icon" sizes="76x76" href="../../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../../assets/img/favicon.png">
@@ -152,21 +161,55 @@
                   </div>
                   <h4 class="card-title">Información del Paciente</h4>
                 </div>
+                
                 <div class="card-body">
                   <div class="row">
                     <div class="col-md-6">
-                      <p><i class="material-icons">sentiment_satisfied_alt</i>Angélica Ramos</p>
-                      <p><i class="material-icons">call</i>56-31-16-11</p>
-                      <p><i class="material-icons">email</i>angeram@gmail.com</p>
-                      <p><i class="material-icons">room</i>Estado de Nuevo León No.269 Col. Providencia Del. Gustavo a Madero</p>
-                      <p><i class="material-icons">local_dining</i>Dificultades para Comer: Ninguna</p>
-                      <p><i class="material-icons">fastfood</i>Alimentos Evitados: Leche, Jitomáte</p>
+                        <p><i class="material-icons">sentiment_satisfied_alt</i><%out.print(paciente.getNombre());%></p>
+                      <p><i class="material-icons">call</i><%out.print(paciente.getTelefono());%></p>
+                      <p><i class="material-icons">email</i><%out.print(usuario.getCorreo());%></p>
+                      <p><i class="material-icons">room</i><%out.print(paciente.getDireccion());%></p>
+                      <p><i class="material-icons">local_dining</i>Dificultades para Comer: <%if (paciente.getDificultadesaliment().equals("")|paciente.getDificultadesaliment()==null) {
+                                out.print("ninguna");
+                            } else {
+                                out.print(paciente.getDificultadesaliment());
+                            }
+                          %></p>
+                      <p><i class="material-icons">fastfood</i>Alimentos Evitados: <%
+                                if (alimentosEvitados.size()>0) {
+                                    Integer a = new Integer(1);
+                                    for (Alimento alimentoEvitadoObject : alimentosEvitados) {
+                                        if (a==1) {
+                                            out.print(alimentoEvitadoObject.getNombre());
+                                        } else {
+                                            out.print(", "+alimentoEvitadoObject.getNombre());
+                                        }
+                                        a++;
+                                    }
+                                } else {
+                                    out.print("ninguno");
+                                }%></p>
                     </div>
                     <div class="col-md-6">
-                      <p><i class="material-icons">accessibility</i>168 cm</p>
-                      <p><i class="material-icons">straighten</i>Cir. Braquial: 30 cm</p>
-                      <p><i class="material-icons">straighten</i>Cir. Pantorrilla: 20 cm</p>
-                      <p><i class="material-icons">fitness_center</i>Yoga (3 días por semana)</p>
+                      <p><i class="material-icons">accessibility</i><%out.print(paciente.getTelefono());%> cm</p>
+                      <p><i class="material-icons">straighten</i>Cir. Braquial: <%out.print(paciente.getCirbraquial());%> cm</p>
+                      <p><i class="material-icons">straighten</i>Cir. Pantorrilla: <%out.print(paciente.getCirpantorrilla());%> cm</p>
+                      <p><i class="material-icons">fitness_center</i><%
+                            switch(paciente.getActividadfisica()) {
+                                case 0:
+                                    out.print("Actividad fisica nula");
+                                    break;
+                                case 1:
+                                    out.print("Actividad fisica ligera");
+                                    break;
+                                case 2:
+                                    out.print("Actividad fisica normal");
+                                    break;
+                                case 3:
+                                    out.print("Actividad fisica alta");
+                                    break;                                
+                            }
+                      %></p>
                       <p><i class="material-icons">favorite_border</i>Enfermedades: Ninguna</p>
                       <p><i class="material-icons">favorite</i>Tratamiento: Ninguno</p>
                     </div>
