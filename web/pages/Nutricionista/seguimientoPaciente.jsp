@@ -210,8 +210,21 @@
                                     break;                                
                             }
                       %></p>
-                      <p><i class="material-icons">favorite_border</i>Enfermedades: Ninguna</p>
-                      <p><i class="material-icons">favorite</i>Tratamiento: Ninguno</p>
+                      <p><i class="material-icons">favorite_border</i>Enfermedades: <%
+
+                            if (paciente.getEnfermedades() == null | paciente.getEnfermedades().equals("")) {
+                                out.print("ninguna");
+                            } else {
+                                out.print(paciente.getEnfermedades());
+                            }
+                          %></p>
+                      <p><i class="material-icons">favorite</i>Tratamiento: <%
+                            if (paciente.getTratamiento() == null | paciente.getTratamiento().equals("")) {
+                                out.print("ninguna");
+                            } else {
+                                out.print(paciente.getTratamiento());
+                            }
+                          %></p>
                     </div>
                   </div>
                 </div>

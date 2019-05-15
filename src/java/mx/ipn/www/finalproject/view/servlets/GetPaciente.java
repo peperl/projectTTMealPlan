@@ -72,7 +72,7 @@ public class GetPaciente extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession(false);
+        HttpSession session = request.getSession();
         
         int idPaciente = Integer.parseInt(request.getParameter("id"));
 
@@ -117,16 +117,21 @@ public class GetPaciente extends HttpServlet {
             planes = planDAO.loadByPaciente(paciente.getKeyObject(), conn);
             for (Planalimenticio plan : planes) {
                 List<Comida> aux = comidaDAO.loadByPlanAlimenticio(plan.getKeyObject(),conn);
-                comidasByPlanes.add(aux);
+                if(aux != null && aux.size()>0) {
+                    comidasByPlanes.add(aux);
+                }
             }
             
+            //Error en las siguientes lineas por encontrar un plan sin alimentos asociados
             for (List<Comida> comidasByPlan : comidasByPlanes) {
                 List<List<RelComida>> aux2 = new ArrayList<>();
-                for (Comida comida : comidasByPlan) {
-                    List<RelComida> aux = relComidaDAO.loadByComida(comida.getKeyObject(), conn);
-                    aux2.add(aux);
+                if (comidasByPlan!=null & comidasByPlan.size()>0) {
+                    for (Comida comida : comidasByPlan) {
+                        List<RelComida> aux = relComidaDAO.loadByComida(comida.getKeyObject(), conn);
+                        aux2.add(aux);
+                    }
+                    relComidasByPlanes.add(aux2);
                 }
-                relComidasByPlanes.add(aux2);
             }
             
             for (List<List<RelComida>> relComidasByPlane : relComidasByPlanes) {
@@ -141,10 +146,11 @@ public class GetPaciente extends HttpServlet {
                 }
                 alimentos.add(aux3);
             }
-            
             List<Alimento> alimentosEvitados = new ArrayList<>();
-            for (Alimentosexcluidos alimentosexcluido : alimentosexcluidos) {
-                alimentosEvitados.add(alimentoDAO.load(new AlimentoKey(alimentosexcluido.getAlimentoIdalimento()), conn));
+            if(alimentosexcluidos != null && alimentosexcluidos.size()>0) {
+                for (Alimentosexcluidos alimentosexcluido : alimentosexcluidos) {
+                    alimentosEvitados.add(alimentoDAO.load(new AlimentoKey(alimentosexcluido.getAlimentoIdalimento()), conn));
+                }
             }
             
             session.setAttribute("pacienteGeneralInformation", paciente);
@@ -153,7 +159,7 @@ public class GetPaciente extends HttpServlet {
             
             ServletContext sc = request.getServletContext();
             String path = sc.getContextPath();
-            response.sendRedirect( path + "/pages/Nutricionista/seguimientopaciente.jsp");
+            response.sendRedirect( path + "/pages/Nutricionista/seguimientoPaciente.jsp");
             
         } catch (NamingException ex) {
             Logger.getLogger(GetPaciente.class.getName()).log(Level.SEVERE, null, ex);
