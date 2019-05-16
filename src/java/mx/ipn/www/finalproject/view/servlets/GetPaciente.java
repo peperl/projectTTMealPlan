@@ -73,7 +73,9 @@ public class GetPaciente extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
-        
+        if (request.getParameter("id") == null) {
+            return;
+        }
         int idPaciente = Integer.parseInt(request.getParameter("id"));
 
         UsuarioDAO usuarioDAO = new UsuarioDAOImpl();
@@ -156,6 +158,8 @@ public class GetPaciente extends HttpServlet {
             session.setAttribute("pacienteGeneralInformation", paciente);
             session.setAttribute("pacienteGIUsuario", usuario);
             session.setAttribute("pacienteGIAlimentosEvitados", alimentosEvitados);
+            session.setAttribute("pacienteGIHistorial", historiales);
+            session.setAttribute("pacienteGIPlanes", planes);
             
             ServletContext sc = request.getServletContext();
             String path = sc.getContextPath();

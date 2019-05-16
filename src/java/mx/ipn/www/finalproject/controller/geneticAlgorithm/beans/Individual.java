@@ -20,6 +20,7 @@ public class Individual {
     private BinarySelection binarySelection;
     private Map<Integer, List<Alimento>> foodByCategory;
     private List<List<Alimento>> diet;
+    private List<List<Integer>> dietQty;
     private ObjectiveCalories objectiveCalories;
     
     public Individual(MealPlanInformation mpi, Map<Integer, List<Alimento>> foodByCategory, ObjectiveCalories objectiveCalories, BinarySelection bs ) {
@@ -29,6 +30,7 @@ public class Individual {
         this.objectiveCalories = objectiveCalories;
         Random random = new Random();
         diet = new ArrayList<>();
+        dietQty = new ArrayList<>();
         this.id = random.nextInt();
         if (this.id < 0) {
             this.id *= -1;
@@ -47,7 +49,8 @@ public class Individual {
         this.foodByCategory = foodByCategory;
         this.objectiveCalories = objectiveCalories;
         this.id = id;
-        
+        diet = new ArrayList<>();
+        dietQty = new ArrayList<>();
         //4 bits de alimento
         //2 de cantidad
         
@@ -60,9 +63,10 @@ public class Individual {
         double prot = 0,lip = 0,carb = 0;
         double objective = objectiveCalories.getCarb()+objectiveCalories.getLip() + objectiveCalories.getProt();
         double result;
-        diet = new ArrayList<>();
+        
         for (Meal mealDistribution : mpi.getMealDistribution()) {
             List<Alimento> aux = new ArrayList<>();
+            List<Integer> auxQty = new ArrayList<>();
             int selector = 0;
             for (Integer category : mealDistribution.getCategoria()) {
                 int food = binarySelection.getAlimento(id, selector);
@@ -72,23 +76,17 @@ public class Individual {
                 prot+= alimento.getProteinas() * qty;
                 lip += alimento.getLipidos() * qty;
                 carb += alimento.getCarbohidratos() * qty;
+                auxQty.add(qty);
                 aux.add(alimento);
             }
+            dietQty.add(auxQty);
             diet.add(aux);
         }
         result = ((prot + lip + carb) - objective) / objective;
         if (result < 0) {
             result *= -1;
         }
-        this.aptitud = result;
-        if (aptitud < 0.08) {
-            System.out.println("aptitud " + aptitud);
-            System.out.println(prot + " " + lip + " " + carb );
-            System.out.print(objectiveCalories.getProt() +" ");
-            System.out.print(objectiveCalories.getLip() + " ");
-            System.out.println(objectiveCalories.getCarb());
-        }
-        
+        this.aptitud = result; 
     }
     
     public double getAptitud() {
@@ -145,6 +143,14 @@ public class Individual {
 
     public void setObjectiveCalories(ObjectiveCalories objectiveCalories) {
         this.objectiveCalories = objectiveCalories;
+    }
+
+    public List<List<Integer>> getDietQty() {
+        return dietQty;
+    }
+
+    public void setDietQty(List<List<Integer>> dietQty) {
+        this.dietQty = dietQty;
     }
     
     @Override

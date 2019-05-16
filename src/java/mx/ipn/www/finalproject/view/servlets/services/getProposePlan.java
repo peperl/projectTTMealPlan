@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -84,14 +85,22 @@ public class getProposePlan extends HttpServlet {
         double a = planalimenticio.getGastocalorico() + planalimenticio.getTmr();
         Logger.getGlobal().info("calorias: " + a);
         ga = new GeneticAlgorithm(1000, planalimenticio.getGastocalorico() + planalimenticio.getTmr(), ConstantSpeedLoseWeight.SLOW_SPEED, 100, foodByCategory, planalimenticio.getNocomidas());
-        Individual individual = ga.runAlgorithm();
-        if (individual == null) {
-            Logger.getGlobal().info("Individuo Nulo");
-        } else {
-            List list = individual.getDiet();
-            String json = new Gson().toJson(list);
-            response.getWriter().write(json);
+        
+        List<List<List<Alimento>>> result = new ArrayList<>();
+        List<List<List<Integer>>> resultQty = new ArrayList<>();
+        for (int i = 0; i < 7; i++) {
+            Individual individual = ga.runAlgorithm();
+            if (individual == null) {
+                Logger.getGlobal().info("Individuo Nulo");
+            } 
+            result.add(individual.getDiet());
+            resultQty.add(individual.getDietQty());
         }
+        
+        
+        List list = result;
+        String json = new Gson().toJson(list);
+        response.getWriter().write(json);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

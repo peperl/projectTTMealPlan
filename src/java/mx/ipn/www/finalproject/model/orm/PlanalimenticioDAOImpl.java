@@ -52,7 +52,7 @@ public class PlanalimenticioDAOImpl implements PlanalimenticioDAO {
         + "idPlanAlimenticio, Paciente_idPaciente, FechaCreacion, Duracion, GastoCalorico, Proteinas, Lipidos, "
         + "Carbohidratos, NoComidas, Estado, TMR "
         + "FROM PlanAlimenticio WHERE "
-        + "Paciente_idPaciente = ?";
+        + "Paciente_idPaciente = ? ORDER BY FechaCreacion desc;";
 
 
     /* SQL to update data */

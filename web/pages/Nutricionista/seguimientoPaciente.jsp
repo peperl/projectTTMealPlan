@@ -4,6 +4,12 @@
     Author     : pepe
 --%>
 
+<%@page import="mx.ipn.www.finalproject.model.Historialantropometrico"%>
+<%@page import="java.util.Calendar"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.time.ZoneId"%>
+<%@page import="java.time.LocalDate"%>
+<%@page import="mx.ipn.www.finalproject.model.Planalimenticio"%>
 <%@page import="mx.ipn.www.finalproject.model.Alimento"%>
 <%@page import="java.util.List"%>
 <%@page import="mx.ipn.www.finalproject.model.Usuario"%>
@@ -17,7 +23,9 @@
     <%Paciente paciente = (Paciente) session.getAttribute("pacienteGeneralInformation");%>
     <%Usuario usuario = (Usuario) session.getAttribute("pacienteGIUsuario");%>
     <%List<Alimento> alimentosEvitados = (List<Alimento>) session.getAttribute("pacienteGIAlimentosEvitados");%>
-    
+    <%List<Planalimenticio> planes = (List<Planalimenticio>) session.getAttribute("pacienteGIPlanes");%>
+    <%List<Historialantropometrico> historiales = (List<Historialantropometrico>) session.getAttribute("pacienteGIHistorial");%>
+
   <meta charset="utf-8" />
   <link rel="apple-touch-icon" sizes="76x76" href="../../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../../assets/img/favicon.png">
@@ -191,7 +199,7 @@
                                 }%></p>
                     </div>
                     <div class="col-md-6">
-                      <p><i class="material-icons">accessibility</i><%out.print(paciente.getTelefono());%> cm</p>
+                      <p><i class="material-icons">accessibility</i><%out.print(paciente.getEstatura());%> cm</p>
                       <p><i class="material-icons">straighten</i>Cir. Braquial: <%out.print(paciente.getCirbraquial());%> cm</p>
                       <p><i class="material-icons">straighten</i>Cir. Pantorrilla: <%out.print(paciente.getCirpantorrilla());%> cm</p>
                       <p><i class="material-icons">fitness_center</i><%
@@ -270,7 +278,13 @@
                   <div class="card-body">
                     <div class="row">
                       <div class="col-md-12">
-                        <p>Fecha Establecida de Ajuste: 24/01/2019</p>
+                        <p>Fecha Establecida de Ajuste: <%
+                            Calendar calendar = Calendar.getInstance();
+                            calendar.setTime(planes.get(0).getFechacreacion());
+                            
+                            out.print(calendar.get(Calendar.DAY_OF_MONTH) + "/" + 
+                                    (calendar.get(Calendar.MONTH) + planes.get(0).getDuracion()) + "/" + calendar.get(Calendar.YEAR));
+                            %></p>
                         <center><input type="submit" class="btn btn-finish btn-fill btn-rose btn-wd" name="finish" value="Ajustar"></center>
                       </div>
                     </div>
@@ -617,7 +631,20 @@
     });
   </script>
   <script>
+      
     $(document).ready(function() {
+        <%
+        double[] peso = new double[historiales.size()];
+        double[] musculo = new double[historiales.size()];
+        double[] grasa = new double[historiales.size()];
+        int cont = 0;
+        //COMPROBAR QUE HISTORIALES NO SEA NULO
+        for (Historialantropometrico historial : historiales) {
+                peso[cont] = historial.getPeso();
+                musculo[cont] = historial.getImc();
+                grasa[cont] = historial.getGrasa();
+            }
+        %>
       dataColouredBarsChart = {
         labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto'],
         series: [
