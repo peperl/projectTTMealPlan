@@ -50,8 +50,8 @@ public class getProposePlan extends HttpServlet {
         //Planalimenticio planalimenticio = (Planalimenticio) session.getAttribute("idPlanAlimenticio");
         Planalimenticio planalimenticio = new Planalimenticio(); 
         planalimenticio.setNocomidas(3);
-        planalimenticio.setGastocalorico(1000);
-        planalimenticio.setTmr(800);
+        planalimenticio.setGastocalorico(0);
+        planalimenticio.setTmr(1000);
         
         
         GeneticAlgorithm ga;
@@ -84,7 +84,7 @@ public class getProposePlan extends HttpServlet {
             
         double a = planalimenticio.getGastocalorico() + planalimenticio.getTmr();
         Logger.getGlobal().info("calorias: " + a);
-        ga = new GeneticAlgorithm(1000, planalimenticio.getGastocalorico() + planalimenticio.getTmr(), ConstantSpeedLoseWeight.SLOW_SPEED, 100, foodByCategory, planalimenticio.getNocomidas());
+        ga = new GeneticAlgorithm(1000, planalimenticio.getGastocalorico() + planalimenticio.getTmr(), ConstantSpeedLoseWeight.SLOW_SPEED, 1000, foodByCategory, planalimenticio.getNocomidas());
         
         List<List<List<Alimento>>> result = new ArrayList<>();
         List<List<List<Integer>>> resultQty = new ArrayList<>();
@@ -92,9 +92,23 @@ public class getProposePlan extends HttpServlet {
             Individual individual = ga.runAlgorithm();
             if (individual == null) {
                 Logger.getGlobal().info("Individuo Nulo");
-            } 
-            result.add(individual.getDiet());
-            resultQty.add(individual.getDietQty());
+            } else {
+                Logger.getGlobal().info("Individuo con error " + individual.getAptitud());
+                Logger.getGlobal().info("Proteinas lipidos Carbos objetivo");
+                Logger.getGlobal().info(
+                        individual.getObjectiveCalories().getProt() + " "
+                    +   individual.getObjectiveCalories().getLip() + " "
+                    +   individual.getObjectiveCalories().getCarb());
+                Logger.getGlobal().info("Proteinas lipidos Carbos del plan");
+                Logger.getGlobal().info(
+                        individual.getProtein() + " "
+                    +   individual.getLipid() + " "
+                    +   individual.getCarbos());
+
+
+                result.add(individual.getDiet());
+                resultQty.add(individual.getDietQty());
+            }
         }
         
         

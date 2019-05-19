@@ -450,7 +450,7 @@
         $(document).ready(function() {
             $.get("../../ListaPacientes", function(responseJson) {    // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response JSON...
                 $.each(responseJson, function(index, item) { // Iterate over the JSON array.
-                    var all="<a href='./getPaciente.jsp?id="+item.idpaciente  + "' class='btn btn-link btn-info btn-just-icon like'><i class='material-icons'>assignment</i></a>";
+                    var all="<a href='../../GetPaciente?id="+item.idpaciente  + "' class='btn btn-link btn-info btn-just-icon like'><i class='material-icons'>assignment</i></a>";
                     all = all + "<a href='./editarPaciente.jsp?id="+item.idpaciente  + "' class='btn btn-link btn-warning btn-just-icon edit'><i class='material-icons'>edit</i></a>";
                     all = all + "<a href='#' class='btn btn-link btn-danger btn-just-icon remove' data-toggle='modal' data-target='#modalBorrado' ";
                     all = all + "infoP='"+ item.idpaciente +"/"+ item.nombre + " " + item.apellidos +"'>";

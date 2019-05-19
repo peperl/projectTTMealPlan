@@ -22,6 +22,7 @@ public class Individual {
     private List<List<Alimento>> diet;
     private List<List<Integer>> dietQty;
     private ObjectiveCalories objectiveCalories;
+    private double protein, lipid, carbos;
     
     public Individual(MealPlanInformation mpi, Map<Integer, List<Alimento>> foodByCategory, ObjectiveCalories objectiveCalories, BinarySelection bs ) {
         this.binarySelection = bs;
@@ -83,6 +84,9 @@ public class Individual {
             diet.add(aux);
         }
         result = ((prot + lip + carb) - objective) / objective;
+        this.protein = prot;
+        this.lipid = lip;
+        this.carbos = carb;
         if (result < 0) {
             result *= -1;
         }
@@ -151,6 +155,30 @@ public class Individual {
 
     public void setDietQty(List<List<Integer>> dietQty) {
         this.dietQty = dietQty;
+    }
+
+    public double getProtein() {
+        return protein;
+    }
+
+    public void setProtein(double protein) {
+        this.protein = protein;
+    }
+
+    public double getLipid() {
+        return lipid;
+    }
+
+    public void setLipid(double lipid) {
+        this.lipid = lipid;
+    }
+
+    public double getCarbos() {
+        return carbos;
+    }
+
+    public void setCarbos(double carbos) {
+        this.carbos = carbos;
     }
     
     @Override

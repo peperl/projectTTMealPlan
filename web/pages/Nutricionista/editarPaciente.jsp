@@ -47,7 +47,14 @@
           <div class="user-info">
             <a data-toggle="collapse" href="#collapseExample" class="username">
               <span>
-                Dr. Tania Andrew
+                  <%
+                        if (session.getAttribute("nameNutricionista") == null) {
+                              response.sendRedirect("../login.html");
+                        } else {
+                            out.println(session.getAttribute("nameNutricionista"));
+                        }
+                  %>
+
                 <b class="caret"></b>
               </span>
             </a>

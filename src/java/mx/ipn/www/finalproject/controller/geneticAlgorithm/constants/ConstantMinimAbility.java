@@ -10,5 +10,5 @@ package mx.ipn.www.finalproject.controller.geneticAlgorithm.constants;
  * @author pepe
  */
 public class ConstantMinimAbility {
-    public static double minumAbility = 0.5;
+    public static double minumAbility = 0.08;
 }

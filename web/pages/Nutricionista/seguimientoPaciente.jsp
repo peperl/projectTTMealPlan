@@ -4,12 +4,11 @@
     Author     : pepe
 --%>
 
-<%@page import="mx.ipn.www.finalproject.model.Historialantropometrico"%>
+<%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.time.ZoneId"%>
 <%@page import="java.time.LocalDate"%>
-<%@page import="mx.ipn.www.finalproject.model.Planalimenticio"%>
 <%@page import="mx.ipn.www.finalproject.model.Alimento"%>
 <%@page import="java.util.List"%>
 <%@page import="mx.ipn.www.finalproject.model.Usuario"%>
@@ -18,13 +17,20 @@
 
 <!DOCTYPE html>
 <html lang="es">
+<%
+if (session == null) {
+    ServletContext sc = request.getServletContext();
+    String path = sc.getContextPath();    
+    response.sendRedirect( path + "/pages/login.html");
+}
+    
+Paciente paciente = (Paciente) session.getAttribute("pacienteGeneralInformation");
+Usuario usuario = (Usuario) session.getAttribute("pacienteGIUsuario");
+List<Alimento> alimentosEvitados = (List<Alimento>) session.getAttribute("pacienteGIAlimentosEvitados");
+int aux = 0;
+%>
 
 <head>
-    <%Paciente paciente = (Paciente) session.getAttribute("pacienteGeneralInformation");%>
-    <%Usuario usuario = (Usuario) session.getAttribute("pacienteGIUsuario");%>
-    <%List<Alimento> alimentosEvitados = (List<Alimento>) session.getAttribute("pacienteGIAlimentosEvitados");%>
-    <%List<Planalimenticio> planes = (List<Planalimenticio>) session.getAttribute("pacienteGIPlanes");%>
-    <%List<Historialantropometrico> historiales = (List<Historialantropometrico>) session.getAttribute("pacienteGIHistorial");%>
 
   <meta charset="utf-8" />
   <link rel="apple-touch-icon" sizes="76x76" href="../../assets/img/apple-icon.png">
@@ -64,7 +70,13 @@
           <div class="user-info">
             <a data-toggle="collapse" href="#collapseExample" class="username">
               <span>
-                Dr. Tania Andrew
+                  <%
+                        if (session.getAttribute("nameNutricionista") == null) {
+                              response.sendRedirect("../login.html");
+                        } else {
+                            out.println(session.getAttribute("nameNutricionista"));
+                        }
+                  %>
                 <b class="caret"></b>
               </span>
             </a>
@@ -88,25 +100,25 @@
         </div>
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="BlankN.html">
+            <a class="nav-link" href="BlankN.jsp">
               <i class="material-icons">home</i>
               <p> Inicio </p>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="registroPaciente.html">
+            <a class="nav-link" href="registroPaciente.jsp">
               <i class="material-icons">face</i>
               <p> Registrar Paciente </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="listaPacientes.html">
+          <li class="nav-item active">
+            <a class="nav-link" href="listaPacientes.jsp">
               <i class="material-icons">favorite_border</i>
               <p> Lista de Pacientes </p>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="agregarAlimento.html">
+            <a class="nav-link" href="agregarAlimento.jsp">
               <i class="material-icons">restaurant</i>
               <p> Registrar Alimento </p>
             </a>
@@ -199,7 +211,7 @@
                                 }%></p>
                     </div>
                     <div class="col-md-6">
-                      <p><i class="material-icons">accessibility</i><%out.print(paciente.getEstatura());%> cm</p>
+                      <p><i class="material-icons">accessibility</i><%out.print(paciente.getEstatura());%> m</p>
                       <p><i class="material-icons">straighten</i>Cir. Braquial: <%out.print(paciente.getCirbraquial());%> cm</p>
                       <p><i class="material-icons">straighten</i>Cir. Pantorrilla: <%out.print(paciente.getCirpantorrilla());%> cm</p>
                       <p><i class="material-icons">fitness_center</i><%
@@ -278,13 +290,7 @@
                   <div class="card-body">
                     <div class="row">
                       <div class="col-md-12">
-                        <p>Fecha Establecida de Ajuste: <%
-                            Calendar calendar = Calendar.getInstance();
-                            calendar.setTime(planes.get(0).getFechacreacion());
-                            
-                            out.print(calendar.get(Calendar.DAY_OF_MONTH) + "/" + 
-                                    (calendar.get(Calendar.MONTH) + planes.get(0).getDuracion()) + "/" + calendar.get(Calendar.YEAR));
-                            %></p>
+                        <p id="actualPlanDate"></p>
                         <center><input type="submit" class="btn btn-finish btn-fill btn-rose btn-wd" name="finish" value="Ajustar"></center>
                       </div>
                     </div>
@@ -319,31 +325,26 @@
                     </div>
                     <div class="form-group">
                       <div class="form-group">
-                        <select class="selectpicker" data-style="select-with-transition" title="Plan Alimenticio">
-                          <option value="2">Plan 1 </option>
-                          <option value="3">Plan 2</option>                                
+                          <select class="selectpicker" data-style="select-with-transition" title="Plan Alimenticio" id="planSelection">
                         </select>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body" id="planInformationDiv">
                   <div class="row">
                     <div class="col-md-12">
-                      <p>Inicio del Plan: 24/12/2017</p>
-                      <p>Duración: 8 semanas</p>
-                      <p>Dieta de <b>1500 kcal</b>. <i class="fa fa-circle text-success"></i>Carbohidratos(50%) <i class="fa fa-circle text-primary"></i>Proteína(20%) <i class="fa fa-circle text-info"></i> Lípidos(30%)</p>
-                      <div class="progress">
-                        <div class="progress-bar progress-bar-success" role="progressbar" style="width: 50%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
-                        <div class="progress-bar progress-bar-primary" role="progressbar" style="width: 20%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-                        <div class="progress-bar progress-bar-info" role="progressbar" style="width: 30%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                        <p id="planInformationDateSelect"></p>
+                        <p id="planInformationTimeSelect"></p>
+                        <p id="plaInformationMacrosSelect">Dieta de <b id="planInformationGoalSelect"></b>.</p>
+                        <div class="progress" id="plaInformationProgressBarSelect">
                       </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-md-7">
                       <div class="material-datatables">
-                        <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                        <table id="planInformationMealChangedSelect" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
                           <thead>
                             <tr>
                               <th>Fecha</th>
@@ -351,57 +352,7 @@
                               <th class="disabled-sorting">Alimento</th>
                             </tr>
                           </thead>
-                          <tbody>
-                            <tr>
-                              <td>4/12/2018</td>
-                              <td>Desayuno</td>
-                              <td>Barbacoa</td>
-                            </tr>
-                            <tr>
-                              <td>4/12/2018</td>
-                              <td>Comida</td>
-                              <td>Tacos Suadero</td>
-                            </tr>
-                            <tr>
-                              <td>16/12/2018</td>
-                              <td>Cena</td>
-                              <td>Pizza</td>
-                            </tr>
-                            <tr>
-                              <td>5/12/2018</td>
-                              <td>Desayuno</td>
-                              <td>Birria</td>
-                            </tr>
-                            <tr>
-                              <td>8/12/2018</td>
-                              <td>Comida</td>
-                              <td>Tacos Pastor</td>
-                            </tr>
-                            <tr>
-                              <td>20/12/2018</td>
-                              <td>Desayuno</td>
-                              <td>Barbacoa</td>
-                            </tr>
-                            <tr>
-                              <td>21/12/2018</td>
-                              <td>Desayuno</td>
-                              <td>Barbacoa</td>
-                            </tr>
-                            <tr>
-                              <td>22/12/2018</td>
-                              <td>Desayuno</td>
-                              <td>Barbacoa</td>
-                            </tr>
-                            <tr>
-                              <td>4/12/2018</td>
-                              <td>Desayuno</td>
-                              <td>Barbacoa</td>
-                            </tr>
-                            <tr>
-                              <td>23/12/2018</td>
-                              <td>Desayuno</td>
-                              <td>Barbacoa</td>
-                            </tr>
+                          <tbody id="planInformationDataTableSelect">
                           </tbody>
                         </table>
                       </div>
@@ -523,6 +474,7 @@
   <script src="../../assets/js/material-dashboard.js?v=2.0.2" type="text/javascript"></script>
   <!-- Material Dashboard DEMO methods, don't include it in your project! -->
   <script src="../../assets/demo/demo.js"></script>
+  <!--script general-->
   <script>
     
     $(document).ready(function() {
@@ -630,21 +582,17 @@
       });
     });
   </script>
+  <!--Chart of historial de peso-->
   <script>
-      
-    $(document).ready(function() {
-        <%
-        double[] peso = new double[historiales.size()];
-        double[] musculo = new double[historiales.size()];
-        double[] grasa = new double[historiales.size()];
-        int cont = 0;
-        //COMPROBAR QUE HISTORIALES NO SEA NULO
-        for (Historialantropometrico historial : historiales) {
-                peso[cont] = historial.getPeso();
-                musculo[cont] = historial.getImc();
-                grasa[cont] = historial.getGrasa();
-            }
-        %>
+      $(document).ready(function() {
+          
+        $.get("../../GetHistorialesByIdPaciente", function(responseJson) {
+            $.each(responseJson, function(index, item) {
+
+                console.log(item);
+            });
+        });
+          
       dataColouredBarsChart = {
         labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto'],
         series: [
@@ -663,9 +611,9 @@
           offset: 40
         },
         axisX: {
-          showGrid: false,
+          showGrid: false
         },
-        low: 30,
+        low: 20,
         high: 150,
         showPoint: true,
         height: '300px'
@@ -675,8 +623,11 @@
       var colouredBarsChart = new Chartist.Line('#colouredBarsChart', dataColouredBarsChart, optionsColouredBarsChart);
 
       md.startAnimationForLineChart(colouredBarsChart);
-
-
+      });
+  </script>
+  <!--Chart of apego a los planes-->
+  <script>
+    $(document).ready(function() {
       dataRoundedLineChart = {
         labels: ['Plan 1', 'Plan 2', 'Plan 3', 'Plan 4', 'Plan 5'],
         series: [
@@ -689,10 +640,10 @@
           tension: 10
         }),
         axisX: {
-          showGrid: false,
+          showGrid: false
         },
         low: 60,
-        high: 100, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+        high: 100+10, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
         chartPadding: {
           top: 0,
           right: 0,
@@ -700,12 +651,15 @@
           left: 0
         },
         showPoint: false
-      }
+      };
 
       var RoundedLineChart = new Chartist.Line('#roundedLineChart', dataRoundedLineChart, optionsRoundedLineChart);
-
       md.startAnimationForLineChart(RoundedLineChart);
-
+    });
+  </script>
+  <!--Chart of información de cada plan-->
+  <script>
+    $(document).ready(function() {
       var dataPreferences = {
         labels: ['68%', '32%'],
         series: [68, 32]
@@ -717,21 +671,61 @@
 
       Chartist.Pie('#chartPreferences', dataPreferences, optionsPreferences);
 
-      $('#datatables').DataTable({
+      $('#planInformationMealChangedSelect').DataTable({
         "pagingType": "numbers",
         "pageLength": 5,
-        responsive: true,
-        language: {
-          search: "_INPUT_",
-          searchPlaceholder: "Búsqueda de Comidas",
+        "responsive": true,
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
         }
       });
-
-      var table = $('#datatable').DataTable();
     });
   </script>
   <script type="text/javascript">
-  </script>  
+    $(document).ready(function() {
+        var idplanalimenticio = -1;
+        $("#planInformationDiv").hide();
+        $('select').on('change', function(e){
+            $("#planInformationDateSelect").append("Inicio del Plan: 12/12/2012");
+            $("#planInformationTimeSelect").append("Duración: 8 semanas");
+            $("#planInformationGoalSelect").append("1500 kcal");
+            
+            
+            $("#plaInformationMacrosSelect").append("<i class='fa fa-circle text-success' ></i>Carbohidratos(50%) ");
+            $("#plaInformationMacrosSelect").append("<i class='fa fa-circle text-primary' ></i>Proteína(20%) ");
+            $("#plaInformationMacrosSelect").append("<i class='fa fa-circle text-info' ></i> Lípidos(30%)");
+            $("#plaInformationProgressBarSelect").append("<div class='progress-bar progress-bar-success' role='progressbar' style='width: 50%' aria-valuenow='15' aria-valuemin='0' aria-valuemax='100'></div>");
+            $("#plaInformationProgressBarSelect").append("<div class='progress-bar progress-bar-primary' role='progressbar' style='width: 20%' aria-valuenow='30' aria-valuemin='0' aria-valuemax='100'></div>");
+            $("#plaInformationProgressBarSelect").append("<div class='progress-bar progress-bar-info' role='progressbar' style='width: 30%' aria-valuenow='20' aria-valuemin='0' aria-valuemax='100'></div>");
+            
+            //Tiene que ir en un for más adelante
+            var table = $("#planInformationDataTableSelect").DataTable();
+            table.row.add(["23/12/2018","Desayuno", "Barbacoa"]).draw(false);
+            
+            $("#planInformationDiv").show();
+        });
+    });
+</script>
+  <!--script para obtener los planes del paciente-->
+  <script>
+        $.get("../../GetPlanesByIdPaciente", function(responseJson) {
+            $.each(responseJson, function(index, item) { // Iterate over the JSON array.
+                if (index === 0) {
+                    var d = new Date(item.fechacreacion);
+                    d.setDate(d.getDate() + item.duracion*7);
+                    console.log(d);
+                    $("#actualPlanDate").append("Fecha Establecida de Ajuste: " + d.getDate() + "/" + d.getMonth()+"/"+d.getFullYear());
+                }
+                var aux = 0;
+                $("#planSelection").append("<option value='" + 
+                                               item.idplanalimenticio+"'>" +
+                                               "Plan " + (++aux) +
+                                               "</option>");
+            });
+        });
+  </script>
 </body>
-
+    <%DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");            
+    //formatter.format(plan.getFechacreacion().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());%>
 </html>
+
