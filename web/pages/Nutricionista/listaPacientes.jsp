@@ -1,5 +1,12 @@
+<%-- 
+    Document   : listaPacientes
+    Created on : Apr 26, 2019, 1:35:59 AM
+    Author     : pepe
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="utf-8" />
@@ -7,7 +14,7 @@
   <link rel="icon" type="image/png" href="../../assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
-    Material Dashboard PRO by Creative Tim
+    Lista de pacientes
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
@@ -40,7 +47,13 @@
           <div class="user-info">
             <a data-toggle="collapse" href="#collapseExample" class="username">
               <span>
-                Dr. Tania Andrew
+                  <%
+                        if (session.getAttribute("nameNutricionista") == null) {
+                              response.sendRedirect("../login.html");
+                        } else {
+                            out.println(session.getAttribute("nameNutricionista"));
+                        }
+                  %>
                 <b class="caret"></b>
               </span>
             </a>
@@ -64,25 +77,25 @@
         </div>
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="BlankN.html">
+            <a class="nav-link" href="BlankN.jsp">
               <i class="material-icons">home</i>
               <p> Inicio </p>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="registroPaciente.html">
+            <a class="nav-link" href="registroPaciente.jsp">
               <i class="material-icons">face</i>
               <p> Registrar Paciente </p>
             </a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="listaPacientes.html">
+            <a class="nav-link" href="listaPacientes.jsp">
               <i class="material-icons">favorite_border</i>
               <p> Lista de Pacientes </p>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="agregarAlimento.html">
+            <a class="nav-link" href="agregarAlimento.jsp">
               <i class="material-icons">restaurant</i>
               <p> Registrar Alimento </p>
             </a>
@@ -150,7 +163,11 @@
                 Está seguro de borrar a <span id="paciente"></span>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Borrar</button>
+                    <form method="get" action="../../BorrarPaciente">
+                        <input type="hidden" name="borrarPaciente" id="borrarPaciente"/>
+                        <input type="submit" class="btn btn-primary"/>
+                        <!--<button type="button" class="btn btn-primary" >Borrar</button>-->
+                    </form>
               </div>
             </div>
           </div>
@@ -176,146 +193,10 @@
                       <tfoot>
                         <tr>
                           <th>Nombre</th>
-                          <th class="text-right">Acción</th>
+                          <th class="disabled-sorting text-right">Acción</th>
                         </tr>
                       </tfoot>
-                      <tbody>
-                        <tr>
-                          <td>Tiger Nixon</td>
-                          <td class="text-right">
-                            <a href="#" class="btn btn-link btn-info btn-just-icon like"><i class="material-icons">assignment</i></a>
-                            <a href="#" class="btn btn-link btn-warning btn-just-icon edit"><i class="material-icons">edit</i></a>
-                            <a href="#" class="btn btn-link btn-danger btn-just-icon remove" data-toggle="modal" data-target="#modalBorrado" infoP="1/Tiger Nixon"><i class="material-icons">delete_forever</i></a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Garrett Winters</td>
-                          <td class="text-right">
-                            <a href="#" class="btn btn-link btn-info btn-just-icon like"><i class="material-icons">assignment</i></a>
-                            <a href="#" class="btn btn-link btn-warning btn-just-icon edit"><i class="material-icons">edit</i></a>
-                            <a href="#" class="btn btn-link btn-danger btn-just-icon remove" data-toggle="modal" data-target="#modalBorrado" infoP="1/Garrett Winters"><i class="material-icons">delete_forever</i></a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Ashton Cox</td>
-                          <td class="text-right">
-                            <a href="#" class="btn btn-link btn-info btn-just-icon like"><i class="material-icons">assignment</i></a>
-                            <a href="#" class="btn btn-link btn-warning btn-just-icon edit"><i class="material-icons">edit</i></a>
-                            <a href="#" class="btn btn-link btn-danger btn-just-icon remove" data-toggle="modal" data-target="#modalBorrado" infoP="1/Ashton Cox"><i class="material-icons">delete_forever</i></a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Cedric Kelly</td>
-                          <td class="text-right">
-                            <a href="#" class="btn btn-link btn-info btn-just-icon like"><i class="material-icons">assignment</i></a>
-                            <a href="#" class="btn btn-link btn-warning btn-just-icon edit"><i class="material-icons">edit</i></a>
-                            <a href="#" class="btn btn-link btn-danger btn-just-icon remove" data-toggle="modal" data-target="#modalBorrado" infoP="1/Cedric Kelly"><i class="material-icons">delete_forever</i></a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Michael Silva</td>
-                          <td class="text-right">
-                            <a href="#" class="btn btn-link btn-info btn-just-icon like"><i class="material-icons">assignment</i></a>
-                            <a href="#" class="btn btn-link btn-warning btn-just-icon edit"><i class="material-icons">edit</i></a>
-                            <a href="#" class="btn btn-link btn-danger btn-just-icon remove" data-toggle="modal" data-target="#modalBorrado" infoP="1/Michael Silva"><i class="material-icons">delete_forever</i></a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Paul Byrd</td>
-                          <td class="text-right">
-                            <a href="#" class="btn btn-link btn-info btn-just-icon like"><i class="material-icons">assignment</i></a>
-                            <a href="#" class="btn btn-link btn-warning btn-just-icon edit"><i class="material-icons">edit</i></a>
-                            <a href="#" class="btn btn-link btn-danger btn-just-icon remove" data-toggle="modal" data-target="#modalBorrado" infoP="1/Paul Byrd"><i class="material-icons">delete_forever</i></a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Gloria Little</td>
-                          <td class="text-right">
-                            <a href="#" class="btn btn-link btn-info btn-just-icon like"><i class="material-icons">assignment</i></a>
-                            <a href="#" class="btn btn-link btn-warning btn-just-icon edit"><i class="material-icons">edit</i></a>
-                            <a href="#" class="btn btn-link btn-danger btn-just-icon remove" data-toggle="modal" data-target="#modalBorrado" infoP="1/Gloria Little"><i class="material-icons">delete_forever</i></a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Bradley Greer</td>
-                          <td class="text-right">
-                            <a href="#" class="btn btn-link btn-info btn-just-icon like"><i class="material-icons">assignment</i></a>
-                            <a href="#" class="btn btn-link btn-warning btn-just-icon edit"><i class="material-icons">edit</i></a>
-                            <a href="#" class="btn btn-link btn-danger btn-just-icon remove" data-toggle="modal" data-target="#modalBorrado" infoP="1/Bradley Greer"><i class="material-icons">delete_forever</i></a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Dai Rios</td>
-                          <td class="text-right">
-                            <a href="#" class="btn btn-link btn-info btn-just-icon like"><i class="material-icons">assignment</i></a>
-                            <a href="#" class="btn btn-link btn-warning btn-just-icon edit"><i class="material-icons">edit</i></a>
-                            <a href="#" class="btn btn-link btn-danger btn-just-icon remove" data-toggle="modal" data-target="#modalBorrado" infoP="1/Dai Rios"><i class="material-icons">delete_forever</i></a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Jenette Caldwell</td>
-                          <td class="text-right">
-                            <a href="#" class="btn btn-link btn-info btn-just-icon like"><i class="material-icons">assignment</i></a>
-                            <a href="#" class="btn btn-link btn-warning btn-just-icon edit"><i class="material-icons">edit</i></a>
-                            <a href="#" class="btn btn-link btn-danger btn-just-icon remove" data-toggle="modal" data-target="#modalBorrado" infoP="1/Jenette Caldwell"><i class="material-icons">delete_forever</i></a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Yuri Berry</td>
-                          <td class="text-right">
-                            <a href="#" class="btn btn-link btn-info btn-just-icon like"><i class="material-icons">assignment</i></a>
-                            <a href="#" class="btn btn-link btn-warning btn-just-icon edit"><i class="material-icons">edit</i></a>
-                            <a href="#" class="btn btn-link btn-danger btn-just-icon remove" data-toggle="modal" data-target="#modalBorrado" infoP="1/Yuri Berry"><i class="material-icons">delete_forever</i></a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Caesar Vance</td>
-                          <td class="text-right">
-                            <a href="#" class="btn btn-link btn-info btn-just-icon like"><i class="material-icons">assignment</i></a>
-                            <a href="#" class="btn btn-link btn-warning btn-just-icon edit"><i class="material-icons">edit</i></a>
-                            <a href="#" class="btn btn-link btn-danger btn-just-icon remove" data-toggle="modal" data-target="#modalBorrado" infoP="1/Caesar Vance"><i class="material-icons">delete_forever</i></a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Doris Wilder</td>
-                          <td class="text-right">
-                            <a href="#" class="btn btn-link btn-info btn-just-icon like"><i class="material-icons">assignment</i></a>
-                            <a href="#" class="btn btn-link btn-warning btn-just-icon edit"><i class="material-icons">edit</i></a>
-                            <a href="#" class="btn btn-link btn-danger btn-just-icon remove" data-toggle="modal" data-target="#modalBorrado" infoP="1/Doris Wilder"><i class="material-icons">delete_forever</i></a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Angelica Ramos</td>
-                          <td class="text-right">
-                            <a href="seguimientoPaciente.html" class="btn btn-link btn-info btn-just-icon like"><i class="material-icons">assignment</i></a>
-                            <a href="editarPaciente.html" class="btn btn-link btn-warning btn-just-icon edit"><i class="material-icons">edit</i></a>
-                            <a href="#" class="btn btn-link btn-danger btn-just-icon remove" data-toggle="modal" data-target="#modalBorrado" infoP="1/Angelica Ramos"><i class="material-icons">delete_forever</i></a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Gavin Joyce</td>
-                          <td class="text-right">
-                            <a href="#" class="btn btn-link btn-info btn-just-icon like"><i class="material-icons">assignment</i></a>
-                            <a href="#" class="btn btn-link btn-warning btn-just-icon edit"><i class="material-icons">edit</i></a>
-                            <a href="#" class="btn btn-link btn-danger btn-just-icon remove" data-toggle="modal" data-target="#modalBorrado" infoP="1/Gavin Joyce"><i class="material-icons">delete_forever</i></a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Vivian Harrell</td>
-                          <td class="text-right">
-                            <a href="#" class="btn btn-link btn-info btn-just-icon like"><i class="material-icons">assignment</i></a>
-                            <a href="#" class="btn btn-link btn-warning btn-just-icon edit"><i class="material-icons">edit</i></a>
-                            <a href="#" class="btn btn-link btn-danger btn-just-icon remove" data-toggle="modal" data-target="#modalBorrado" infoP="1/Vivian Harrell"><i class="material-icons">delete_forever</i></a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Timothy Mooney</td>
-                          <td class="text-right">
-                            <a href="#" class="btn btn-link btn-info btn-just-icon like"><i class="material-icons">assignment</i></a>
-                            <a href="#" class="btn btn-link btn-warning btn-just-icon edit"><i class="material-icons">edit</i></a>
-                            <a href="#" class="btn btn-link btn-danger btn-just-icon remove" data-toggle="modal" data-target="#modalBorrado" infoP="1/Timothy Mooney"><i class="material-icons">delete_forever</i></a>
-                          </td>
-                        </tr>
+                      <tbody id="idTable">
                       </tbody>
                     </table>
                   </div>
@@ -414,8 +295,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
   <!-- Library for adding dinamically elements -->
   <script src="../../assets/js/plugins/arrive.min.js"></script>
-  <!--  Google Maps Plugin    -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
   <!-- Chartist JS -->
   <script src="../../assets/js/plugins/chartist.min.js"></script>
   <!--  Notifications Plugin    -->
@@ -428,6 +307,7 @@
     $(document).on('click', '.remove', function () {
       var info = $(this).attr('infoP').split('/');
       $('#paciente').text(info[1]);
+      
     });
 
     $(document).ready(function() {
@@ -566,6 +446,25 @@
       
     });
   </script>
+    <script>
+        $(document).ready(function() {
+            $.get("../../ListaPacientes", function(responseJson) {    // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response JSON...
+                $.each(responseJson, function(index, item) { // Iterate over the JSON array.
+                    var all="<a href='../../GetPaciente?id="+item.idpaciente  + "' class='btn btn-link btn-info btn-just-icon like'><i class='material-icons'>assignment</i></a>";
+                    all = all + "<a href='./editarPaciente.jsp?id="+item.idpaciente  + "' class='btn btn-link btn-warning btn-just-icon edit'><i class='material-icons'>edit</i></a>";
+                    all = all + "<a href='#' class='btn btn-link btn-danger btn-just-icon remove' data-toggle='modal' data-target='#modalBorrado' ";
+                    all = all + "infoP='"+ item.idpaciente +"/"+ item.nombre + " " + item.apellidos +"'>";
+                    all = all + "<i class='material-icons'>delete_forever</i></a>";
+                    var table = $('#datatables').DataTable();
+                    table.row.add([item.nombre + " " + item.apellidos,all]).draw(false);
+                    
+                    //($("#idTable")).append(all);
+                });
+            });
+        });
+        
+    </script>
+  
 </body>
 
 </html>

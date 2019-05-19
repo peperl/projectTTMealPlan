@@ -11,6 +11,8 @@ import mx.ipn.www.finalproject.model.ComidaKey;
 import mx.ipn.www.finalproject.model.Comida;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
+import mx.ipn.www.finalproject.model.PlanalimenticioKey;
 
 /**
  * This interface provides methods to populate DB Table of comida
@@ -32,6 +34,7 @@ public interface ComidaDAO {
      */
     public Comida load(ComidaKey key, Connection conn) throws SQLException;
 
+    public List<Comida> loadByPlanAlimenticio(PlanalimenticioKey key, Connection conn) throws SQLException;
     /**
      * Update a record in Database.
      * @param bean   The Object to be saved.
@@ -47,4 +50,6 @@ public interface ComidaDAO {
      * @exception    SQLException if something is wrong.
      */
     public void delete(ComidaKey key, Connection conn) throws SQLException;
+
+    
 }

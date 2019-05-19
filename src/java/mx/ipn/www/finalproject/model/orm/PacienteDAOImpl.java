@@ -17,6 +17,7 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.List;
 import java.util.ArrayList;
+import mx.ipn.www.finalproject.model.NutricionistaKey;
 import mx.ipn.www.finalproject.model.dao.PacienteDAO;
 
 /**
@@ -52,6 +53,16 @@ public class PacienteDAOImpl implements PacienteDAO {
         + "FROM Paciente WHERE "
         + "Usuario_idUsuario = ?";
     
+    private static final String SQL_SELECT_BY_IDNUTRICIONISTA =
+        "SELECT "
+        + "idPaciente, Usuario_idUsuario, Nutricionista_idNutricionista, Nombre, Apellidos, FechaNacimiento, Sexo, "
+        + "Telefono, Direccion, PesoAnterior, Estatura, CirBraquial, CirPantorrilla, DificultadesAliment, "
+        + "Enfermedades, Tratamiento, ProteinaAnterior, LipidosAnterior, CarbohidratosAnterior, ComidasAnterior, ActividadFisica, "
+        + "FechaRegistro, Estado "
+        + "FROM Paciente WHERE "
+        + "Nutricionista_idNutricionista = ? AND Estado=1";
+
+
     /* SQL to update data */
     private static final String SQL_UPDATE =
         "UPDATE Paciente SET "
@@ -100,7 +111,7 @@ public class PacienteDAOImpl implements PacienteDAO {
             ps.setDouble(18, bean.getLipidosanterior());
             ps.setDouble(19, bean.getCarbohidratosanterior());
             ps.setDouble(20, bean.getComidasanterior());
-            ps.setDouble(21, bean.getActividadfisica());
+            ps.setInt(21, bean.getActividadfisica());
             if (bean.getFechanacimiento() != null)
                 ps.setDate(22, new java.sql.Date(bean.getFecharegistro().getTime()));
             else
@@ -155,6 +166,24 @@ public class PacienteDAOImpl implements PacienteDAO {
         }        
     }
 
+    @Override
+    public List<Paciente> loadByNutricionista(NutricionistaKey key, Connection conn) throws SQLException {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            ps = conn.prepareStatement(SQL_SELECT_BY_IDNUTRICIONISTA);
+            ps.setInt(1, key.getIdnutricionista());
+            rs = ps.executeQuery();
+            List results = getResults(rs);
+            if (results.size() > 0)
+                return results;
+            else
+                return null;
+        }finally {
+            close(rs);
+            close(ps);
+        }        
+    }
 
     /**
      * Update a record in Database.
@@ -188,7 +217,7 @@ public class PacienteDAOImpl implements PacienteDAO {
             ps.setDouble(17, bean.getLipidosanterior());
             ps.setDouble(18, bean.getCarbohidratosanterior());
             ps.setDouble(19, bean.getComidasanterior());
-            ps.setDouble(20, bean.getActividadfisica());
+            ps.setInt(20, bean.getActividadfisica());
             if (bean.getFechanacimiento() != null)
                 ps.setDate(21, new java.sql.Date(bean.getFecharegistro().getTime()));
             else
@@ -248,7 +277,7 @@ public class PacienteDAOImpl implements PacienteDAO {
             bean.setLipidosanterior(rs.getDouble("LipidosAnterior"));
             bean.setCarbohidratosanterior(rs.getDouble("CarbohidratosAnterior"));
             bean.setComidasanterior(rs.getDouble("ComidasAnterior"));
-            bean.setActividadfisica(rs.getDouble("ActividadFisica"));
+            bean.setActividadfisica(rs.getInt("ActividadFisica"));
             bean.setFecharegistro(rs.getDate("FechaRegistro"));
             bean.setEstado(rs.getInt("Estado"));
             results.add(bean);

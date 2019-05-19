@@ -11,6 +11,8 @@ import mx.ipn.www.finalproject.model.PlanalimenticioKey;
 import mx.ipn.www.finalproject.model.Planalimenticio;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
+import mx.ipn.www.finalproject.model.PacienteKey;
 
 /**
  * This interface provides methods to populate DB Table of planalimenticio
@@ -32,6 +34,10 @@ public interface PlanalimenticioDAO {
      */
     public Planalimenticio load(PlanalimenticioKey key, Connection conn) throws SQLException;
 
+    public Planalimenticio loadLastPlan(Planalimenticio plan, Connection conn) throws SQLException;
+    
+    public List<Planalimenticio> loadByPaciente(PacienteKey key, Connection conn) throws SQLException;
+    
     /**
      * Update a record in Database.
      * @param bean   The Object to be saved.

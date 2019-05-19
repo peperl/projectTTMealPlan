@@ -13,8 +13,50 @@
         <servlet-class>mx.ipn.www.finalproject.view.servlets.RegistroPaciente</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>RegisterAntopometricData</servlet-name>
+        <servlet-class>mx.ipn.www.finalproject.view.servlets.RegisterAntopometricData</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AgregarAlimento</servlet-name>
+        <servlet-class>mx.ipn.www.finalproject.view.servlets.AgregarAlimento</servlet-class>
+    </servlet>    
+    <servlet>
+        <servlet-name>BorrarPaciente</servlet-name>
+        <servlet-class>mx.ipn.www.finalproject.view.servlets.BorrarPaciente</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetPaciente</servlet-name>
+        <servlet-class>mx.ipn.www.finalproject.view.servlets.GetPaciente</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>getAllFood</servlet-name>
         <servlet-class>mx.ipn.www.finalproject.view.servlets.services.getAllFood</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListaPacientes</servlet-name>
+        <servlet-class>mx.ipn.www.finalproject.view.servlets.services.ListaPacientes</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>getProposePlan</servlet-name>
+        <servlet-class>mx.ipn.www.finalproject.view.servlets.services.getProposePlan</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>InicioSesion</servlet-name>
+        <servlet-class>mx.ipn.www.finalproject.view.servlets.services.android.InicioSesion</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>getCategoria</servlet-name>
+        <servlet-class>mx.ipn.www.finalproject.view.servlets.services.getCategoria</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetHistorialesByIdPaciente</servlet-name>
+        <servlet-class>mx.ipn.www.finalproject.view.servlets.seguimientoPaciente.GetHistorialesByIdPaciente</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetPlanesByIdPaciente</servlet-name>
+        <servlet-class>mx.ipn.www.finalproject.view.servlets.seguimientoPaciente.GetPlanesByIdPaciente</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
@@ -31,6 +73,46 @@
     <servlet-mapping>
         <servlet-name>getAllFood</servlet-name>
         <url-pattern>/getAllFood</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListaPacientes</servlet-name>
+        <url-pattern>/ListaPacientes</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>getProposePlan</servlet-name>
+        <url-pattern>/getProposePlan</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegisterAntopometricData</servlet-name>
+        <url-pattern>/RegisterAntopometricData</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InicioSesion</servlet-name>
+        <url-pattern>/InicioSesion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AgregarAlimento</servlet-name>
+        <url-pattern>/AgregarAlimento</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>getCategoria</servlet-name>
+        <url-pattern>/getCategoria</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BorrarPaciente</servlet-name>
+        <url-pattern>/BorrarPaciente</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetPaciente</servlet-name>
+        <url-pattern>/GetPaciente</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetHistorialesByIdPaciente</servlet-name>
+        <url-pattern>/GetHistorialesByIdPaciente</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetPlanesByIdPaciente</servlet-name>
+        <url-pattern>/GetPlanesByIdPaciente</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

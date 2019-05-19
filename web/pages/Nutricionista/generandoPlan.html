@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="utf-8" />
@@ -7,7 +7,7 @@
   <link rel="icon" type="image/png" href="../../assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
-    Material Dashboard PRO by Creative Tim
+    Generación de plan de alimentación
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
@@ -28,18 +28,21 @@
       <div class="content">
         <div class="container-fluid">
           <div class="col-lg-8 col-md-6 col-sm-6 ml-auto mr-auto">
-          <form class="form" method="" action="">
+          <form class="form" method="GET" action="../../RegisterAntopometricData">
             <div class="card card-login card-hidden">
               <div class="card-header card-header-info text-center">
-                <h3 class="card-title">Generando Plan Alimenticio</h3>
-                
+                <h3 class="card-title">Registro manual de Peso</h3>
               </div>
               <div class="card-body ">
-                <p class="card-description text-center">Paciente: Josué Durán Martínez</p>
-                <center><img src="../../assets/img/yumk1.png"></center>
+                <!--<p class="card-description text-center">Paciente: Josué Durán Martínez</p>
+                <center><img src="../../assets/img/yumk1.png"></center>-->
+                Peso<input type="number" name="peso" id="peso" required/>
+                IMC<input type="number" name="imc" id="imc" required/>
+                GRASA<input type="number" name="grasa" id="grasa" required/>
               </div>
               <div class="card-footer justify-content-center">
-                <a href="planAlimenticio.html" class="btn btn-rose btn-link btn-lg">Lets Go</a>
+                  <input type="submit" value="Submit" />
+                  <!--<a href="planAlimenticio.html" class="btn btn-rose btn-link btn-lg">Lets Go</a>-->
               </div>
             </div>
           </form>
@@ -88,8 +91,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
   <!-- Library for adding dinamically elements -->
   <script src="../../assets/js/plugins/arrive.min.js"></script>
-  <!--  Google Maps Plugin    -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
   <!-- Chartist JS -->
   <script src="../../assets/js/plugins/chartist.min.js"></script>
   <!--  Notifications Plugin    -->

@@ -143,7 +143,7 @@ public class AlimentoDAOImpl implements AlimentoDAO {
     }
 
     @Override
-    public List<Alimento> loadAll(Connection conn) throws SQLException {
+    public List<Alimento> loadAllActive(Connection conn) throws SQLException {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {

@@ -40,7 +40,7 @@ public interface AlimentoDAO {
      * @param conn      JDBC Connection.
      * @exception       SQLException if something is wrong.
      */
-    public List<Alimento> loadAll(Connection conn) throws SQLException;
+    public List<Alimento> loadAllActive(Connection conn) throws SQLException;
 
     /**
      * Retrive a record from Database.

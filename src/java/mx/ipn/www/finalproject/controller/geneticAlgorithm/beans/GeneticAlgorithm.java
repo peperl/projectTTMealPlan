@@ -1,27 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mx.ipn.www.finalproject.controller.geneticAlgorithm.beans;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.naming.NamingException;
-import javax.servlet.ServletException;
 import mx.ipn.www.finalproject.controller.geneticAlgorithm.constants.ConstantMealDistribution;
-import mx.ipn.www.finalproject.controller.geneticAlgorithm.constants.ConstantSpeedLoseWeight;
 import mx.ipn.www.finalproject.model.Alimento;
-import mx.ipn.www.finalproject.model.CategoriaalimentoKey;
-import mx.ipn.www.finalproject.model.Planalimenticio;
-import mx.ipn.www.finalproject.model.dao.AlimentoDAO;
-import mx.ipn.www.finalproject.model.orm.AlimentoDAOImpl;
-import mx.ipn.www.finalproject.utils.ConnectionByPayaraSource;
 
 /**
  *
@@ -30,59 +13,36 @@ import mx.ipn.www.finalproject.utils.ConnectionByPayaraSource;
 public class GeneticAlgorithm {
     
     private Map<Integer, List<Alimento>> foodByCategory;
-    private Population population;
+    private PopulationGenerator pGenerator;
     private ObjectiveCalories objectiveCalories;
+    private int iterations;
     
-    public GeneticAlgorithm(int populationSize, int kilocal, short speed) throws ServletException, NamingException {
-        foodByCategory = new HashMap<>();
-        objectiveCalories = new ObjectiveCalories(kilocal, speed);
-        ConnectionByPayaraSource connector = new ConnectionByPayaraSource();
-        ConstantMealDistribution cmd = new ConstantMealDistribution(3);
-        Meal [] shellMeal = cmd.getTiempos();
-        Connection conn = null;
-        try {
-            conn = connector.initConnection();
-        } catch (SQLException ex) {
-            Logger.getLogger(GeneticAlgorithm.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        AlimentoDAO alimentoDAO = new AlimentoDAOImpl();
+    public GeneticAlgorithm(int populationSize, double kilocal, short speed, int iterations, Map<Integer, List<Alimento>> foodByCategory, int mealsQty) {
         
-        for (Meal meal : shellMeal) {
-            for (Integer idCategoria : meal.getCategoria()) {
-                try {
-                    if (!foodByCategory.containsKey(idCategoria)) {
-                        List<Alimento> a = alimentoDAO.loadByCategory(new CategoriaalimentoKey(idCategoria), conn);
-                        foodByCategory.put(idCategoria, a);
-                    }
-                } catch (SQLException ex) {
-                    Logger.getLogger(GeneticAlgorithm.class.getName()).log(Level.SEVERE, null, ex);
-                }
+        this.iterations = iterations;
+        this.foodByCategory = foodByCategory;
+        objectiveCalories = new ObjectiveCalories(kilocal, speed);
+        ConstantMealDistribution cmd = new ConstantMealDistribution(mealsQty);
+        Meal [] shellMeal = cmd.getTiempos();
+        MealPlanInformation mpi = new MealPlanInformation(shellMeal);
+        this.pGenerator = new PopulationGenerator(populationSize, mpi, foodByCategory, objectiveCalories);
+    }
+    
+    public Individual runAlgorithm() {
+        List<Individual> population = this.pGenerator.generatePopulation();
+        Individual a = null;
+        
+        for (int i = 0; i < iterations; i++) {
+            Map<Double,Individual> population2 = this.pGenerator.Crossing(population);
+            population2 = this.pGenerator.Mutation(population2);
+            population = new ArrayList<>(population2.values());
+            a = this.pGenerator.reachGoal(population);
+            if (a != null) {
+                System.out.println("meta lograda");
+                break;
             }
         }
-        connector.destroy();
         
-        MealPlanInformation mpi = new MealPlanInformation(shellMeal);
-        this.population = new Population(populationSize, mpi, foodByCategory, objectiveCalories);
-        
+        return a;
     }
-    
-    public Planalimenticio runAlgorithm() {
-        this.population.generatePopulation();
-        return null;
-    }
-    
-    public static void main(String[] args) {
-        GeneticAlgorithm ga;
-        try {
-            ga = new GeneticAlgorithm(1000, 1900, ConstantSpeedLoseWeight.SLOW_SPEED);
-            ga.runAlgorithm();
-        } catch (ServletException ex) {
-            Logger.getLogger(GeneticAlgorithm.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NamingException ex) {
-            Logger.getLogger(GeneticAlgorithm.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }
-    
-    
 }

@@ -17,12 +17,12 @@ public class ConstantSpeedLoseWeight {
      * 1 Proteinas
      * 2 Lípidos
      */
-    public static double [] slowSpeed = {0.55 , 0.16 , 0.29};
-    public static double[] normalSpeed = {0.50 , 0.18 , 0.32};
-    public static double[] fastSpeed = {0.45 , 0.20 , 0.35};
-    public static short SLOW_SPEED = 1;
-    public static short NORMAL_SPEED = 2;
-    public static short FAST_SPEED = 3;
+    public static final double [] slowSpeed = {0.55 , 0.16 , 0.29};
+    public static final  double[] normalSpeed = {0.50 , 0.18 , 0.32};
+    public static final  double[] fastSpeed = {0.45 , 0.20 , 0.35};
+    public static final  short SLOW_SPEED = 1;
+    public static final  short NORMAL_SPEED = 2;
+    public static final  short FAST_SPEED = 3;
     
 }
 

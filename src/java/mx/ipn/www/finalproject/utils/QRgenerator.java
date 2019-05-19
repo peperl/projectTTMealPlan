@@ -12,6 +12,7 @@ import com.google.zxing.qrcode.QRCodeWriter;
 import java.awt.image.BufferedImage;
 import java.io.FileOutputStream;
 import java.security.MessageDigest;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 /**
@@ -26,7 +27,6 @@ public class QRgenerator {
     private static final int qrTamAncho = 400;
     private static final int qrTamAlto = 400;
     private static final String formato = "png";
-    private static final String ruta = "web/qr/";
     private static final int randomMin = 100;
     private static final int randomMax = 998;
     
@@ -59,8 +59,9 @@ public class QRgenerator {
                     imagen.setRGB(x, y, (valor == 0 ? 0 : 0xFFFFFF));
                 }
             }
-            FileOutputStream qrCode = new FileOutputStream(ruta+name+".png");
+            FileOutputStream qrCode = new FileOutputStream(name+".png");
             ImageIO.write(imagen, formato, qrCode);
+                
             qrCode.close();
         }catch(Exception e){
             System.out.println(e);
@@ -84,4 +85,5 @@ public class QRgenerator {
         }
         return false;
     }
+    
 }

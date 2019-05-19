@@ -11,6 +11,14 @@ public class PacienteKey implements java.io.Serializable, Cloneable {
     /* idPaciente */
     protected int idpaciente;
 
+    public PacienteKey() {
+
+    }
+    
+    public PacienteKey(int idPaciente) {
+        this.idpaciente = idPaciente;
+    }
+
     /* idPaciente */
     public int getIdpaciente() {
         return idpaciente;

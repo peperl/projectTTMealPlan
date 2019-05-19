@@ -16,7 +16,7 @@ public final class ObjectiveCalories {
     private double carb, prot, lip;
     
     
-    public ObjectiveCalories(int kilocalories, short speed) {
+    public ObjectiveCalories(double kilocalories, short speed) {
         double kilocal = kilocalories;
         
         if (speed == ConstantSpeedLoseWeight.SLOW_SPEED) {

@@ -9,7 +9,6 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -46,7 +45,7 @@ public class getAllFood extends HttpServlet {
             ConnectionByPayaraSource connector = new ConnectionByPayaraSource();
             Connection conn = connector.initConnection();
             AlimentoDAO dao = new AlimentoDAOImpl();
-            List<Alimento> list = dao.loadAll(conn);
+            List<Alimento> list = dao.loadAllActive(conn);
             String json = new Gson().toJson(list);
             response.getWriter().write(json);
             connector.destroy();

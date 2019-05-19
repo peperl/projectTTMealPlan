@@ -1,5 +1,12 @@
+<%-- 
+    Document   : agregarAlimento
+    Created on : Apr 26, 2019, 1:31:32 AM
+    Author     : pepe
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="utf-8" />
@@ -7,7 +14,7 @@
   <link rel="icon" type="image/png" href="../../assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
-    Material Dashboard PRO by Creative Tim
+    Agregar alimento
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
@@ -40,7 +47,13 @@
           <div class="user-info">
             <a data-toggle="collapse" href="#collapseExample" class="username">
               <span>
-                Dr. Tania Andrew
+                  <%
+                        if (session.getAttribute("nameNutricionista") == null) {
+                              response.sendRedirect("../login.html");
+                        } else {
+                            out.println(session.getAttribute("nameNutricionista"));
+                        }
+                  %>
                 <b class="caret"></b>
               </span>
             </a>
@@ -63,26 +76,26 @@
           </div>
         </div>
         <ul class="nav">
-          <li class="nav-item active">
-            <a class="nav-link" href="BlankN.html">
+          <li class="nav-item">
+            <a class="nav-link" href="BlankN.jsp">
               <i class="material-icons">home</i>
               <p> Inicio </p>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="registroPaciente.html">
+            <a class="nav-link" href="registroPaciente.jsp">
               <i class="material-icons">face</i>
               <p> Registrar Paciente </p>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="listaPacientes.html">
+            <a class="nav-link" href="listaPacientes.jsp">
               <i class="material-icons">favorite_border</i>
               <p> Lista de Pacientes </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="agregarAlimento.html">
+          <li class="nav-item active">
+            <a class="nav-link" href="agregarAlimento.jsp">
               <i class="material-icons">restaurant</i>
               <p> Registrar Alimento </p>
             </a>
@@ -105,7 +118,7 @@
                 <i class="material-icons design_bullet-list-67 visible-on-sidebar-mini">view_list</i>
               </button>
             </div>
-            <a class="navbar-brand" href="#pablo">Bienvenida</a>
+            <a class="navbar-brand" href="#pablo">Registrar Alimento</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation" data-target="#navigation-example">
             <span class="sr-only">Toggle navigation</span>
@@ -137,13 +150,108 @@
       <div class="content">
         <div class="container-fluid">
           <div class="col-md-8 col-12 mr-auto ml-auto">
-            <div class="alert alert-primary alert-with-icon" data-notify="container">
-                    <i class="material-icons" data-notify="icon">notifications</i>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <i class="material-icons">close</i>
-                    </button>
-                    <span data-notify="message">El ajuste de Josué Durán está próximo. <a class="btn btn-rose" href=""> Dar Seguimiento</a></span>
+            <div class="card">
+              <div class="card-header card-header-primary card-header-icon">
+                <div class="card-icon">
+                  <i class="material-icons">restaurant</i>
+                </div>
+                <h4 class="card-title">Registrar Alimento</h4>
+              </div>
+              <div class="card-body">
+                <form class="form" method = "GET" action = "../../AgregarAlimento">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="input-group form-control-lg">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="material-icons">fastfood</i>
+                        </span>
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInput1" class="bmd-label-floating">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" required>
+                      </div>
+                    </div>
+                    <div class="input-group form-control-lg">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="material-icons">kitchen</i>
+                        </span>
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInput1" class="bmd-label-floating">Cantidad</label>
+                        <input type="number" class="form-control" id="cantidad" name="cantidad" required>
+                      </div>
+                    </div>
+                    <div class="input-group form-control-lg">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="material-icons">list</i>
+                        </span>
+                      </div>
+                      <div class="form-group">
+                          <select class="selectpicker" data-style="select-with-transition" title="Categoría" id="categorias" required>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="input-group form-control-lg">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="material-icons">rounded_corner</i>
+                        </span>
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInput1" class="bmd-label-floating">Unidad</label>
+                        <input type="text" class="form-control" id="unidad" name="unidad" required>
+                      </div>
+                    </div>
+                      
                   </div>
+                  <div class="col-md-6">
+                    <div class="input-group form-control-lg">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="material-icons">local_dining</i>
+                        </span>
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInput1" class="bmd-label-floating">Proteínas</label>
+                        <input type="text" class="form-control" id="proteinas" name="proteinas" required>
+                      </div>
+                    </div>
+                    <div class="input-group form-control-lg">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="material-icons">local_dining</i>
+                        </span>
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInput1" class="bmd-label-floating">Carbohidratos</label>
+                        <input type="text" class="form-control" id="carbohidratos" name="carbohidratos" required>
+                      </div>
+                    </div>
+                    <div class="input-group form-control-lg">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="material-icons">local_dining</i>
+                        </span>
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInput1" class="bmd-label-floating">Lípidos</label>
+                        <input type="text" class="form-control" id="lipidos" name="lipidos" required>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <center><input type="submit" class="btn btn-finish btn-fill btn-rose btn-wd" name="finish" value="Guardar"></center>
+                  </div>
+                </div>
+                </form>                  
+                  
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -233,8 +341,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
   <!-- Library for adding dinamically elements -->
   <script src="../../assets/js/plugins/arrive.min.js"></script>
-  <!--  Google Maps Plugin    -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
   <!-- Chartist JS -->
   <script src="../../assets/js/plugins/chartist.min.js"></script>
   <!--  Notifications Plugin    -->
@@ -359,6 +465,51 @@
       }, 600);
     });
   </script>
+  <script>
+    $.get("../../getCategoria", function(responseJson) {    // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response JSON...
+        $.each(responseJson, function(index, item) { // Iterate over the JSON array.
+            ($("#categorias")).append("<option value=" + item.categoryId +">" + item.nombrecategoria + "</option>");
+        });
+        $('#categorias').selectpicker('refresh');
+    });
+    
+    
+  </script>
+  <script>
+    var pathname = window.location.href;
+    var url = new URL(pathname);
+    var c = url.searchParams.get("success");
+    var result = c.localeCompare("yes");
+    if (result == 0) {
+        $.notify({
+            title: '<strong>Registro no exitoso</strong>',
+            message: 'Error al registrar el alimento.'
+        },{
+            type: 'danger',
+            delay: 5000,
+            placement: {
+		from: "top",
+		align: "left"
+            }            
+        }
+        );
+    } else {
+        $.notify({
+            title: '<strong>Registro exitoso</strong>',
+            message: 'Alimento registrado correctamente.'
+        },{
+            type: 'success',
+            delay: 5000,
+            placement: {
+		from: "top",
+		align: "left"
+            }            
+        }
+        );
+        
+    }
+  </script>  
+  
 </body>
 
 </html>

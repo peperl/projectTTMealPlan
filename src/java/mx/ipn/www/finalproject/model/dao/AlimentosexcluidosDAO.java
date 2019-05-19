@@ -11,6 +11,8 @@ import mx.ipn.www.finalproject.model.AlimentosexcluidosKey;
 import mx.ipn.www.finalproject.model.Alimentosexcluidos;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
+import mx.ipn.www.finalproject.model.PacienteKey;
 
 /**
  * This interface provides methods to populate DB Table of alimentosexcluidos
@@ -32,6 +34,7 @@ public interface AlimentosexcluidosDAO {
      */
     public Alimentosexcluidos load(AlimentosexcluidosKey key, Connection conn) throws SQLException;
 
+    public List<Alimentosexcluidos> loadByPaciente(PacienteKey key, Connection conn) throws SQLException;
     /**
      * Update a record in Database.
      * @param bean   The Object to be saved.
@@ -47,4 +50,5 @@ public interface AlimentosexcluidosDAO {
      * @exception    SQLException if something is wrong.
      */
     public void delete(AlimentosexcluidosKey key, Connection conn) throws SQLException;
+
 }

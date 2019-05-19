@@ -11,6 +11,14 @@ public class AlimentoKey implements java.io.Serializable, Cloneable {
     /* idAlimento */
     protected int idalimento;
 
+    public AlimentoKey() {
+        
+    }
+    
+    public AlimentoKey(int alimentoIdalimento) {
+        this.idalimento = alimentoIdalimento;
+    }
+
     /* idAlimento */
     public int getIdalimento() {
         return idalimento;

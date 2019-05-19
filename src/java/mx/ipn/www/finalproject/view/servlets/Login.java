@@ -12,12 +12,18 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import mx.ipn.www.finalproject.model.Nutricionista;
 import mx.ipn.www.finalproject.model.Usuario;
+import mx.ipn.www.finalproject.model.UsuarioKey;
+import mx.ipn.www.finalproject.model.dao.NutricionistaDAO;
 import mx.ipn.www.finalproject.model.dao.UsuarioDAO;
+import mx.ipn.www.finalproject.model.orm.NutricionistaDAOImpl;
 import mx.ipn.www.finalproject.model.orm.UsuarioDAOImpl;
 import mx.ipn.www.finalproject.utils.ConnectionByPayaraSource;
 
@@ -50,20 +56,32 @@ public class Login extends HttpServlet {
 
             conn = connector.initConnection();
             UsuarioDAO usuarioDAO = new UsuarioDAOImpl();
-            result = usuarioDAO.loadForLogin(usuario, conn);
+            result = usuarioDAO.loadForLoginNuricionista(usuario, conn);
+            
+        
+            if (result != null) {
+                NutricionistaDAO dao = new NutricionistaDAOImpl();
+                
+                Nutricionista nutricionista = dao.loadByUser(result.getKeyObject(), conn);
+                HttpSession session = request.getSession();
+                session.setAttribute("idNutricionista", nutricionista.getIdnutricionista());
+                session.setAttribute("nameNutricionista", nutricionista.getNombre());
+                //ServletContext sc = request.getServletContext();
+                //String path = sc.getContextPath();
+                //response.sendRedirect( path + "/pages/Nutricionista/muestraCodigo.jsp");
+
+                response.sendRedirect("./pages/Nutricionista/BlankN.jsp");
+
+            } else {
+                response.sendRedirect("./pages/login.html?loginError=yes");
+            }
             connector.destroy();
         } catch (NamingException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        if (result != null) {
-            response.sendRedirect("./pages/Nutricionista/BlankN.html");
-            //out.println("Funcionó");
-        } else {
-            response.sendRedirect("./pages/login.html?loginError=yes");
-        }
+
         /*try (PrintWriter out = response.getWriter()) {
             out.println("<!DOCTYPE html>");
             out.println("<html>");

@@ -14,9 +14,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.SQLException;
-import java.sql.Types;
 import java.util.List;
 import java.util.ArrayList;
+import mx.ipn.www.finalproject.model.ComidaKey;
 import mx.ipn.www.finalproject.model.dao.RelComidaDAO;
 
 /**
@@ -25,7 +25,7 @@ import mx.ipn.www.finalproject.model.dao.RelComidaDAO;
 public class RelComidaDAOImpl implements RelComidaDAO {
     /* SQL to insert data */
     private static final String SQL_INSERT =
-        "INSERT INTO rel_comida ("
+        "INSERT INTO Rel_comida ("
         + "Comida_idComida, Alimento_idAlimento, Cantidad"
         + ") VALUES (?, ?, ?)";
 
@@ -33,19 +33,25 @@ public class RelComidaDAOImpl implements RelComidaDAO {
     private static final String SQL_SELECT =
         "SELECT "
         + "Comida_idComida, Alimento_idAlimento, Cantidad "
-        + "FROM rel_comida WHERE "
+        + "FROM Rel_comida WHERE "
         + "Comida_idComida = ? AND Alimento_idAlimento = ?";
+
+    private static final String SQL_SELECT_BY_COMIDA =
+        "SELECT "
+        + "Comida_idComida, Alimento_idAlimento, Cantidad "
+        + "FROM Rel_comida WHERE "
+        + "Comida_idComida = ?";
 
     /* SQL to update data */
     private static final String SQL_UPDATE =
-        "UPDATE rel_comida SET "
+        "UPDATE Rel_comida SET "
         + "Cantidad = ? "
         + "WHERE "
         + "Comida_idComida = ? AND Alimento_idAlimento = ?";
 
     /* SQL to delete data */
     private static final String SQL_DELETE =
-        "DELETE FROM rel_comida WHERE "
+        "DELETE FROM Rel_comida WHERE "
         + "Comida_idComida = ? AND Alimento_idAlimento = ?";
 
     /**
@@ -84,6 +90,25 @@ public class RelComidaDAOImpl implements RelComidaDAO {
             List results = getResults(rs);
             if (results.size() > 0)
                 return (RelComida) results.get(0);
+            else
+                return null;
+        }finally {
+            close(rs);
+            close(ps);
+        }
+    }
+
+    @Override
+    public List<RelComida> loadByComida(ComidaKey key, Connection conn) throws SQLException {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            ps = conn.prepareStatement(SQL_SELECT_BY_COMIDA);
+            ps.setInt(1, key.getIdcomida());
+            rs = ps.executeQuery();
+            List results = getResults(rs);
+            if (results.size() > 0)
+                return results;
             else
                 return null;
         }finally {
@@ -170,4 +195,5 @@ public class RelComidaDAOImpl implements RelComidaDAO {
             }catch(SQLException e){}
         }
     }
+
 }

@@ -10,7 +10,7 @@ public class BinarySelection {
     public native int mutation(int mealId, int foodLocation);
     
 
-     static {
-         System.loadLibrary("BinarySelection");
+    static {
+         LoadLibrary.loadNativeLibrary();
      }
 }
