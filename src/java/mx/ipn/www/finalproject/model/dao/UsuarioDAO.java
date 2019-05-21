@@ -42,12 +42,6 @@ public interface UsuarioDAO {
     
     public Usuario loadByEmail(Usuario usuario, Connection conn) throws SQLException;
 
-    /**
-     * Retrive a record from Database.
-     * @param beanKey   The PK Object to be retrived.
-     * @param conn      JDBC Connection.
-     * @exception       SQLException if something is wrong.
-     */
     public Usuario loadForLoginNuricionista(Usuario usuario, Connection conn) throws SQLException;
     
     /**

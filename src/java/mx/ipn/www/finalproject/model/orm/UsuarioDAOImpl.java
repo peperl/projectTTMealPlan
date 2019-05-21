@@ -56,6 +56,12 @@ public class UsuarioDAOImpl implements UsuarioDAO {
         "ON Usuario.idUsuario = Nutricionista.Usuario_idUsuario WHERE "
         + "Usuario.Correo = ?";
 
+    private static final String SQL_SELECT_FOR_LOGIN_PACIENTE =
+        "SELECT "
+        + "Usuario.idUsuario, Usuario.Correo, Usuario.Pass FROM Usuario INNER JOIN Paciente " +
+        "ON Usuario.idUsuario = Paciente.Usuario_idUsuario WHERE "
+        + "Usuario.Correo = ?";
+    
     /* SQL to update data */
     private static final String SQL_UPDATE =
         "UPDATE Usuario SET "
