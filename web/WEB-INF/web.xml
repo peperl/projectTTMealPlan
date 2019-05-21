@@ -19,7 +19,7 @@
     <servlet>
         <servlet-name>AgregarAlimento</servlet-name>
         <servlet-class>mx.ipn.www.finalproject.view.servlets.AgregarAlimento</servlet-class>
-    </servlet>    
+    </servlet>
     <servlet>
         <servlet-name>BorrarPaciente</servlet-name>
         <servlet-class>mx.ipn.www.finalproject.view.servlets.BorrarPaciente</servlet-class>
@@ -40,12 +40,10 @@
         <servlet-name>getProposePlan</servlet-name>
         <servlet-class>mx.ipn.www.finalproject.view.servlets.services.getProposePlan</servlet-class>
     </servlet>
-
     <servlet>
         <servlet-name>InicioSesion</servlet-name>
         <servlet-class>mx.ipn.www.finalproject.view.servlets.services.android.InicioSesion</servlet-class>
     </servlet>
-
     <servlet>
         <servlet-name>getCategoria</servlet-name>
         <servlet-class>mx.ipn.www.finalproject.view.servlets.services.getCategoria</servlet-class>
@@ -57,6 +55,34 @@
     <servlet>
         <servlet-name>GetPlanesByIdPaciente</servlet-name>
         <servlet-class>mx.ipn.www.finalproject.view.servlets.seguimientoPaciente.GetPlanesByIdPaciente</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>getPaciente</servlet-name>
+        <servlet-class>mx.ipn.www.finalproject.view.servlets.services.android.getPaciente</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangePassword</servlet-name>
+        <servlet-class>mx.ipn.www.finalproject.view.servlets.services.android.ChangePassword</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>registraPeso</servlet-name>
+        <servlet-class>mx.ipn.www.finalproject.view.servlets.services.android.registraPeso</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MuestraPlan</servlet-name>
+        <servlet-class>mx.ipn.www.finalproject.view.servlets.services.android.MuestraPlan</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RegistrarComida</servlet-name>
+        <servlet-class>mx.ipn.www.finalproject.view.servlets.services.android.RegistrarComida</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetAvances</servlet-name>
+        <servlet-class>mx.ipn.www.finalproject.view.servlets.services.android.GetAvances</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetApegoPercent</servlet-name>
+        <servlet-class>mx.ipn.www.finalproject.view.servlets.services.android.GetApegoPercent</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
@@ -113,6 +139,34 @@
     <servlet-mapping>
         <servlet-name>GetPlanesByIdPaciente</servlet-name>
         <url-pattern>/GetPlanesByIdPaciente</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>getPaciente</servlet-name>
+        <url-pattern>/getPaciente</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangePassword</servlet-name>
+        <url-pattern>/ChangePassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>registraPeso</servlet-name>
+        <url-pattern>/registraPeso</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MuestraPlan</servlet-name>
+        <url-pattern>/MuestraPlan</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegistrarComida</servlet-name>
+        <url-pattern>/RegistrarComida</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetAvances</servlet-name>
+        <url-pattern>/GetAvances</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetApegoPercent</servlet-name>
+        <url-pattern>/GetApegoPercent</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

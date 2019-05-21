@@ -11,6 +11,8 @@ import mx.ipn.www.finalproject.model.Seguimiento;
 import mx.ipn.www.finalproject.model.SeguimientoKey;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
+import mx.ipn.www.finalproject.model.ComidaKey;
 
 /**
  * This interface provides methods to populate DB Table of seguimiento
@@ -47,4 +49,6 @@ public interface SeguimientoDAO {
      * @exception    SQLException if something is wrong.
      */
     public void delete(SeguimientoKey key, Connection conn) throws SQLException;
+
+    public List<Seguimiento> loadByIdComida(ComidaKey key, Connection conn);
 }
