@@ -7,7 +7,6 @@ package mx.ipn.www.finalproject.view.servlets.services.android;
 
 import com.google.gson.Gson;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Date;
@@ -19,16 +18,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import mx.ipn.www.finalproject.model.Historialantropometrico;
-import mx.ipn.www.finalproject.model.Paciente;
-import mx.ipn.www.finalproject.model.PacienteKey;
-import mx.ipn.www.finalproject.model.Usuario;
-import mx.ipn.www.finalproject.model.UsuarioKey;
 import mx.ipn.www.finalproject.model.dao.HistorialantropometricoDAO;
-import mx.ipn.www.finalproject.model.dao.PacienteDAO;
-import mx.ipn.www.finalproject.model.dao.UsuarioDAO;
 import mx.ipn.www.finalproject.model.orm.HistorialantropometricoDAOImpl;
-import mx.ipn.www.finalproject.model.orm.PacienteDAOImpl;
-import mx.ipn.www.finalproject.model.orm.UsuarioDAOImpl;
 import mx.ipn.www.finalproject.utils.ConnectionByPayaraSource;
 import mx.ipn.www.finalproject.view.servlets.services.getAllFood;
 
@@ -52,8 +43,15 @@ public class registraPeso extends HttpServlet {
         response.setContentType("application/json;charset=UTF-8");
         String idPaciente = request.getParameter("idPaciente");
         String peso = request.getParameter("peso");
-        String grasa;
-        String imc;
+        String grasa = request.getParameter("grasa");
+        String imc = request.getParameter("imc");
+
+        if (idPaciente==null||peso==null) {
+            GenericResponse genericResponse = new GenericResponse(Boolean.FALSE);
+            String json = new Gson().toJson(genericResponse);
+            response.getWriter().write(json);
+        }
+        
         try {
             grasa = request.getParameter("grasa");
         } catch (Exception e) {
@@ -75,16 +73,15 @@ public class registraPeso extends HttpServlet {
             historialantropometrico.setGrasa(Double.parseDouble(grasa));
             historialantropometrico.setImc(Double.parseDouble(imc));
             dao.create(historialantropometrico, conn);            
-            Boolean successful = true;
-            String json = new Gson().toJson(successful);
+            GenericResponse genericResponse = new GenericResponse(Boolean.TRUE);
+            String json = new Gson().toJson(genericResponse);
             response.getWriter().write(json);
             connector.destroy();
         } catch (NamingException | SQLException ex) {
             Logger.getLogger(getAllFood.class.getName()).log(Level.SEVERE, null, ex);
-            Boolean successful = false;
-            String json = new Gson().toJson(successful);
+            GenericResponse genericResponse = new GenericResponse(Boolean.FALSE);
+            String json = new Gson().toJson(genericResponse);
             response.getWriter().write(json);
-
         }        
     }
 
