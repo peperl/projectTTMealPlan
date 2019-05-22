@@ -5,11 +5,22 @@
  */
 package mx.ipn.www.finalproject.view.servlets.services.android;
 
+import com.google.gson.Gson;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import mx.ipn.www.finalproject.model.Usuario;
+import mx.ipn.www.finalproject.model.dao.UsuarioDAO;
+import mx.ipn.www.finalproject.model.orm.UsuarioDAOImpl;
+import mx.ipn.www.finalproject.utils.ConnectionByPayaraSource;
+import mx.ipn.www.finalproject.view.servlets.services.getAllFood;
 
 /**
  *
@@ -19,6 +30,36 @@ public class InicioSesion extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("application/json;charset=UTF-8");
+        String user = request.getParameter("user");
+        String pass = request.getParameter("pass");
+        if (user==null||pass==null) {
+            GenericResponse genericResponse = new GenericResponse(Boolean.FALSE);
+            String json = new Gson().toJson(genericResponse);
+            response.getWriter().write(json);
+            return;
+        }
+        try {
+            ConnectionByPayaraSource connector = new ConnectionByPayaraSource();
+            Connection conn = connector.initConnection();
+            
+            Usuario usuario = new Usuario(user, pass);
+            UsuarioDAO dao = new UsuarioDAOImpl();
+            
+            usuario = dao.loadForLoginPaciente(usuario, conn);
+            Boolean successful;
+            successful = usuario != null;
+            
+            GenericResponse genericResponse = new GenericResponse(successful);
+            String json = new Gson().toJson(genericResponse);
+            response.getWriter().write(json);
+            connector.destroy();
+        } catch (NamingException | SQLException ex) {
+            Logger.getLogger(getAllFood.class.getName()).log(Level.SEVERE, null, ex);
+            GenericResponse genericResponse = new GenericResponse(Boolean.FALSE);
+            String json = new Gson().toJson(genericResponse);
+            response.getWriter().write(json);
+        }
 
     }
 

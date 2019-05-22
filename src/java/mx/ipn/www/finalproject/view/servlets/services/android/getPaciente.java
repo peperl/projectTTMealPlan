@@ -43,6 +43,12 @@ public class getPaciente extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("application/json;charset=UTF-8");
         String qr = request.getParameter("qr");
+        if (qr==null) {
+            GenericResponse genericResponse = new GenericResponse(Boolean.FALSE);
+            String json = new Gson().toJson(genericResponse);
+            response.getWriter().write(json);
+        }
+        
         String[] aux = qr.split(qr);
         
         if (QRgenerator.verifyQRContent(qr)) {
@@ -54,10 +60,11 @@ public class getPaciente extends HttpServlet {
                 String json = new Gson().toJson(paciente);
                 response.getWriter().write(json);
                 connector.destroy();
-            } catch (NamingException ex) {
+            } catch (NamingException | SQLException ex) {
                 Logger.getLogger(getAllFood.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
-                Logger.getLogger(getAllFood.class.getName()).log(Level.SEVERE, null, ex);
+                GenericResponse genericResponse = new GenericResponse(Boolean.FALSE);
+                String json = new Gson().toJson(genericResponse);
+                response.getWriter().write(json);
             }
             
         } else {

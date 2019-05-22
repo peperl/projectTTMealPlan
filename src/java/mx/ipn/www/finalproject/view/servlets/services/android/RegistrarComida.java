@@ -7,7 +7,6 @@ package mx.ipn.www.finalproject.view.servlets.services.android;
 
 import com.google.gson.Gson;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Date;
@@ -18,17 +17,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import mx.ipn.www.finalproject.model.Paciente;
-import mx.ipn.www.finalproject.model.PacienteKey;
 import mx.ipn.www.finalproject.model.Seguimiento;
-import mx.ipn.www.finalproject.model.Usuario;
-import mx.ipn.www.finalproject.model.UsuarioKey;
-import mx.ipn.www.finalproject.model.dao.PacienteDAO;
 import mx.ipn.www.finalproject.model.dao.SeguimientoDAO;
-import mx.ipn.www.finalproject.model.dao.UsuarioDAO;
-import mx.ipn.www.finalproject.model.orm.PacienteDAOImpl;
 import mx.ipn.www.finalproject.model.orm.SeguimientoDAOImpl;
-import mx.ipn.www.finalproject.model.orm.UsuarioDAOImpl;
 import mx.ipn.www.finalproject.utils.ConnectionByPayaraSource;
 import mx.ipn.www.finalproject.view.servlets.services.getAllFood;
 

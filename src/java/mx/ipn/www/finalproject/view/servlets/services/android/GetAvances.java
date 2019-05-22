@@ -7,7 +7,6 @@ package mx.ipn.www.finalproject.view.servlets.services.android;
 
 import com.google.gson.Gson;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
@@ -19,16 +18,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import mx.ipn.www.finalproject.model.Historialantropometrico;
-import mx.ipn.www.finalproject.model.Paciente;
 import mx.ipn.www.finalproject.model.PacienteKey;
-import mx.ipn.www.finalproject.model.Usuario;
-import mx.ipn.www.finalproject.model.UsuarioKey;
 import mx.ipn.www.finalproject.model.dao.HistorialantropometricoDAO;
-import mx.ipn.www.finalproject.model.dao.PacienteDAO;
-import mx.ipn.www.finalproject.model.dao.UsuarioDAO;
 import mx.ipn.www.finalproject.model.orm.HistorialantropometricoDAOImpl;
-import mx.ipn.www.finalproject.model.orm.PacienteDAOImpl;
-import mx.ipn.www.finalproject.model.orm.UsuarioDAOImpl;
 import mx.ipn.www.finalproject.utils.ConnectionByPayaraSource;
 import mx.ipn.www.finalproject.view.servlets.services.getAllFood;
 
@@ -51,6 +43,12 @@ public class GetAvances extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("application/json;charset=UTF-8");
         String idPaciente = request.getParameter("idPaciente");
+        if (idPaciente==null) {
+            GenericResponse genericResponse = new GenericResponse(Boolean.FALSE);
+            String json = new Gson().toJson(genericResponse);
+            response.getWriter().write(json);
+            return;
+        }
         
         try {
             ConnectionByPayaraSource connector = new ConnectionByPayaraSource();
@@ -63,10 +61,11 @@ public class GetAvances extends HttpServlet {
             connector.destroy();
         } catch (NamingException | SQLException ex) {
             Logger.getLogger(getAllFood.class.getName()).log(Level.SEVERE, null, ex);
-            Boolean successful = false;
-            String json = new Gson().toJson(successful);
+            GenericResponse genericResponse = new GenericResponse(Boolean.FALSE);
+            String json = new Gson().toJson(genericResponse);
             response.getWriter().write(json);
-        }    }
+        }    
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

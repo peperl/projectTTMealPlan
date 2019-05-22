@@ -7,7 +7,6 @@ package mx.ipn.www.finalproject.view.servlets.services.android;
 
 import com.google.gson.Gson;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -20,22 +19,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import mx.ipn.www.finalproject.model.Comida;
-import mx.ipn.www.finalproject.model.Paciente;
 import mx.ipn.www.finalproject.model.PacienteKey;
 import mx.ipn.www.finalproject.model.Planalimenticio;
 import mx.ipn.www.finalproject.model.Seguimiento;
-import mx.ipn.www.finalproject.model.Usuario;
-import mx.ipn.www.finalproject.model.UsuarioKey;
 import mx.ipn.www.finalproject.model.dao.ComidaDAO;
-import mx.ipn.www.finalproject.model.dao.PacienteDAO;
 import mx.ipn.www.finalproject.model.dao.PlanalimenticioDAO;
 import mx.ipn.www.finalproject.model.dao.SeguimientoDAO;
-import mx.ipn.www.finalproject.model.dao.UsuarioDAO;
 import mx.ipn.www.finalproject.model.orm.ComidaDAOImpl;
-import mx.ipn.www.finalproject.model.orm.PacienteDAOImpl;
 import mx.ipn.www.finalproject.model.orm.PlanalimenticioDAOImpl;
 import mx.ipn.www.finalproject.model.orm.SeguimientoDAOImpl;
-import mx.ipn.www.finalproject.model.orm.UsuarioDAOImpl;
 import mx.ipn.www.finalproject.utils.ConnectionByPayaraSource;
 import mx.ipn.www.finalproject.view.servlets.services.getAllFood;
 
@@ -59,6 +51,12 @@ public class GetApegoPercent extends HttpServlet {
         response.setContentType("application/json;charset=UTF-8");
         String idPaciente = request.getParameter("idPaciente");
         
+        if (idPaciente==null) {
+            GenericResponse genericResponse = new GenericResponse(Boolean.FALSE);
+            String json = new Gson().toJson(genericResponse);
+            response.getWriter().write(json);
+            return;
+        }
         try {
             ConnectionByPayaraSource connector = new ConnectionByPayaraSource();
             Connection conn = connector.initConnection();
@@ -95,8 +93,8 @@ public class GetApegoPercent extends HttpServlet {
             connector.destroy();
         } catch (NamingException | SQLException ex) {
             Logger.getLogger(getAllFood.class.getName()).log(Level.SEVERE, null, ex);
-            Boolean successful = false;
-            String json = new Gson().toJson(successful);
+            GenericResponse genericResponse = new GenericResponse(Boolean.FALSE);
+            String json = new Gson().toJson(genericResponse);
             response.getWriter().write(json);
         }
     }

@@ -7,7 +7,6 @@ package mx.ipn.www.finalproject.view.servlets.services.android;
 
 import com.google.gson.Gson;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -55,6 +54,13 @@ public class MuestraPlan extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("application/json;charset=UTF-8");
         String idPaciente = request.getParameter("idPaciente");
+        
+        if (idPaciente==null) {
+            GenericResponse genericResponse = new GenericResponse(Boolean.FALSE);
+            String json = new Gson().toJson(genericResponse);
+            response.getWriter().write(json);
+            return;
+        }
         
         try {
             ConnectionByPayaraSource connector = new ConnectionByPayaraSource();
@@ -110,8 +116,8 @@ public class MuestraPlan extends HttpServlet {
             connector.destroy();
         } catch (NamingException | SQLException ex) {
             Logger.getLogger(getAllFood.class.getName()).log(Level.SEVERE, null, ex);
-            Boolean successful = false;
-            String json = new Gson().toJson(successful);
+            GenericResponse genericResponse = new GenericResponse(Boolean.FALSE);
+            String json = new Gson().toJson(genericResponse);
             response.getWriter().write(json);
         }
     }

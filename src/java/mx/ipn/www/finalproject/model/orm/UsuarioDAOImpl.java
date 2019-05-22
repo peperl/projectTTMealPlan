@@ -54,13 +54,13 @@ public class UsuarioDAOImpl implements UsuarioDAO {
         "SELECT "
         + "Usuario.idUsuario, Usuario.Correo, Usuario.Pass FROM Usuario INNER JOIN Nutricionista " +
         "ON Usuario.idUsuario = Nutricionista.Usuario_idUsuario WHERE "
-        + "Usuario.Correo = ?";
+        + "Usuario.Correo = ? AND Usuario.Pass = ?";
 
     private static final String SQL_SELECT_FOR_LOGIN_PACIENTE =
         "SELECT "
         + "Usuario.idUsuario, Usuario.Correo, Usuario.Pass FROM Usuario INNER JOIN Paciente " +
         "ON Usuario.idUsuario = Paciente.Usuario_idUsuario WHERE "
-        + "Usuario.Correo = ?";
+        + "Usuario.Correo = ? AND Usuario.Pass = ?";
     
     /* SQL to update data */
     private static final String SQL_UPDATE =
@@ -173,6 +173,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
         try {
             ps = conn.prepareStatement(SQL_SELECT_FOR_LOGIN_NUTRICIONISTA);
             ps.setString(1, usuario.getCorreo());
+            ps.setString(2, usuario.getPass());
             rs = ps.executeQuery();
             List results = getResults(rs);
             if (results.size() > 0)
@@ -184,6 +185,26 @@ public class UsuarioDAOImpl implements UsuarioDAO {
             close(ps);
         }
     }    
+
+    @Override
+    public Usuario loadForLoginPaciente(Usuario usuario, Connection conn) throws SQLException {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            ps = conn.prepareStatement(SQL_SELECT_FOR_LOGIN_PACIENTE);
+            ps.setString(1, usuario.getCorreo());
+            ps.setString(2, usuario.getPass());
+            rs = ps.executeQuery();
+            List results = getResults(rs);
+            if (results.size() > 0)
+                return (Usuario) results.get(0);
+            else
+                return null;
+        }finally {
+            close(rs);
+            close(ps);
+        }
+    }
 
     /**
      * Update a record in Database.
@@ -265,5 +286,6 @@ public class UsuarioDAOImpl implements UsuarioDAO {
             }catch(SQLException e){}
         }
     }
+
 
 }

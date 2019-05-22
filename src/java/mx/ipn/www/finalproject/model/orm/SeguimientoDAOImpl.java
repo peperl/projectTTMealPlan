@@ -17,6 +17,7 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.List;
 import java.util.ArrayList;
+import mx.ipn.www.finalproject.model.ComidaKey;
 import mx.ipn.www.finalproject.model.dao.SeguimientoDAO;
 
 /**
@@ -179,5 +180,10 @@ public class SeguimientoDAOImpl implements SeguimientoDAO {
                 rs.close();
             }catch(SQLException e){}
         }
+    }
+
+    @Override
+    public List<Seguimiento> loadByIdComida(ComidaKey key, Connection conn) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
