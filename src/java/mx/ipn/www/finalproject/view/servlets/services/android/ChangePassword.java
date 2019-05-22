@@ -47,6 +47,7 @@ public class ChangePassword extends HttpServlet {
         //http://localhost:8080/projectTTMealPlans/ChangePassword?idPaciente=15
         response.setContentType("application/json;charset=UTF-8");
         String idPaciente = request.getParameter("idPaciente");
+        
         String password = request.getParameter("newPassword");
         if (idPaciente==null||password==null) {
             GenericResponse genericResponse = new GenericResponse(Boolean.FALSE);
@@ -68,7 +69,7 @@ public class ChangePassword extends HttpServlet {
             String json = new Gson().toJson(genericResponse);
             response.getWriter().write(json);
             connector.destroy();
-        } catch (NamingException | SQLException ex) {
+        } catch (NamingException | SQLException | NullPointerException ex) {
             Logger.getLogger(getAllFood.class.getName()).log(Level.SEVERE, null, ex);
             GenericResponse genericResponse = new GenericResponse(Boolean.FALSE);
             String json = new Gson().toJson(genericResponse);

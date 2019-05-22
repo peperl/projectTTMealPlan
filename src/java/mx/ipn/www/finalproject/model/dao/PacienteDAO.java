@@ -13,6 +13,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 import mx.ipn.www.finalproject.model.NutricionistaKey;
+import mx.ipn.www.finalproject.model.UsuarioKey;
 
 /**
  * This interface provides methods to populate DB Table of paciente
