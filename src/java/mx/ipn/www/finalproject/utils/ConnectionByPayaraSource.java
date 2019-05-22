@@ -25,7 +25,7 @@ public class ConnectionByPayaraSource {
   public Connection initConnection () throws ServletException, NamingException, NamingException, SQLException {
       ctx = new InitialContext();
       //MySqlConnector es el nombre que le di a mi recurso en payara
-      ds = (DataSource) ctx.lookup("java:comp/DefaultDataSource");
+      ds = (DataSource) ctx.lookup("mysql_Pool");
         System.out.println("");
       conn = ds.getConnection();
       return conn;

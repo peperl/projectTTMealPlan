@@ -86,7 +86,7 @@ public class RegisterAntopometricData extends HttpServlet {
             session.setAttribute("idPlanAlimenticio",planalimenticio);
             ServletContext sc = request.getServletContext();
             String path = sc.getContextPath();
-            response.sendRedirect( path + "/pages/Nutricionista/planAlimenticio.html");
+            response.sendRedirect( path + "/pages/Nutricionista/planAlimenticio.jsp");
 
         } catch (NamingException ex) {
             Logger.getLogger(RegisterAntopometricData.class.getName()).log(Level.SEVERE, null, ex);

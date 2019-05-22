@@ -123,10 +123,9 @@ public class RegistroPaciente extends HttpServlet {
             usuario = usuarioDAO.loadByEmail(usuario, con);
             usuarioIdusuario = usuario.getIdusuario();
             
-            /*
-            Terminar el siguiente codigo con la sesión iniciada del nutricionista
-            */
-            nutricionistaIdnutricionista = 1;
+            HttpSession session = request.getSession();
+            nutricionistaIdnutricionista = (int) session.getAttribute("idNutricionista");
+            
             
             Paciente paciente = new Paciente(usuarioIdusuario, nutricionistaIdnutricionista, nombre, apellidos, fechanacimiento, sexo, telefono, direccion, pesoanterior, estatura, cirbraquial, cirpantorrilla, dificultadesaliment, enfermedades, tratamiento, proteinaanterior, lipidosanterior, carbohidratosanterior, comidasanterior, actividadfisica, fechaRegistro, estado);
             PacienteDAO pacienteDAO = new PacienteDAOImpl();
@@ -165,7 +164,7 @@ public class RegistroPaciente extends HttpServlet {
             
             QRgenerator.generateQRImage(qr, constanteQR.ConstanteQR.PATH_QR + usuarioIdusuario);
             
-            HttpSession session = request.getSession();
+            
             session.setAttribute("qrid", usuarioIdusuario);
             session.setAttribute("pacienteIdpaciente", paciente);
             session.setAttribute("idPlanAlimenticio", planalimenticio);
