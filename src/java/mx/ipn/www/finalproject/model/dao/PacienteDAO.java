@@ -37,6 +37,7 @@ public interface PacienteDAO {
     
     public Paciente loadByName(Paciente paciente, Connection conn) throws SQLException;
     
+    public Paciente loadByUsuario(UsuarioKey key, Connection conn) throws SQLException;
     public List<Paciente> loadByNutricionista(NutricionistaKey key, Connection conn) throws SQLException;
 
     /**
@@ -54,4 +55,6 @@ public interface PacienteDAO {
      * @exception    SQLException if something is wrong.
      */
     public void delete(PacienteKey key, Connection conn) throws SQLException;
+
+    
 }

@@ -18,6 +18,7 @@ import java.sql.Types;
 import java.util.List;
 import java.util.ArrayList;
 import mx.ipn.www.finalproject.model.NutricionistaKey;
+import mx.ipn.www.finalproject.model.UsuarioKey;
 import mx.ipn.www.finalproject.model.dao.PacienteDAO;
 
 /**
@@ -62,7 +63,15 @@ public class PacienteDAOImpl implements PacienteDAO {
         + "FROM Paciente WHERE "
         + "Nutricionista_idNutricionista = ? AND Estado=1";
 
-
+    private static final String SQL_SELECT_BY_USUARIO =
+        "SELECT "
+        + "idPaciente, Usuario_idUsuario, Nutricionista_idNutricionista, Nombre, Apellidos, FechaNacimiento, Sexo, "
+        + "Telefono, Direccion, PesoAnterior, Estatura, CirBraquial, CirPantorrilla, DificultadesAliment, "
+        + "Enfermedades, Tratamiento, ProteinaAnterior, LipidosAnterior, CarbohidratosAnterior, ComidasAnterior, ActividadFisica, "
+        + "FechaRegistro, Estado "
+        + "FROM Paciente WHERE "
+        + "Usuario_idUsuario = ?";
+    
     /* SQL to update data */
     private static final String SQL_UPDATE =
         "UPDATE Paciente SET "
@@ -184,6 +193,26 @@ public class PacienteDAOImpl implements PacienteDAO {
             close(ps);
         }        
     }
+
+    @Override
+    public Paciente loadByUsuario(UsuarioKey key, Connection conn) throws SQLException {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            ps = conn.prepareStatement(SQL_SELECT_BY_IDUSUARIO);
+            ps.setInt(1, key.getIdusuario());
+            rs = ps.executeQuery();
+            List results = getResults(rs);
+            if (results.size() > 0)
+                return (Paciente) results.get(0);
+            else
+                return null;
+        }finally {
+            close(rs);
+            close(ps);
+        }        
+    }
+
 
     /**
      * Update a record in Database.

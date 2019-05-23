@@ -16,8 +16,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import mx.ipn.www.finalproject.model.Paciente;
 import mx.ipn.www.finalproject.model.Usuario;
+import mx.ipn.www.finalproject.model.dao.PacienteDAO;
 import mx.ipn.www.finalproject.model.dao.UsuarioDAO;
+import mx.ipn.www.finalproject.model.orm.PacienteDAOImpl;
 import mx.ipn.www.finalproject.model.orm.UsuarioDAOImpl;
 import mx.ipn.www.finalproject.utils.ConnectionByPayaraSource;
 import mx.ipn.www.finalproject.view.servlets.services.getAllFood;
@@ -47,11 +50,9 @@ public class InicioSesion extends HttpServlet {
             UsuarioDAO dao = new UsuarioDAOImpl();
             
             usuario = dao.loadForLoginPaciente(usuario, conn);
-            Boolean successful;
-            successful = usuario != null;
-            
-            GenericResponse genericResponse = new GenericResponse(successful);
-            String json = new Gson().toJson(genericResponse);
+            PacienteDAO pacienteDAO = new PacienteDAOImpl();
+            Paciente paciente = pacienteDAO.loadByUsuario(usuario.getKeyObject(),conn);
+            String json = new Gson().toJson(paciente);
             response.getWriter().write(json);
             connector.destroy();
         } catch (NamingException | SQLException ex) {
