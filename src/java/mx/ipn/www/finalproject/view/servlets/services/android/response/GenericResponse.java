@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mx.ipn.www.finalproject.view.servlets.services.android;
+package mx.ipn.www.finalproject.view.servlets.services.android.response;
 
 /**
  *

@@ -360,91 +360,84 @@
                   </div>
                 </div>
                 </div>
-                <div class="col-md-4">
-                  <div class="card">
-                <div class="card-header card-header-primary card-header-icon">
-                  <div class="card-icon">
-                    <i class="material-icons">playlist_add</i>
-                  </div>
-                  <h4 class="card-title">Agregar Alimentos</h4>
-                </div>
-                <div class="card-body">
-                            <div class="row">
-                              <div class="col-sm-12">
-                                <div class="input-group form-control-lg">
-                                  <div class="input-group-prepend">
-                                    <span class="input-group-text">
-                                      <i class="material-icons">fastfood</i>
-                                    </span>
-                                  </div>
-                                  <div class="form-group">
-                                    <select class="selectpicker" data-style="select-with-transition" title="alimentos" id="alimentos">
-                                      <option value="Huevo">Huevo </option>
-                                      <option value="Leche">Leche</option>
-                                    </select>
-                                  </div>
-                                </div>
-                                <div class="input-group form-control-lg">
-                                  <div class="input-group-prepend">
-                                    <span class="input-group-text">
-                                      <i class="material-icons">kitchen</i>
-                                    </span>
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="exampleInput1" class="bmd-label-floating">Cantidad</label>
-                                    <input type="text" class="form-control" id="cantidadA" name="v">
-                                  </div>
-                                  <span class="btn btn-primary btn-fab btn-fab-mini btn-round" id="addA">
-                                    <i class="material-icons">add</i>
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                           
-                            <div class="row">
-                              <div class="col-sm-12">
-                                <div class="progress-container progress-info">
-                                  <span class="progress-badge">Proteína 8 de 10 gramos (80%)</span>
-                                  <div class="progress">
-                                      <div class="progress-bar progress-bar-rose" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;">
-                                      </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="row">
-                              <div class="col-sm-12">
-                                <div class="progress-container progress-info">
-                                  <span class="progress-badge">Carbohidratos 8 de 10 gramos (80%)</span>
-                                  <div class="progress">
-                                      <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;">
-                                      </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="row">
-                              <div class="col-sm-12">
-                                <div class="progress-container progress-info">
-                                  <span class="progress-badge">Lípidos 8 de 10 gramos (80%)</span>
-                                  <div class="progress">
-                                      <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;">
-                                      </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="row">
-                              <div class="col-sm-12">
-                                <input type="submit" class="btn btn-finish btn-fill btn-rose btn-wd" name="finish" value="Guardar">
-                                </div>
-                            </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header card-header-primary card-header-icon">
+                                <div class="card-icon">
+                          <i class="material-icons">playlist_add</i>
                         </div>
-                      </div>
+                                <h4 class="card-title">Agregar Alimentos</h4>
+                            </div>
+                            <div class="card-body">
+                                  <div class="row">
+                                    <div class="col-sm-12">
+                                      <div class="input-group form-control-lg">
+                                        <div class="input-group-prepend">
+                                          <span class="input-group-text">
+                                            <i class="material-icons">fastfood</i>
+                                          </span>
+                                        </div>
+                                        <div class="form-group">
+                                          <select class="selectpicker" data-style="select-with-transition" title="alimentos" id="alimentos">
+                                          </select>
+                                        </div>
+                                      </div>
+                                      <div class="input-group form-control-lg">
+                                        <div class="input-group-prepend">
+                                          <span class="input-group-text">
+                                            <i class="material-icons">kitchen</i>
+                                          </span>
+                                        </div>
+                                        <span class="btn btn-primary btn-fab btn-fab-mini btn-round" id="addA">
+                                          <i class="material-icons">add</i>
+                                        </span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                 <div class="row">
+                                    <div class="col-sm-12">
+                                      <div class="progress-container progress-info">
+                                        <span class="progress-badge">Proteína 8 de 10 gramos (80%)</span>
+                                        <div class="progress">
+                                            <div class="progress-bar progress-bar-rose" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;">
+                                            </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-sm-12">
+                                      <div class="progress-container progress-info">
+                                        <span class="progress-badge">Carbohidratos 8 de 10 gramos (80%)</span>
+                                        <div class="progress">
+                                            <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;">
+                                            </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-sm-12">
+                                      <div class="progress-container progress-info">
+                                        <span class="progress-badge">Lípidos 8 de 10 gramos (80%)</span>
+                                        <div class="progress">
+                                            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;">
+                                            </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-sm-12">
+                                      <input type="submit" id="subB" class="btn btn-finish btn-fill btn-rose btn-wd" name="finish" value="Guardar">
+                                      </div>
+                                  </div>
+                              </div>
+                        </div>
                     </div>
 
 
-              </div>
+                </div>
             </div>
           </div>
         </div>
@@ -558,13 +551,10 @@
                     text2 = text2 + (index+1);
                     text2 = text2 + "-" + (index2+1) + "'>";
                     text2 = text2 + "<div class='input-group form-control-lg'><div class='input-group-prepend'><span class='input-group-text'><i class='material-icons'>alarm</i></span></div><div class='form-group'><label for='exampleInput1' class='bmd-label-floating'>Hora de Comida</label><input type='text' class='form-control timepicker' value='10:05'></div></div>";
-                    text2 = text2 + "<input type='text' value='1";
-                    $.each(item2, function(index3, item3) { // Iterate over the JSON array.
-                        //$('#link' + (item+1)).append();
-                       console.log(item3.nombre + "(" + index2 + ", " + index3 +  ")") ;
-                       text2 = text2 + " | " + item3.nombre;
-                    });
-                    text2 = text2 + "' class='form-control tagsinput' data-role='tagsinput' data-color='info' id='Alink";
+                    text2 = text2 + "<input type='text' value='";
+                   
+                    text2 = text2 + "' class='form-control tagsinput' data-color='info' id='Alink";
+                    text2 = text2 + (index+1) +"-"+(index2+1)+"' name='comida";
                     text2 = text2 + (index+1) +"-"+(index2+1)+"'></div>";
                               //Alink con el index y luego index2
                        
@@ -582,7 +572,25 @@
                             $("#SaturdayContent").append(text2);
                         } else if (index === 6) {                                
                             $("#SundayContent").append(text2);
-                        }                                           
+                        } 
+                        $("#Alink"+(index+1) +"-"+(index2+1)).tagsinput("refresh");
+                        //$("#Alink"+(index+1) +"-"+(index2+1)).addClass("info-badge");
+                        
+                         $.each(item2, function(index3, item3) { // Iterate over the JSON array.
+                        //$('#link' + (item+1)).append();
+                            //console.log(item3.nombre + "(" + index2 + ", " + index3 +  ")") ;
+                            text2 = text2 + " , " + item3.nombre;
+                            $("#Alink"+(index+1) +"-"+(index2+1)).tagsinput('add',item3.nombre+"("+item3.idalimento+")");
+                            
+                            /*
+                            $("#Alink"+(index+1) +"-"+(index2+1)).tagsinput({
+                                itemValue: 'id',
+                                  itemText: 'text'
+                              });
+                            $("#Alink"+(index+1) +"-"+(index2+1)).tagsinput('add',{id: item3.idalimento,text: item3.nombre});
+                         */
+                        });
+                        
                 });
                 
                 if (numeroComidas === 3) {
@@ -618,6 +626,7 @@
                     
                 }
             });
+            $('.tag').css('background','#00bcd4');
             
         });
               
@@ -657,12 +666,16 @@
         }
 
         $('#addA').click( function(){          
-          var list = $('#Alink1-1').val();
+          //var list = $('#Alink1-1').val();
           //$('#alimEv').val(list+','+algo);
-          $('#'+selection).tagsinput('add', $('#cantidadA').val()+" | "+$('#alimentos').val());
-          //$('#alimEv').val(list+','+$('#alimentos').val());
+          
+          //$('#'+selection).tagsinput('add', {id:$('#alimentos').val(),text:$("#alimentos option:selected").text()});
+        $('#'+selection).tagsinput('add',$("#alimentos option:selected").text()+"("+$('#alimentos').val()+")");
+        $('.tag').css('background','#00bcd4');
+          //$('#alimEv').val(list+','+$('#alimentos').val()); {"value":item3.idalimento,"text":item3.nombre}
         });
 
+      
         $('.fixed-plugin a').click(function(event) {
           // Alex if we click on switch, stop propagation of the event, so the dropdown will not be hide, otherwise we set the  section active
           if ($(this).hasClass('switch-trigger')) {
@@ -753,6 +766,52 @@
       if ($('.slider').length != 0) {
         md.initSliders();
       }
+    });
+  </script>
+  <script>
+        $.get("../../getAllFood", function(responseJson) {    // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response JSON...
+            $.each(responseJson, function(index, item) { // Iterate over the JSON array.
+                ($("#alimentos")).append("<option value=" + item.idalimento +">" + item.nombre + "</option>");
+            });
+            $('#alimentos').selectpicker('refresh');
+        });
+      
+  </script>
+  <script>
+    $("#subB").click(function(){
+        var result = [];
+        for (var i = 0; i < 7; i++) {
+            var x;
+            
+            if (i === 0) { 
+                x = $("#MondayContent > div").length;
+            } else if (i === 1) {
+                x = $("#TuesdayContent > div").length;
+            } else if (i === 2) {                                
+                x = $("#WednesdayContent > div").length;
+            } else if (i === 3) {
+                x = $("#ThursdayContent > div").length;
+            } else if (i === 4) {
+                x = $("#FridayContent > div").length;
+            } else if (i === 5) {                                
+                x = $("#SaturdayContent > div").length;
+            } else if (i === 6) {                                
+                x = $("#SundayContent > div").length;
+            }  
+            var resultAux2 = [];
+            for (var j = 0; j < x; j++) {
+                var aux = $("#link" + i + "-"+ x).find(".bootstrap-tagsinput").find(".tag");
+                var resultAux = [];
+                $.each(aux, function(index, item) {
+                    var cadena = item.innerText;
+                    resultAux.push(cadena);
+                    console.log(cadena);
+                });
+                resultAux2.push(resultAux);
+            }
+            result.push(resultAux2);
+        }
+        console.log(result);
     });
   </script>
   </body>
