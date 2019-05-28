@@ -580,7 +580,8 @@
                         //$('#link' + (item+1)).append();
                             //console.log(item3.nombre + "(" + index2 + ", " + index3 +  ")") ;
                             text2 = text2 + " , " + item3.nombre;
-                            $("#Alink"+(index+1) +"-"+(index2+1)).tagsinput('add',item3.nombre+"("+item3.idalimento+")");
+                            var qty = item3.quantity*item3.cantidad;
+                            $("#Alink"+(index+1) +"-"+(index2+1)).tagsinput('add',qty + " " + item3.unidad + " " +  item3.nombre+"("+item3.idalimento+")");
                             
                             /*
                             $("#Alink"+(index+1) +"-"+(index2+1)).tagsinput({
@@ -780,38 +781,38 @@
   <script>
     $("#subB").click(function(){
         var result = [];
-        for (var i = 0; i < 7; i++) {
+        for (var i = 1; i <= 7; i++) {
             var x;
             
-            if (i === 0) { 
+            if (i === 1) { 
                 x = $("#MondayContent > div").length;
-            } else if (i === 1) {
+            } else if (i === 2) {
                 x = $("#TuesdayContent > div").length;
-            } else if (i === 2) {                                
+            } else if (i === 3) {                                
                 x = $("#WednesdayContent > div").length;
-            } else if (i === 3) {
-                x = $("#ThursdayContent > div").length;
             } else if (i === 4) {
+                x = $("#ThursdayContent > div").length;
+            } else if (i === 5) {
                 x = $("#FridayContent > div").length;
-            } else if (i === 5) {                                
-                x = $("#SaturdayContent > div").length;
             } else if (i === 6) {                                
+                x = $("#SaturdayContent > div").length;
+            } else if (i === 7) {                                
                 x = $("#SundayContent > div").length;
             }  
             var resultAux2 = [];
-            for (var j = 0; j < x; j++) {
-                var aux = $("#link" + i + "-"+ x).find(".bootstrap-tagsinput").find(".tag");
+            for (var j = 1; j <= x; j++) {
+                var aux = $("#link" + i + "-"+ j).find(".bootstrap-tagsinput").find(".tag");
                 var resultAux = [];
                 $.each(aux, function(index, item) {
                     var cadena = item.innerText;
                     resultAux.push(cadena);
-                    console.log(cadena);
                 });
                 resultAux2.push(resultAux);
             }
             result.push(resultAux2);
         }
-        console.log(result);
+        var myJSON = JSON.stringify(result);
+        window.location.replace("../../SaveMealPlan?infoPlan=" +myJSON);
     });
   </script>
   </body>

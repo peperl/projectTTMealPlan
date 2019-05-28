@@ -723,7 +723,5 @@ int aux = 0;
         });
   </script>
 </body>
-    <%DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");            
-    //formatter.format(plan.getFechacreacion().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());%>
 </html>
 

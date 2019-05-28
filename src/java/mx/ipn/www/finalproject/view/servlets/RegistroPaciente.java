@@ -114,6 +114,10 @@ public class RegistroPaciente extends HttpServlet {
         }
 
         try {            
+            HttpSession session = request.getSession();
+            nutricionistaIdnutricionista = (int) session.getAttribute("idNutricionista");
+
+            
             ConnectionByPayaraSource connectionClass = new ConnectionByPayaraSource();
             Connection con = connectionClass.initConnection();
 
@@ -123,8 +127,6 @@ public class RegistroPaciente extends HttpServlet {
             usuario = usuarioDAO.loadByEmail(usuario, con);
             usuarioIdusuario = usuario.getIdusuario();
             
-            HttpSession session = request.getSession();
-            nutricionistaIdnutricionista = (int) session.getAttribute("idNutricionista");
             
             
             Paciente paciente = new Paciente(usuarioIdusuario, nutricionistaIdnutricionista, nombre, apellidos, fechanacimiento, sexo, telefono, direccion, pesoanterior, estatura, cirbraquial, cirpantorrilla, dificultadesaliment, enfermedades, tratamiento, proteinaanterior, lipidosanterior, carbohidratosanterior, comidasanterior, actividadfisica, fechaRegistro, estado);

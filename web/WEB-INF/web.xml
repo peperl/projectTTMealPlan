@@ -84,6 +84,10 @@
         <servlet-name>GetApegoPercent</servlet-name>
         <servlet-class>mx.ipn.www.finalproject.view.servlets.services.android.GetApegoPercent</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SaveMealPlan</servlet-name>
+        <servlet-class>mx.ipn.www.finalproject.view.servlets.SaveMealPlan</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -167,6 +171,10 @@
     <servlet-mapping>
         <servlet-name>GetApegoPercent</servlet-name>
         <url-pattern>/GetApegoPercent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SaveMealPlan</servlet-name>
+        <url-pattern>/SaveMealPlan</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

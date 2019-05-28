@@ -57,7 +57,7 @@ public class getProposePlan extends HttpServlet {
         
         GeneticAlgorithm ga;
             
-        Map <Integer, List<Alimento>> foodByCategory = new HashMap<>();    
+        Map <Integer, List<Alimento>> foodByCategory = new HashMap<>();
         ConstantMealDistribution cmd = new ConstantMealDistribution(planalimenticio.getNocomidas());
         ConnectionByPayaraSource connectionByPayaraSource = new ConnectionByPayaraSource();
         Connection conn = null;
