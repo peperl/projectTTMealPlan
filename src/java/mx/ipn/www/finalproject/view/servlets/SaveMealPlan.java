@@ -29,6 +29,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import javax.naming.NamingException;
+import javax.servlet.ServletContext;
 import mx.ipn.www.finalproject.controller.geneticAlgorithm.beans.GeneticAlgorithm;
 import mx.ipn.www.finalproject.controller.geneticAlgorithm.beans.Meal;
 import mx.ipn.www.finalproject.controller.geneticAlgorithm.constants.ConstantMealDistribution;
@@ -199,10 +200,9 @@ public class SaveMealPlan extends HttpServlet {
                 }
             }
         }
-        
-        
- 
-        
+        ServletContext sc = request.getServletContext();
+        String path = sc.getContextPath();
+        response.sendRedirect( path + "/pages/Nutricionista/BlankN.jsp");
         
     }
 

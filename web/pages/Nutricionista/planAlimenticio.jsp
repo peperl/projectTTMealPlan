@@ -76,26 +76,26 @@
           </div>
         </div>
         <ul class="nav">
-          <li class="nav-item">
-            <a class="nav-link" href="BlankN.html">
+          <li class="nav-item active">
+            <a class="nav-link" href="BlankN.jsp">
               <i class="material-icons">home</i>
               <p> Inicio </p>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="registroPaciente.html">
+            <a class="nav-link" href="registroPaciente.jsp">
               <i class="material-icons">face</i>
               <p> Registrar Paciente </p>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="listaPacientes.html">
+            <a class="nav-link" href="listaPacientes.jsp">
               <i class="material-icons">favorite_border</i>
               <p> Lista de Pacientes </p>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="agregarAlimento.html">
+            <a class="nav-link" href="agregarAlimento.jsp">
               <i class="material-icons">restaurant</i>
               <p> Registrar Alimento </p>
             </a>
