@@ -27,8 +27,8 @@ public class ComidaDAOImpl implements ComidaDAO {
     /* SQL to insert data */
     private static final String SQL_INSERT =
         "INSERT INTO Comida ("
-        + "idComida, PlanAlimenticio_idPlanAlimenticio, Nombre, Dia, Numero, Hora"
-        + ") VALUES (?, ?, ?, ?, ?, ?)";
+        + "PlanAlimenticio_idPlanAlimenticio, Nombre, Dia, Numero, Hora"
+        + ") VALUES (?, ?, ?, ?, ?)";
 
     /* SQL to select data */
     private static final String SQL_SELECT =
@@ -65,15 +65,14 @@ public class ComidaDAOImpl implements ComidaDAO {
         PreparedStatement ps = null;
         try {
             ps = conn.prepareStatement(SQL_INSERT);
-            ps.setInt(1, bean.getIdcomida());
-            ps.setInt(2, bean.getPlanalimenticioIdplanalimenticio());
-            ps.setString(3, bean.getNombre());
-            ps.setString(4, bean.getDia());
-            ps.setInt(5, bean.getNumero());
+            ps.setInt(1, bean.getPlanalimenticioIdplanalimenticio());
+            ps.setString(2, bean.getNombre());
+            ps.setString(3, bean.getDia());
+            ps.setInt(4, bean.getNumero());
             if (bean.getHora() != null)
-                ps.setDate(6, new java.sql.Date(bean.getHora().getTime()));
+                ps.setDate(5, new java.sql.Date(bean.getHora().getTime()));
             else
-                ps.setNull(6, Types.DATE);
+                ps.setNull(5, Types.DATE);
             ps.executeUpdate();
         }finally {
             close(ps);

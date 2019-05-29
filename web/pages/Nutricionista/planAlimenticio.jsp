@@ -388,6 +388,10 @@
                                             <i class="material-icons">kitchen</i>
                                           </span>
                                         </div>
+                                        <div class="form-group">
+                                          <label for="exampleInput1" class="bmd-label-floating">Cantidad</label>
+                                          <input type="text" class="form-control" id="cantidadA" name="v">
+                                        </div>                                          
                                         <span class="btn btn-primary btn-fab btn-fab-mini btn-round" id="addA">
                                           <i class="material-icons">add</i>
                                         </span>
@@ -550,7 +554,8 @@
                     }
                     text2 = text2 + (index+1);
                     text2 = text2 + "-" + (index2+1) + "'>";
-                    text2 = text2 + "<div class='input-group form-control-lg'><div class='input-group-prepend'><span class='input-group-text'><i class='material-icons'>alarm</i></span></div><div class='form-group'><label for='exampleInput1' class='bmd-label-floating'>Hora de Comida</label><input type='text' class='form-control timepicker' value='10:05'></div></div>";
+                    text2 = text2 + "<div class='input-group form-control-lg'><div class='input-group-prepend'><span class='input-group-text'><i class='material-icons'>alarm</i></span></div><div class='form-group'><label for='exampleInput1' class='bmd-label-floating'>Hora de Comida</label>";
+                    text2 = text2 + "<input type='text' class='form-control timepicker' id='comida" + (index+1) +"-"+(index2+1)+"' value='10:05'/></div></div>";
                     text2 = text2 + "<input type='text' value='";
                    
                     text2 = text2 + "' class='form-control tagsinput' data-color='info' id='Alink";
@@ -671,8 +676,12 @@
           //$('#alimEv').val(list+','+algo);
           
           //$('#'+selection).tagsinput('add', {id:$('#alimentos').val(),text:$("#alimentos option:selected").text()});
-        $('#'+selection).tagsinput('add',$("#alimentos option:selected").text()+"("+$('#alimentos').val()+")");
-        $('.tag').css('background','#00bcd4');
+        
+        $('#'+selection).tagsinput('add', 
+            (parseFloat($("#cantidadA").val())+ parseFloat($("#alimentos option:selected").getAttribute("data-qty")))+ " " +
+            $("#alimentos option:selected").getAttribute("data-unidad") + " " +
+            $("#alimentos option:selected").text()+"("+$('#alimentos').val()+")");
+            $('.tag').css('background','#00bcd4');
           //$('#alimEv').val(list+','+$('#alimentos').val()); {"value":item3.idalimento,"text":item3.nombre}
         });
 
@@ -772,7 +781,7 @@
   <script>
         $.get("../../getAllFood", function(responseJson) {    // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response JSON...
             $.each(responseJson, function(index, item) { // Iterate over the JSON array.
-                ($("#alimentos")).append("<option value=" + item.idalimento +">" + item.nombre + "</option>");
+                ($("#alimentos")).append("<option data-unidad='" + item.unidad +"' data-qty='" + item.cantidad + "' value=" + item.idalimento +">" + item.nombre + "</option>");
             });
             $('#alimentos').selectpicker('refresh');
         });
@@ -804,7 +813,7 @@
                 var aux = $("#link" + i + "-"+ j).find(".bootstrap-tagsinput").find(".tag");
                 var resultAux = [];
                 $.each(aux, function(index, item) {
-                    var cadena = item.innerText;
+                    var cadena = item.innerText+"*" + $("#comida" + i + "-" + j).val();
                     resultAux.push(cadena);
                 });
                 resultAux2.push(resultAux);
