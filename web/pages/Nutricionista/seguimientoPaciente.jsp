@@ -18,12 +18,6 @@
 <!DOCTYPE html>
 <html lang="es">
 <%
-if (session == null) {
-    ServletContext sc = request.getServletContext();
-    String path = sc.getContextPath();    
-    response.sendRedirect( path + "/pages/login.html");
-}
-    
 Paciente paciente = (Paciente) session.getAttribute("pacienteGeneralInformation");
 Usuario usuario = (Usuario) session.getAttribute("pacienteGIUsuario");
 List<Alimento> alimentosEvitados = (List<Alimento>) session.getAttribute("pacienteGIAlimentosEvitados");
@@ -670,20 +664,24 @@ int aux = 0;
       };
 
       Chartist.Pie('#chartPreferences', dataPreferences, optionsPreferences);
-
-      $('#planInformationMealChangedSelect').DataTable({
-        "pagingType": "numbers",
-        "pageLength": 5,
-        "responsive": true,
-        "language": {
-            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
-        }
-      });
     });
   </script>
+  <!--DataTable of información de cada plan-->
+  <script>
+      $(document).ready(function() {
+        $('#planInformationMealChangedSelect').DataTable({
+          "pagingType": "numbers",
+          "pageLength": 5,
+          "responsive": true,
+          "language": {
+              "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+          }
+        }); 
+      });
+  </script>
+  <!--Evento de seleccionar un plan de alimentacion-->
   <script type="text/javascript">
     $(document).ready(function() {
-        var idplanalimenticio = -1;
         $("#planInformationDiv").hide();
         $('select').on('change', function(e){
             $("#planInformationDateSelect").append("Inicio del Plan: 12/12/2012");
@@ -725,7 +723,5 @@ int aux = 0;
         });
   </script>
 </body>
-    <%DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");            
-    //formatter.format(plan.getFechacreacion().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());%>
 </html>
 

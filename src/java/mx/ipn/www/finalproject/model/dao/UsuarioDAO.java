@@ -43,7 +43,7 @@ public interface UsuarioDAO {
     public Usuario loadByEmail(Usuario usuario, Connection conn) throws SQLException;
 
     public Usuario loadForLoginNuricionista(Usuario usuario, Connection conn) throws SQLException;
-    
+    public Usuario loadForLoginPaciente(Usuario usuario, Connection conn) throws SQLException;
     /**
      * Update a record in Database.
      * @param bean   The Object to be saved.

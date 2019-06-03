@@ -27,9 +27,9 @@ public class PlanalimenticioDAOImpl implements PlanalimenticioDAO {
     /* SQL to insert data */
     private static final String SQL_INSERT =
         "INSERT INTO PlanAlimenticio ("
-        + "idPlanAlimenticio, Paciente_idPaciente, FechaCreacion, Duracion, GastoCalorico, Proteinas, Lipidos, "
+        + "Paciente_idPaciente, FechaCreacion, Duracion, GastoCalorico, Proteinas, Lipidos, "
         + "Carbohidratos, NoComidas, Estado, TMR "
-        + ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        + ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     /* SQL to select data */
     private static final String SQL_SELECT =
@@ -78,20 +78,19 @@ public class PlanalimenticioDAOImpl implements PlanalimenticioDAO {
         PreparedStatement ps = null;
         try {
             ps = conn.prepareStatement(SQL_INSERT);
-            ps.setInt(1, bean.getIdplanalimenticio());
-            ps.setInt(2, bean.getPacienteIdpaciente());
+            ps.setInt(1, bean.getPacienteIdpaciente());
             if (bean.getFechacreacion() != null)
-                ps.setDate(3, new java.sql.Date(bean.getFechacreacion().getTime()));
+                ps.setDate(2, new java.sql.Date(bean.getFechacreacion().getTime()));
             else
-                ps.setNull(3, Types.DATE);
-            ps.setInt(4, bean.getDuracion());
-            ps.setDouble(5, bean.getGastocalorico());
-            ps.setDouble(6, bean.getProteinas());
-            ps.setDouble(7, bean.getLipidos());
-            ps.setDouble(8, bean.getCarbohidratos());
-            ps.setInt(9, bean.getNocomidas());
-            ps.setInt(10, bean.getEstado());
-            ps.setDouble(11, bean.getTmr());
+                ps.setNull(2, Types.DATE);
+            ps.setInt(3, bean.getDuracion());
+            ps.setDouble(4, bean.getGastocalorico());
+            ps.setDouble(5, bean.getProteinas());
+            ps.setDouble(6, bean.getLipidos());
+            ps.setDouble(7, bean.getCarbohidratos());
+            ps.setInt(8, bean.getNocomidas());
+            ps.setInt(9, bean.getEstado());
+            ps.setDouble(10, bean.getTmr());
             ps.executeUpdate();
         }finally {
             close(ps);

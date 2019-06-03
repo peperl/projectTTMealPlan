@@ -5,6 +5,7 @@
  */
 package mx.ipn.www.finalproject.view.servlets.services.android;
 
+import mx.ipn.www.finalproject.view.servlets.services.android.response.GenericResponse;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.sql.Connection;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import mx.ipn.www.finalproject.model.Paciente;
 import mx.ipn.www.finalproject.model.PacienteKey;
+import mx.ipn.www.finalproject.model.UsuarioKey;
 import mx.ipn.www.finalproject.model.dao.PacienteDAO;
 import mx.ipn.www.finalproject.model.orm.PacienteDAOImpl;
 import mx.ipn.www.finalproject.utils.ConnectionByPayaraSource;
@@ -43,26 +45,45 @@ public class getPaciente extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("application/json;charset=UTF-8");
         String qr = request.getParameter("qr");
-        String[] aux = qr.split(qr);
-        
-        if (QRgenerator.verifyQRContent(qr)) {
-            try {
-                ConnectionByPayaraSource connector = new ConnectionByPayaraSource();
-                Connection conn = connector.initConnection();
-                PacienteDAO dao = new PacienteDAOImpl();
-                Paciente paciente = dao.load(new PacienteKey(Integer.parseInt(aux[1])), conn);
-                String json = new Gson().toJson(paciente);
+        if (qr==null) {
+            GenericResponse genericResponse = new GenericResponse(Boolean.FALSE);
+            String json = new Gson().toJson(genericResponse);
+            response.getWriter().write(json);
+        }else {
+            String[] aux = qr.split("-");
+            //if (QRgenerator.verifyQRContent(qr)) {
+                try {
+                    ConnectionByPayaraSource connector = new ConnectionByPayaraSource();
+                    Connection conn = connector.initConnection();
+                    PacienteDAO dao = new PacienteDAOImpl();
+                    Paciente paciente = new Paciente();
+                    paciente.setUsuarioIdusuario(Integer.parseInt(aux[1]));
+                    Logger.getGlobal().info("aux1 " + aux[1]);
+                    paciente = dao.loadByName(paciente, conn);
+                    if (paciente==null) {
+                GenericResponse genericResponse = new GenericResponse(Boolean.FALSE);
+                String json = new Gson().toJson(genericResponse);
                 response.getWriter().write(json);
-                connector.destroy();
-            } catch (NamingException ex) {
-                Logger.getLogger(getAllFood.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
-                Logger.getLogger(getAllFood.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-        } else {
-            
+
+                    } else{
+                        String json = new Gson().toJson(paciente);
+                        response.getWriter().write(json);
+
+                    }
+                    connector.destroy();
+                } catch (NamingException | SQLException ex) {
+                    Logger.getLogger(getAllFood.class.getName()).log(Level.SEVERE, null, ex);
+                    GenericResponse genericResponse = new GenericResponse(Boolean.FALSE);
+                    String json = new Gson().toJson(genericResponse);
+                    response.getWriter().write(json);
+                }
         }
+        
+        
+            
+        //} else {
+            
+        //}
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

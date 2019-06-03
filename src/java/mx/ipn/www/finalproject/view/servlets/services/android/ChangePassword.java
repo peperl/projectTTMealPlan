@@ -5,9 +5,9 @@
  */
 package mx.ipn.www.finalproject.view.servlets.services.android;
 
+import mx.ipn.www.finalproject.view.servlets.services.android.response.GenericResponse;
 import com.google.gson.Gson;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -26,7 +26,6 @@ import mx.ipn.www.finalproject.model.dao.UsuarioDAO;
 import mx.ipn.www.finalproject.model.orm.PacienteDAOImpl;
 import mx.ipn.www.finalproject.model.orm.UsuarioDAOImpl;
 import mx.ipn.www.finalproject.utils.ConnectionByPayaraSource;
-import mx.ipn.www.finalproject.utils.QRgenerator;
 import mx.ipn.www.finalproject.view.servlets.services.getAllFood;
 
 /**
@@ -46,9 +45,17 @@ public class ChangePassword extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //http://localhost:8080/projectTTMealPlans/ChangePassword?idPaciente=15
         response.setContentType("application/json;charset=UTF-8");
         String idPaciente = request.getParameter("idPaciente");
+        
         String password = request.getParameter("newPassword");
+        if (idPaciente==null||password==null) {
+            GenericResponse genericResponse = new GenericResponse(Boolean.FALSE);
+            String json = new Gson().toJson(genericResponse);
+            response.getWriter().write(json);
+            return;
+        }
         
         try {
             ConnectionByPayaraSource connector = new ConnectionByPayaraSource();
@@ -59,14 +66,14 @@ public class ChangePassword extends HttpServlet {
             Usuario usuario = userDAO.load(new UsuarioKey(paciente.getUsuarioIdusuario()), conn);
             usuario.setPass(password);
             userDAO.update(usuario, conn);
-            Boolean successful = true;
-            String json = new Gson().toJson(successful);
+            GenericResponse genericResponse = new GenericResponse(Boolean.TRUE);
+            String json = new Gson().toJson(genericResponse);
             response.getWriter().write(json);
             connector.destroy();
-        } catch (NamingException | SQLException ex) {
+        } catch (NamingException | SQLException | NullPointerException ex) {
             Logger.getLogger(getAllFood.class.getName()).log(Level.SEVERE, null, ex);
-            Boolean successful = false;
-            String json = new Gson().toJson(successful);
+            GenericResponse genericResponse = new GenericResponse(Boolean.FALSE);
+            String json = new Gson().toJson(genericResponse);
             response.getWriter().write(json);
         }
     }

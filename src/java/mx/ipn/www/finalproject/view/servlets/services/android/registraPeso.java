@@ -5,6 +5,7 @@
  */
 package mx.ipn.www.finalproject.view.servlets.services.android;
 
+import mx.ipn.www.finalproject.view.servlets.services.android.response.GenericResponse;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.sql.Connection;

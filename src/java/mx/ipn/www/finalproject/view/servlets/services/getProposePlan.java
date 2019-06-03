@@ -27,6 +27,7 @@ import mx.ipn.www.finalproject.model.Planalimenticio;
 import mx.ipn.www.finalproject.model.dao.AlimentoDAO;
 import mx.ipn.www.finalproject.model.orm.AlimentoDAOImpl;
 import mx.ipn.www.finalproject.utils.ConnectionByPayaraSource;
+import mx.ipn.www.finalproject.view.servlets.services.response.ResponseProposePlan;
 
 /**
  *
@@ -56,7 +57,7 @@ public class getProposePlan extends HttpServlet {
         
         GeneticAlgorithm ga;
             
-        Map <Integer, List<Alimento>> foodByCategory = new HashMap<>();    
+        Map <Integer, List<Alimento>> foodByCategory = new HashMap<>();
         ConstantMealDistribution cmd = new ConstantMealDistribution(planalimenticio.getNocomidas());
         ConnectionByPayaraSource connectionByPayaraSource = new ConnectionByPayaraSource();
         Connection conn = null;
@@ -110,9 +111,21 @@ public class getProposePlan extends HttpServlet {
                 resultQty.add(individual.getDietQty());
             }
         }
+        List<List<List<ResponseProposePlan>>> list = new ArrayList();
+        for (int i = 0; i < result.size(); i++) {
+            List<List<ResponseProposePlan>> b = new ArrayList();
+            for (int j = 0; j < result.get(i).size(); j++) {
+                List<ResponseProposePlan> c = new ArrayList();
+                for (int k = 0; k < result.get(i).get(j).size(); k++) {
+                    ResponseProposePlan d = new ResponseProposePlan(result.get(i).get(j).get(k), resultQty.get(i).get(j).get(k));
+                    c.add(d);
+                }
+                b.add(c);
+            }
+            list.add(b);
+        }
         
         
-        List list = result;
         String json = new Gson().toJson(list);
         response.getWriter().write(json);
     }

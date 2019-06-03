@@ -79,14 +79,14 @@ public class RegisterAntopometricData extends HttpServlet {
             calendar.setTime(paciente.getFechanacimiento());            
             int anioNacimiento = calendar.get(Calendar.YEAR);
             double tmr = Estimations.getTMR(paciente.getSexo(), peso, paciente.getEstatura()*100, anioActual-anioNacimiento);
-            double gastoCalorico = Estimations.getGastoCalorico(tmr, paciente.getActividadfisica());
+            double gastoCalorico = Estimations.getGastoCalorico(paciente.getSexo(),tmr, paciente.getActividadfisica());
             planalimenticio.setTmr(tmr);
             planalimenticio.setGastocalorico(gastoCalorico);
             planDAO.update(planalimenticio, conn);
             session.setAttribute("idPlanAlimenticio",planalimenticio);
             ServletContext sc = request.getServletContext();
             String path = sc.getContextPath();
-            response.sendRedirect( path + "/pages/Nutricionista/planAlimenticio.html");
+            response.sendRedirect( path + "/pages/Nutricionista/planAlimenticio.jsp");
 
         } catch (NamingException ex) {
             Logger.getLogger(RegisterAntopometricData.class.getName()).log(Level.SEVERE, null, ex);

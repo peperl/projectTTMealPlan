@@ -27,8 +27,8 @@ public class ComidaDAOImpl implements ComidaDAO {
     /* SQL to insert data */
     private static final String SQL_INSERT =
         "INSERT INTO Comida ("
-        + "idComida, PlanAlimenticio_idPlanAlimenticio, Nombre, Dia, Numero, Hora"
-        + ") VALUES (?, ?, ?, ?, ?, ?)";
+        + "PlanAlimenticio_idPlanAlimenticio, Nombre, Dia, Numero, Hora"
+        + ") VALUES (?, ?, ?, ?, ?)";
 
     /* SQL to select data */
     private static final String SQL_SELECT =
@@ -65,15 +65,14 @@ public class ComidaDAOImpl implements ComidaDAO {
         PreparedStatement ps = null;
         try {
             ps = conn.prepareStatement(SQL_INSERT);
-            ps.setInt(1, bean.getIdcomida());
-            ps.setInt(2, bean.getPlanalimenticioIdplanalimenticio());
-            ps.setString(3, bean.getNombre());
-            ps.setString(4, bean.getDia());
-            ps.setInt(5, bean.getNumero());
+            ps.setInt(1, bean.getPlanalimenticioIdplanalimenticio());
+            ps.setString(2, bean.getNombre());
+            ps.setString(3, bean.getDia());
+            ps.setInt(4, bean.getNumero());
             if (bean.getHora() != null)
-                ps.setDate(6, new java.sql.Date(bean.getHora().getTime()));
+                ps.setTime(5, new java.sql.Time(bean.getHora().getHour(),bean.getHora().getMinute(),0));
             else
-                ps.setNull(6, Types.DATE);
+                ps.setNull(5, Types.TIME);
             ps.executeUpdate();
         }finally {
             close(ps);
@@ -138,9 +137,9 @@ public class ComidaDAOImpl implements ComidaDAO {
             ps.setString(3, bean.getDia());
             ps.setInt(4, bean.getNumero());
             if (bean.getHora() != null)
-                ps.setDate(5, new java.sql.Date(bean.getHora().getTime()));
+                ps.setTime(5, new java.sql.Time(bean.getHora().getHour(),bean.getHora().getMinute(),0));
             else
-                ps.setNull(5, Types.DATE);
+                ps.setNull(5, Types.TIME);
             ps.setInt(6, bean.getIdcomida());
             ps.executeUpdate();
         }finally {
@@ -180,7 +179,7 @@ public class ComidaDAOImpl implements ComidaDAO {
             bean.setNombre(rs.getString("Nombre"));
             bean.setDia(rs.getString("Dia"));
             bean.setNumero(rs.getInt("Numero"));
-            bean.setHora(rs.getDate("Hora"));
+            bean.setHora(rs.getTime("Hora").toLocalTime());
             results.add(bean);
         }
         return results;

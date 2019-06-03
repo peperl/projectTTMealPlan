@@ -13,6 +13,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 import mx.ipn.www.finalproject.model.NutricionistaKey;
+import mx.ipn.www.finalproject.model.UsuarioKey;
 
 /**
  * This interface provides methods to populate DB Table of paciente
@@ -36,6 +37,7 @@ public interface PacienteDAO {
     
     public Paciente loadByName(Paciente paciente, Connection conn) throws SQLException;
     
+    public Paciente loadByUsuario(UsuarioKey key, Connection conn) throws SQLException;
     public List<Paciente> loadByNutricionista(NutricionistaKey key, Connection conn) throws SQLException;
 
     /**
@@ -53,4 +55,6 @@ public interface PacienteDAO {
      * @exception    SQLException if something is wrong.
      */
     public void delete(PacienteKey key, Connection conn) throws SQLException;
+
+    
 }

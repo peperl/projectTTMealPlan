@@ -44,7 +44,7 @@ public class Individual {
         //ints.forEach(System.out::println);        
     }
     
-    Individual(MealPlanInformation mpi, Map<Integer, List<Alimento>> foodByCategory, ObjectiveCalories objectiveCalories, BinarySelection bs, int id) {
+    public Individual(MealPlanInformation mpi, Map<Integer, List<Alimento>> foodByCategory, ObjectiveCalories objectiveCalories, BinarySelection bs, int id) {
         this.binarySelection = bs;
         this.mpi = mpi;
         this.foodByCategory = foodByCategory;
