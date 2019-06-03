@@ -7,6 +7,8 @@
 
 package mx.ipn.www.finalproject.model;
 
+import java.time.LocalTime;
+
 /*
  * For Table comida
  */
@@ -29,7 +31,7 @@ public class Comida implements java.io.Serializable, Cloneable {
     protected int numero;
 
     /* Hora */
-    protected java.util.Date hora;
+    protected LocalTime hora;
 
     /* Return the key object. */
     public ComidaKey getKeyObject() {
@@ -88,12 +90,12 @@ public class Comida implements java.io.Serializable, Cloneable {
     }
 
     /* Hora */
-    public java.util.Date getHora() {
+    public LocalTime getHora() {
         return hora;
     }
 
     /* Hora */
-    public void setHora(java.util.Date hora) {
+    public void setHora(LocalTime hora) {
         this.hora = hora;
     }
 
@@ -150,7 +152,7 @@ public class Comida implements java.io.Serializable, Cloneable {
         bean.dia = this.dia;
         bean.numero = this.numero;
         if (this.hora != null)
-            bean.hora = (java.util.Date) this.hora.clone();
+            bean.hora = this.hora;
         return bean;
     }
 

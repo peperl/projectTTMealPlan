@@ -230,7 +230,7 @@ public class Planalimenticio implements java.io.Serializable, Cloneable {
     }
 
     /* Creates and returns a copy of this object. */
-    public Object clone()
+    public Planalimenticio clone()
     {
         Planalimenticio bean = new Planalimenticio();
         bean.idplanalimenticio = this.idplanalimenticio;

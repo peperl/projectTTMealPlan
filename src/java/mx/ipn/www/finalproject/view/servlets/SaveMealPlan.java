@@ -22,6 +22,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -78,16 +79,25 @@ public class SaveMealPlan extends HttpServlet {
         ConnectionByPayaraSource con = new ConnectionByPayaraSource();
         Connection conn = null;
         Planalimenticio base = (Planalimenticio) session.getAttribute("idPlanAlimenticio");
+
+        
         List<Planalimenticio> planes = new ArrayList<>();
         planes.add(base);
         
         List<List<Comida>> comidas = new ArrayList<>();
-        
+
+        Planalimenticio auxPlan = null;
         for (int i = 0; i < 6; i++) {
             try {
                 conn = con.initConnection();
                 planalimenticio.create(base, conn);
-                planes.add(planalimenticio.loadLastPlan(base, conn));
+                if (i==0) {
+                    auxPlan = planalimenticio.loadLastPlan(base, conn);
+                    planes.add(auxPlan.clone());
+                } else {
+                    auxPlan.setIdplanalimenticio(auxPlan.getIdplanalimenticio()+ 1);
+                    planes.add(auxPlan.clone());
+                }
             } catch (NamingException ex) {
                 Logger.getLogger(SaveMealPlan.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SQLException ex) {
@@ -95,10 +105,6 @@ public class SaveMealPlan extends HttpServlet {
             }
         }
         
-
-
-
-
 
        String jsonArray = request.getParameter("infoPlan");
         Gson gson = new Gson();
@@ -116,9 +122,8 @@ public class SaveMealPlan extends HttpServlet {
             Logger.getLogger(SaveMealPlan.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        
         List<List<String>> horasList = new ArrayList<>();
-        List<List<Date>> horaComidaList =new ArrayList<>();
+        List<List<LocalTime>> horaComidaList =new ArrayList<>();
         List<List<List<String>>> alimentosListList = new ArrayList<>();
         for (JsonElement jsonElement : mealPlanArray) {
             //Aqui es un plan completo
@@ -133,7 +138,7 @@ public class SaveMealPlan extends HttpServlet {
                     String[] infoCompleta = jsonElement2.toString().split("\\*");
                     alimentos.add(infoCompleta[0]);
                     if (aux++==0) {
-                        horas.add(infoCompleta[1]);
+                        horas.add(infoCompleta[1].substring(0, infoCompleta[1].length()-1));
                     }
                 }
                 alimentosList.add(alimentos);
@@ -142,50 +147,75 @@ public class SaveMealPlan extends HttpServlet {
             horasList.add(horas);
         }
         for (List<String> horal : horasList) {
-            List<Date> horaComida =new ArrayList<>();
+            List<LocalTime> horaComida =new ArrayList<>();
             for (String hora : horal) {
-                SimpleDateFormat sdf =  new SimpleDateFormat("HH:mm");
-                try {
-                    horaComida.add(sdf.parse(hora));
-                } catch (ParseException ex) {
-                    Logger.getLogger(SaveMealPlan.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                String[] horaSeparada = hora.split(":");
+                horaComida.add(LocalTime.of(Integer.parseInt(horaSeparada[0]), Integer.parseInt(horaSeparada[1])));
             }
             horaComidaList.add(horaComida);
         }
+        
+        
 
 
 
 
+
+
+
+        //horaComidaList
+        //planes
 
         int auxplan = 0;
+        int finalIdComida = 0;
         for (Planalimenticio plan : planes) {
             ConstantMealDistribution cmd = new ConstantMealDistribution(plan.getNocomidas());
-            int auxTiempo=1;
+
             int auxComida=0;
+            
+            List<Comida> comidaAux = new ArrayList<>();
             try {
                 for (String nameTiempo : cmd.getNameTiempos()) {
                     Comida comida = new Comida();
                     comida.setNombre(nameTiempo);
                     comida.setDia(dias[auxplan]);
-                    comida.setNumero(auxTiempo);
+                    comida.setNumero(auxComida + 1);
                     comida.setHora(horaComidaList.get(auxplan).get(auxComida));
                     comida.setPlanalimenticioIdplanalimenticio(plan.getIdplanalimenticio());
                     comidaDAO.create(comida, conn);
+                    comidaAux.add(comida);
                     auxComida++;
                 }
-                comidas.add(comidaDAO.loadByPlanAlimenticio(plan.getKeyObject(), conn));
+                if (auxplan == 0) {
+                    comidas.add(comidaDAO.loadByPlanAlimenticio(plan.getKeyObject(), conn));
+                    List<Comida> a =  comidas.get(0);
+                    finalIdComida = a.get(a.size()-1).getIdcomida();
+                } else {
+                    for (Comida comida : comidaAux) {
+                        finalIdComida++;
+                        comida.setIdcomida(finalIdComida);
+                    }
+
+                    comidas.add(comidaAux);
+                }
+                
             } catch (SQLException ex) {
                 Logger.getLogger(SaveMealPlan.class.getName()).log(Level.SEVERE, null, ex);
             }
             auxplan++;
         }
         
-        //alimentosListList
-        //comidas
+        
+        Logger.getGlobal().info(comidas.toString());        
+        //alimentosListList aqui están todos los alimentos
+        //comidas están todas las comidas
+        
+        
         for (int i = 0; i < alimentosListList.size(); i++) {
             for (int j = 0; j < alimentosListList.get(i).size(); j++) {
                 for (int k = 0; k < alimentosListList.get(i).get(j).size(); k++) {
+                    
+                    
                     RelComida relcomida = new RelComida();
                     Alimento a = getAlimento(alimentosListList.get(i).get(j).get(k));
                     int qty = getQuantity(alimentosListList.get(i).get(j).get(k), a);
@@ -245,8 +275,10 @@ public class SaveMealPlan extends HttpServlet {
         return "Short description";
     }// </editor-fold>
     private int getQuantity(String line, Alimento alimento) {
+        Logger.getGlobal().info("getQtyLine: " + line);
+        
         String finalInt = "";
-        for (int i = 0; i < line.length(); i++) {
+        for (int i = 1; i < line.length(); i++) {
             if ( Character.isDigit(line.charAt(i))) {
                 finalInt+=line.charAt(i);
             } else {
