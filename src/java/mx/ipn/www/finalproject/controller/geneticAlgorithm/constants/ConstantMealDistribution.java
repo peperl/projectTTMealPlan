@@ -25,6 +25,7 @@ public class ConstantMealDistribution {
     private String[] nameTiempos;
     
     public ConstantMealDistribution(int tiempos) {
+        
         if (tiempos == 3) {
             Integer[] desayunoCategorias = {1,2,4,3,5};
             Meal desayuno = new Meal(desayunoCategorias );
@@ -35,29 +36,39 @@ public class ConstantMealDistribution {
             Integer[] cenaCategorias = {1,2,4,3,5};
             Meal cena = new Meal(cenaCategorias );
 
-             this.tiempos = new Meal[tiempos];
-             this.nameTiempos = new String[tiempos];
-             this.tiempos[0] = desayuno;
-             this.tiempos[1] = comida;
-             this.tiempos[2] = cena;
+            this.tiempos = new Meal[tiempos];
+            this.nameTiempos = new String[tiempos];
+            this.tiempos[0] = desayuno;
+            this.tiempos[1] = comida;
+            this.tiempos[2] = cena;
              
-             this.nameTiempos[0] = "Desayuno";
-             this.nameTiempos[1] = "Comida";
-             this.nameTiempos[2] = "Cena";
+            this.nameTiempos[0] = "Desayuno";
+            this.nameTiempos[1] = "Comida";
+            this.nameTiempos[2] = "Cena";
         } else if (tiempos == 4) {
-             this.nameTiempos = new String[tiempos];
-             this.nameTiempos[0] = "Desayuno";
-             this.nameTiempos[1] = "Comida";
-             this.nameTiempos[2] = "Colación";
-             this.nameTiempos[3] = "Cena";
+            
+            this.nameTiempos = new String[tiempos];
+            this.nameTiempos[0] = "Desayuno";
+            this.nameTiempos[1] = "Comida";
+            this.nameTiempos[2] = "Colación";
+            this.nameTiempos[3] = "Cena";
+            
+            
         } else  if (tiempos == 5) {
-             this.nameTiempos = new String[tiempos];
-             this.nameTiempos[0] = "Desayuno";
-             this.nameTiempos[1] = "Colación";
-             this.nameTiempos[2] = "Comida";
-             this.nameTiempos[3] = "Colación";
-             this.nameTiempos[4] = "Cena";
+            this.nameTiempos = new String[tiempos];
+            this.nameTiempos[0] = "Desayuno";
+            this.nameTiempos[1] = "Colación";
+            this.nameTiempos[2] = "Comida";
+            this.nameTiempos[3] = "Colación";
+            this.nameTiempos[4] = "Cena";
+            
+            
+            
         }
+        
+        
+        
+        
     }
 
     public Meal[] getTiempos() {

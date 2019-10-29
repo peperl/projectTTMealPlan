@@ -19,18 +19,24 @@ public final class ObjectiveCalories {
     public ObjectiveCalories(double kilocalories, short speed) {
         double kilocal = kilocalories;
         
-        if (speed == ConstantSpeedLoseWeight.SLOW_SPEED) {
-            carb = kilocal * ConstantSpeedLoseWeight.slowSpeed[0];
-            prot = kilocal * ConstantSpeedLoseWeight.slowSpeed[1];
-            lip = kilocal * ConstantSpeedLoseWeight.slowSpeed[2];
-        } else if (speed == ConstantSpeedLoseWeight.NORMAL_SPEED) {
-            carb = kilocal * ConstantSpeedLoseWeight.normalSpeed[0];
-            prot = kilocal * ConstantSpeedLoseWeight.normalSpeed[1];
-            lip = kilocal * ConstantSpeedLoseWeight.normalSpeed[2];
-        } else if (speed == ConstantSpeedLoseWeight.FAST_SPEED) {
-            carb = kilocal * ConstantSpeedLoseWeight.fastSpeed[0];
-            prot = kilocal * ConstantSpeedLoseWeight.fastSpeed[1];
-            lip = kilocal * ConstantSpeedLoseWeight.fastSpeed[2];
+        switch (speed) {
+            case ConstantSpeedLoseWeight.SLOW_SPEED:
+                carb = kilocal * ConstantSpeedLoseWeight.slowSpeed[0];
+                prot = kilocal * ConstantSpeedLoseWeight.slowSpeed[1];
+                lip = kilocal * ConstantSpeedLoseWeight.slowSpeed[2];
+                break;
+            case ConstantSpeedLoseWeight.NORMAL_SPEED:
+                carb = kilocal * ConstantSpeedLoseWeight.normalSpeed[0];
+                prot = kilocal * ConstantSpeedLoseWeight.normalSpeed[1];
+                lip = kilocal * ConstantSpeedLoseWeight.normalSpeed[2];
+                break;
+            case ConstantSpeedLoseWeight.FAST_SPEED:
+                carb = kilocal * ConstantSpeedLoseWeight.fastSpeed[0];
+                prot = kilocal * ConstantSpeedLoseWeight.fastSpeed[1];
+                lip = kilocal * ConstantSpeedLoseWeight.fastSpeed[2];
+                break;
+            default:
+                break;
         }
         
     }
@@ -63,6 +69,4 @@ public final class ObjectiveCalories {
     public String toString() {
         return "ObjectiveCalories{" + "carb=" + carb + ", prot=" + prot + ", lip=" + lip + '}';
     }
-    
-    
 }

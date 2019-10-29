@@ -150,13 +150,6 @@
       <div class="content">
         <div class="container-fluid">
           <div class="col-md-8 col-12 mr-auto ml-auto">
-            <div class="alert alert-primary alert-with-icon" data-notify="container">
-                    <i class="material-icons" data-notify="icon">notifications</i>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <i class="material-icons">close</i>
-                    </button>
-                    <span data-notify="message">El ajuste de Josué Durán está próximo. <a class="btn btn-rose" href=""> Dar Seguimiento</a></span>
-                  </div>
           </div>
         </div>
       </div>

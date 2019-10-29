@@ -21,24 +21,38 @@ public class Estimations {
     public static double getGastoCalorico(String sexo, double tmr, int actividadFisica) {
         double actFisica = 0;
         if (sexo.equals("M")) {
-            if (actividadFisica == 0) {
-                actFisica = 0;
-            } else if (actividadFisica==1) {
-                actFisica = 1.55;
-            } else if (actividadFisica==2) {
-                actFisica = 1.78;
-            } else if (actividadFisica==3) {
-                actFisica = 2.10;
+            switch (actividadFisica) {
+                case 0:
+                    actFisica = 0;
+                    break;
+                case 1:
+                    actFisica = 1.55;
+                    break;
+                case 2:
+                    actFisica = 1.78;
+                    break;
+                case 3:
+                    actFisica = 2.10;
+                    break;
+                default:
+                    break;
             }
         } else{
-            if (actividadFisica == 0) {
-                actFisica = 0;
-            } else if (actividadFisica==1) {
-                actFisica = 1.56;
-            } else if (actividadFisica==2) {
-                actFisica = 1.64;
-            } else if (actividadFisica==3) {
-                actFisica = 1.82;
+            switch (actividadFisica) {
+                case 0:
+                    actFisica = 0;
+                    break;
+                case 1:
+                    actFisica = 1.56;
+                    break;
+                case 2:
+                    actFisica = 1.64;
+                    break;
+                case 3:
+                    actFisica = 1.82;
+                    break;
+                default:
+                    break;
             }
         }
         

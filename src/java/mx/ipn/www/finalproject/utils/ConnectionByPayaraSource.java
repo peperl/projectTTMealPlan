@@ -23,11 +23,17 @@ public class ConnectionByPayaraSource {
     private Connection conn = null;
         
   public Connection initConnection () throws ServletException, NamingException, NamingException, SQLException {
-      ctx = new InitialContext();
-      //MySqlConnector es el nombre que le di a mi recurso en payara
-      ds = (DataSource) ctx.lookup("java:comp/DefaultDataSource");
-        System.out.println("");
-      conn = ds.getConnection();
+        try {
+            //ctx = new InitialContext();
+            //MySqlConnector es el nombre que le di a mi recurso en payara
+            //ds = (DataSource) ctx.lookup("java:comp/DefaultDataSource");
+            //conn = ds.getConnection();
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ConnectionByPayaraSource.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    conn=DriverManager.getConnection(  
+    "jdbc:mysql://localhost:3306/mydb","root","root");        
       return conn;
   }
 

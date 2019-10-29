@@ -78,18 +78,5 @@ public class CustomClassLoader extends ClassLoader {
         return classData;
     }
 
-    /**
-     * Simple usage of the CustomClassLoader implementation
-     * 
-     * @param args
-     * @throws ClassNotFoundException
-     * @throws IllegalAccessException
-     * @throws InstantiationException
-     * @throws SecurityException
-     * @throws NoSuchMethodException
-     * @throws InvocationTargetException
-     * @throws IllegalArgumentException
-     */
-
 
 }
