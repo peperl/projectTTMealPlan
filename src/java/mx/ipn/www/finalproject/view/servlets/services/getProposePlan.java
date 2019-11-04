@@ -48,11 +48,11 @@ public class getProposePlan extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("application/json;charset=UTF-8");
         HttpSession session = request.getSession(false);
-        //Planalimenticio planalimenticio = (Planalimenticio) session.getAttribute("idPlanAlimenticio");
-        Planalimenticio planalimenticio = new Planalimenticio(); 
+        Planalimenticio planalimenticio = (Planalimenticio) session.getAttribute("idPlanAlimenticio");
+        /*Planalimenticio planalimenticio = new Planalimenticio(); 
         planalimenticio.setNocomidas(3);
         planalimenticio.setGastocalorico(0);
-        planalimenticio.setTmr(1000);
+        planalimenticio.setTmr(1000);*/
         
         
         GeneticAlgorithm ga;

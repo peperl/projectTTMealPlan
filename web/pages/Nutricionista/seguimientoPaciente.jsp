@@ -376,7 +376,7 @@ int aux = 0;
       </div>
       <footer class="footer">
         <div class="container-fluid">
-          YUMK 2018
+          YUMK 2019
         </div>
       </footer>
     </div>
@@ -698,7 +698,7 @@ int aux = 0;
             
             //Tiene que ir en un for más adelante
             var table = $("#planInformationDataTableSelect").DataTable();
-            table.row.add(["23/12/2018","Desayuno", "Barbacoa"]).draw(false);
+            table.row.add(["23/12/2019","Desayuno", "Barbacoa"]).draw(false);
             
             $("#planInformationDiv").show();
         });

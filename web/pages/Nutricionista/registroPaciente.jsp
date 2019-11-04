@@ -493,7 +493,7 @@
                                 </span>
                               </div>
                               <div class="form-group">
-                                <label for="exampleInput1" class="bmd-label-floating">Duración</label>
+                                <label for="exampleInput1" class="bmd-label-floating">Duración (Semanas)</label>
                                 <input type="text" class="form-control" id="timePlan" name="timePlan" required>
                               </div>
                             </div>
@@ -587,7 +587,7 @@
       </div>
       <footer class="footer">
         <div class="container-fluid">
-          YUMK 2018
+          YUMK 2019
         </div>
       </footer>
     </div>
