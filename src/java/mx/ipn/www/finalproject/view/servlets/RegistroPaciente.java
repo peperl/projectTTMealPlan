@@ -164,6 +164,7 @@ public class RegistroPaciente extends HttpServlet {
             
             String qr = QRgenerator.generateQRContent(usuarioIdusuario + "");
             
+            
             QRgenerator.generateQRImage(qr, constanteQR.ConstanteQR.PATH_QR + usuarioIdusuario);
             
             

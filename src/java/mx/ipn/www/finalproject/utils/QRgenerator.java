@@ -12,7 +12,6 @@ import com.google.zxing.qrcode.QRCodeWriter;
 import java.awt.image.BufferedImage;
 import java.io.FileOutputStream;
 import java.security.MessageDigest;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 /**

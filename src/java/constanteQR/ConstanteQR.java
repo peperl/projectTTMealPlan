@@ -10,5 +10,5 @@ package constanteQR;
  * @author pepe
  */
 public class ConstanteQR {
-    public static final String PATH_QR = "/home/pepe/NetBeansProjects/projectTTMealPlans/web/qr/";
+    public static final String PATH_QR = "C:\\Users\\Pepe\\Documents\\NetBeansProjects\\projectTTMealPlan\\web\\qr\\";
 }

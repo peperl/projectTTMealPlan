@@ -47,7 +47,7 @@ public class getProposePlan extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("application/json;charset=UTF-8");
-        HttpSession session = request.getSession(false);
+        HttpSession session = request.getSession();
         Planalimenticio planalimenticio = (Planalimenticio) session.getAttribute("idPlanAlimenticio");
         /*Planalimenticio planalimenticio = new Planalimenticio(); 
         planalimenticio.setNocomidas(3);
