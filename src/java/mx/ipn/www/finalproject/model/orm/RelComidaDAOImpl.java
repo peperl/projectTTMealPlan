@@ -25,7 +25,7 @@ import mx.ipn.www.finalproject.model.dao.RelComidaDAO;
 public class RelComidaDAOImpl implements RelComidaDAO {
     /* SQL to insert data */
     private static final String SQL_INSERT =
-        "INSERT INTO Rel_comida ("
+        "INSERT INTO rel_comida ("
         + "Comida_idComida, Alimento_idAlimento, Cantidad"
         + ") VALUES (?, ?, ?)";
 
@@ -33,25 +33,25 @@ public class RelComidaDAOImpl implements RelComidaDAO {
     private static final String SQL_SELECT =
         "SELECT "
         + "Comida_idComida, Alimento_idAlimento, Cantidad "
-        + "FROM Rel_comida WHERE "
+        + "FROM rel_comida WHERE "
         + "Comida_idComida = ? AND Alimento_idAlimento = ?";
 
     private static final String SQL_SELECT_BY_COMIDA =
         "SELECT "
         + "Comida_idComida, Alimento_idAlimento, Cantidad "
-        + "FROM Rel_comida WHERE "
+        + "FROM rel_comida WHERE "
         + "Comida_idComida = ?";
 
     /* SQL to update data */
     private static final String SQL_UPDATE =
-        "UPDATE Rel_comida SET "
+        "UPDATE rel_comida SET "
         + "Cantidad = ? "
         + "WHERE "
         + "Comida_idComida = ? AND Alimento_idAlimento = ?";
 
     /* SQL to delete data */
     private static final String SQL_DELETE =
-        "DELETE FROM Rel_comida WHERE "
+        "DELETE FROM rel_comida WHERE "
         + "Comida_idComida = ? AND Alimento_idAlimento = ?";
 
     /**

@@ -25,7 +25,7 @@ import mx.ipn.www.finalproject.model.dao.AlimentoDAO;
 public class AlimentoDAOImpl implements AlimentoDAO {
     /* SQL to insert data */
     private static final String SQL_INSERT =
-        "INSERT INTO Alimento ("
+        "INSERT INTO alimento ("
         + "Nombre, Cantidad, Unidad, Proteinas, Lipidos, Carbohidratos, Estado, "
         + "Categoria"
         + ") VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -35,7 +35,7 @@ public class AlimentoDAOImpl implements AlimentoDAO {
         "SELECT "
         + "idAlimento, Nombre, Cantidad, Unidad, Proteinas, Lipidos, Carbohidratos, Estado, "
         + "Categoria "
-        + "FROM Alimento WHERE "
+        + "FROM alimento WHERE "
         + "idAlimento = ?";
 
     /* SQL to select data */
@@ -43,7 +43,7 @@ public class AlimentoDAOImpl implements AlimentoDAO {
         "SELECT "
         + "idAlimento, Nombre, Cantidad, Unidad, Proteinas, Lipidos, Carbohidratos, Estado, "
         + "Categoria "
-        + "FROM Alimento WHERE "
+        + "FROM alimento WHERE "
         + "Categoria = ? AND  Estado=1"; //Falta agregarle el left join para los alimentos que no quiere el usuario
 
     /* SQL to select data */
@@ -51,19 +51,19 @@ public class AlimentoDAOImpl implements AlimentoDAO {
         "SELECT "
         + "idAlimento, Nombre, Cantidad, Unidad, Proteinas, Lipidos, Carbohidratos, Estado, "
         + "Categoria "
-        + "FROM Alimento WHERE "
+        + "FROM alimento WHERE "
         + "Estado=1"; //Falta agregarle el left join para los alimentos que no quiere el usuario
 
     /* SQL to update data */
     private static final String SQL_UPDATE =
-        "UPDATE Alimento SET "
+        "UPDATE alimento SET "
         + "Nombre = ?, Cantidad = ?, Unidad = ?, Proteinas = ?, Lipidos = ?, Carbohidratos = ?, Estado = ?, Categoria = ? "
         + "WHERE "
         + "idAlimento = ?";
 
     /* SQL to delete data */
     private static final String SQL_DELETE =
-        "DELETE FROM Alimento WHERE "
+        "DELETE FROM alimento WHERE "
         + "idAlimento = ?";
 
     /**

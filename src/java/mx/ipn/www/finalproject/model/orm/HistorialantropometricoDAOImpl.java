@@ -26,7 +26,7 @@ import mx.ipn.www.finalproject.model.dao.HistorialantropometricoDAO;
 public class HistorialantropometricoDAOImpl implements HistorialantropometricoDAO {
     /* SQL to insert data */
     private static final String SQL_INSERT =
-        "INSERT INTO HistorialAntropometrico ("
+        "INSERT INTO historialantropometrico ("
         + "Paciente_idPaciente, Fecha, Peso, IMC, Grasa"
         + ") VALUES (?, ?, ?, ?, ?)";
 
@@ -34,25 +34,25 @@ public class HistorialantropometricoDAOImpl implements HistorialantropometricoDA
     private static final String SQL_SELECT =
         "SELECT "
         + "idRegistro, Paciente_idPaciente, Fecha, Peso, IMC, Grasa "
-        + "FROM HistorialAntropometrico WHERE "
+        + "FROM historialantropometrico WHERE "
         + "idRegistro = ?";
     
     private static final String SQL_SELECT_BY_PACIENTE =
         "SELECT "
         + "idRegistro, Paciente_idPaciente, Fecha, Peso, IMC, Grasa "
-        + "FROM HistorialAntropometrico WHERE "
+        + "FROM historialantropometrico WHERE "
         + "Paciente_idPaciente = ?";    
 
     /* SQL to update data */
     private static final String SQL_UPDATE =
-        "UPDATE HistorialAntropometrico SET "
+        "UPDATE historialantropometrico SET "
         + "Paciente_idPaciente = ?, Fecha = ?, Peso = ?, IMC = ?, Grasa = ? "
         + "WHERE "
         + "idRegistro = ?";
 
     /* SQL to delete data */
     private static final String SQL_DELETE =
-        "DELETE FROM HistorialAntropometrico WHERE "
+        "DELETE FROM historialantropometrico WHERE "
         + "idRegistro = ?";
 
     /**

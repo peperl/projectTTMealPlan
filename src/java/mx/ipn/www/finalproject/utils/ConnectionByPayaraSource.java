@@ -33,7 +33,7 @@ public class ConnectionByPayaraSource {
             Logger.getLogger(ConnectionByPayaraSource.class.getName()).log(Level.SEVERE, null, ex);
         }
     conn=DriverManager.getConnection(  
-    "jdbc:mysql://localhost:3306/mydb","root","root");        
+    "jdbc:mysql://localhost:3306/yumk_db","root","root");        
       return conn;
   }
 

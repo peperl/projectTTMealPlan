@@ -26,7 +26,7 @@ import mx.ipn.www.finalproject.model.dao.NutricionistaDAO;
 public class NutricionistaDAOImpl implements NutricionistaDAO {
     /* SQL to insert data */
     private static final String SQL_INSERT =
-        "INSERT INTO Nutricionista ("
+        "INSERT INTO nutricionista ("
         + "Usuario_idUsuario, Nombre, Cedula, FechaNacimiento, EscuelaProcedencia, Telefono, "
         + "Direccion, Estado, FechaRegistro"
         + ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -36,7 +36,7 @@ public class NutricionistaDAOImpl implements NutricionistaDAO {
         "SELECT "
         + "idNutricionista, Usuario_idUsuario, Nombre, Cedula, FechaNacimiento, EscuelaProcedencia, Telefono, "
         + "Direccion, Estado, FechaRegistro, FechaAceptado "
-        + "FROM Nutricionista WHERE "
+        + "FROM nutricionista WHERE "
         + "idNutricionista = ?";
 
     /* SQL to select data */
@@ -44,12 +44,12 @@ public class NutricionistaDAOImpl implements NutricionistaDAO {
         "SELECT "
         + "idNutricionista, Usuario_idUsuario, Nombre, Cedula, FechaNacimiento, EscuelaProcedencia, Telefono, "
         + "Direccion, Estado, FechaRegistro, FechaAceptado "
-        + "FROM Nutricionista WHERE "
+        + "FROM nutricionista WHERE "
         + "Usuario_idUsuario = ?";    
     
     /* SQL to update data */
     private static final String SQL_UPDATE =
-        "UPDATE Nutricionista SET "
+        "UPDATE nutricionista SET "
         + "Usuario_idUsuario = ?, Nombre = ?, Cedula = ?, FechaNacimiento = ?, EscuelaProcedencia = ?, Telefono = ?, Direccion = ?,  "
         + "Estado = ?, FechaRegistro = ?, FechaAceptado = ? "
         + "WHERE "
@@ -57,7 +57,7 @@ public class NutricionistaDAOImpl implements NutricionistaDAO {
 
     /* SQL to delete data */
     private static final String SQL_DELETE =
-        "DELETE FROM Nutricionista WHERE "
+        "DELETE FROM nutricionista WHERE "
         + "idNutricionista = ?";
 
     /**

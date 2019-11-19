@@ -25,7 +25,7 @@ import mx.ipn.www.finalproject.model.dao.UsuarioDAO;
 public class UsuarioDAOImpl implements UsuarioDAO {
     /* SQL to insert data */
     private static final String SQL_INSERT =
-        "INSERT INTO Usuario ("
+        "INSERT INTO usuario ("
         + "Correo, Pass"
         + ") VALUES (?, ?)";
 
@@ -33,45 +33,45 @@ public class UsuarioDAOImpl implements UsuarioDAO {
     private static final String SQL_SELECT =
         "SELECT "
         + "idUsuario, Correo, Pass "
-        + "FROM Usuario WHERE "
+        + "FROM usuario WHERE "
         + "idUsuario = ?";
 
     /* SQL to select data without id*/
     private static final String SQL_SELECT_BY_DATA =
         "SELECT "
         + "idUsuario, Correo, Pass "
-        + "FROM Usuario WHERE "
+        + "FROM usuario WHERE "
         + "Correo = ? AND Pass = ?";
     
     private static final String SQL_SELECT_BY_EMAIL =
         "SELECT "
         + "idUsuario, Correo, Pass "
-        + "FROM Usuario WHERE "
+        + "FROM usuario WHERE "
         + "Correo = ?";
 
     /* SQL to select data without id*/
     private static final String SQL_SELECT_FOR_LOGIN_NUTRICIONISTA =
         "SELECT "
-        + "Usuario.idUsuario, Usuario.Correo, Usuario.Pass FROM Usuario INNER JOIN Nutricionista " +
-        "ON Usuario.idUsuario = Nutricionista.Usuario_idUsuario WHERE "
-        + "Usuario.Correo = ? AND Usuario.Pass = ?";
+        + "usuario.idUsuario, usuario.Correo, usuario.Pass FROM usuario INNER JOIN nutricionista " +
+        "ON usuario.idUsuario = nutricionista.Usuario_idUsuario WHERE "
+        + "usuario.Correo = ? AND usuario.Pass = ?";
 
     private static final String SQL_SELECT_FOR_LOGIN_PACIENTE =
         "SELECT "
-        + "Usuario.idUsuario, Usuario.Correo, Usuario.Pass FROM Usuario INNER JOIN Paciente " +
-        "ON Usuario.idUsuario = Paciente.Usuario_idUsuario WHERE "
-        + "Usuario.Correo = ? AND Usuario.Pass = ?";
+        + "usuario.idUsuario, usuario.Correo, usuario.Pass FROM usuario INNER JOIN Paciente " +
+        "ON usuario.idUsuario = Paciente.Usuario_idUsuario WHERE "
+        + "usuario.Correo = ? AND usuario.Pass = ?";
     
     /* SQL to update data */
     private static final String SQL_UPDATE =
-        "UPDATE Usuario SET "
+        "UPDATE usuario SET "
         + "Correo = ?, Pass = ? "
         + "WHERE "
         + "idUsuario = ?";
 
     /* SQL to delete data */
     private static final String SQL_DELETE =
-        "DELETE FROM Usuario WHERE "
+        "DELETE FROM usuario WHERE "
         + "idUsuario = ?";
 
     /**

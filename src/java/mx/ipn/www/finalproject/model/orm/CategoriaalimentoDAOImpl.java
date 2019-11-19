@@ -25,7 +25,7 @@ import mx.ipn.www.finalproject.model.dao.CategoriaalimentoDAO;
 public class CategoriaalimentoDAOImpl implements CategoriaalimentoDAO {
     /* SQL to insert data */
     private static final String SQL_INSERT =
-        "INSERT INTO CategoriaAlimento ("
+        "INSERT INTO categoriaalimento ("
         + "category_id, NombreCategoria"
         + ") VALUES (?, ?)";
 
@@ -33,24 +33,24 @@ public class CategoriaalimentoDAOImpl implements CategoriaalimentoDAO {
     private static final String SQL_SELECT =
         "SELECT "
         + "category_id, NombreCategoria "
-        + "FROM CategoriaAlimento WHERE "
+        + "FROM categoriaalimento WHERE "
         + "category_id = ?";
 
     private static final String SQL_SELECT_ALL =
         "SELECT "
         + "category_id, NombreCategoria "
-        + "FROM CategoriaAlimento";
+        + "FROM categoriaalimento";
 
     /* SQL to update data */
     private static final String SQL_UPDATE =
-        "UPDATE CategoriaAlimento SET "
+        "UPDATE categoriaalimento SET "
         + "NombreCategoria = ? "
         + "WHERE "
         + "category_id = ?";
 
     /* SQL to delete data */
     private static final String SQL_DELETE =
-        "DELETE FROM CategoriaAlimento WHERE "
+        "DELETE FROM categoriaalimento WHERE "
         + "category_id = ?";
 
     /**

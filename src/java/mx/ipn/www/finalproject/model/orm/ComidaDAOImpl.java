@@ -26,7 +26,7 @@ import mx.ipn.www.finalproject.model.dao.ComidaDAO;
 public class ComidaDAOImpl implements ComidaDAO {
     /* SQL to insert data */
     private static final String SQL_INSERT =
-        "INSERT INTO Comida ("
+        "INSERT INTO comida ("
         + "PlanAlimenticio_idPlanAlimenticio, Nombre, Dia, Numero, Hora"
         + ") VALUES (?, ?, ?, ?, ?)";
 
@@ -34,25 +34,25 @@ public class ComidaDAOImpl implements ComidaDAO {
     private static final String SQL_SELECT =
         "SELECT "
         + "idComida, PlanAlimenticio_idPlanAlimenticio, Nombre, Dia, Numero, Hora "
-        + "FROM Comida WHERE "
+        + "FROM comida WHERE "
         + "idComida = ?";
 
     private static final String SQL_SELECT_BY_PLAN =
         "SELECT "
         + "idComida, PlanAlimenticio_idPlanAlimenticio, Nombre, Dia, Numero, Hora "
-        + "FROM Comida WHERE "
+        + "FROM comida WHERE "
         + "PlanAlimenticio_idPlanAlimenticio = ?";
 
     /* SQL to update data */
     private static final String SQL_UPDATE =
-        "UPDATE Comida SET "
+        "UPDATE comida SET "
         + "PlanAlimenticio_idPlanAlimenticio = ?, Nombre = ?, Dia = ?, Numero = ?, Hora = ? "
         + "WHERE "
         + "idComida = ?";
 
     /* SQL to delete data */
     private static final String SQL_DELETE =
-        "DELETE FROM Comida WHERE "
+        "DELETE FROM comida WHERE "
         + "idComida = ?";
 
     /**

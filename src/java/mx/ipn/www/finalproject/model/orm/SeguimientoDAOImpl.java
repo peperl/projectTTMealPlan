@@ -26,7 +26,7 @@ import mx.ipn.www.finalproject.model.dao.SeguimientoDAO;
 public class SeguimientoDAOImpl implements SeguimientoDAO {
     /* SQL to insert data */
     private static final String SQL_INSERT =
-        "INSERT INTO Seguimiento ("
+        "INSERT INTO seguimiento ("
         + "idSeguimiento, Cumplimiento, Fecha, Comida_idComida, AlimentosEquivalentes_idAlimentosEquivalentes"
         + ") VALUES (?, ?, ?, ?, ?)";
 
@@ -34,19 +34,19 @@ public class SeguimientoDAOImpl implements SeguimientoDAO {
     private static final String SQL_SELECT =
         "SELECT "
         + "idSeguimiento, Cumplimiento, Fecha, Comida_idComida, AlimentosEquivalentes_idAlimentosEquivalentes "
-        + "FROM Seguimiento WHERE "
+        + "FROM seguimiento WHERE "
         + "idSeguimiento = ?";
 
     /* SQL to update data */
     private static final String SQL_UPDATE =
-        "UPDATE Seguimiento SET "
+        "UPDATE seguimiento SET "
         + "Cumplimiento = ?, Fecha = ?, Comida_idComida = ?, AlimentosEquivalentes_idAlimentosEquivalentes = ? "
         + "WHERE "
         + "idSeguimiento = ?";
 
     /* SQL to delete data */
     private static final String SQL_DELETE =
-        "DELETE FROM Seguimiento WHERE "
+        "DELETE FROM seguimiento WHERE "
         + "idSeguimiento = ?";
 
     /**

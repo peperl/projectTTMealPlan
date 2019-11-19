@@ -27,7 +27,7 @@ import mx.ipn.www.finalproject.model.dao.PacienteDAO;
 public class PacienteDAOImpl implements PacienteDAO {
     /* SQL to insert data */
     private static final String SQL_INSERT =
-        "INSERT INTO Paciente ("
+        "INSERT INTO paciente ("
         + "idPaciente, Usuario_idUsuario, Nutricionista_idNutricionista, Nombre, Apellidos, FechaNacimiento, Sexo, "
         + "Telefono, Direccion, PesoAnterior, Estatura, CirBraquial, CirPantorrilla, DificultadesAliment, "
         + "Enfermedades, Tratamiento, ProteinaAnterior, LipidosAnterior, CarbohidratosAnterior, ComidasAnterior, ActividadFisica, "
@@ -41,7 +41,7 @@ public class PacienteDAOImpl implements PacienteDAO {
         + "Telefono, Direccion, PesoAnterior, Estatura, CirBraquial, CirPantorrilla, DificultadesAliment, "
         + "Enfermedades, Tratamiento, ProteinaAnterior, LipidosAnterior, CarbohidratosAnterior, ComidasAnterior, ActividadFisica, "
         + "FechaRegistro, Estado "
-        + "FROM Paciente WHERE "
+        + "FROM paciente WHERE "
         + "idPaciente = ?";
 
     /* SQL to select data */
@@ -51,7 +51,7 @@ public class PacienteDAOImpl implements PacienteDAO {
         + "Telefono, Direccion, PesoAnterior, Estatura, CirBraquial, CirPantorrilla, DificultadesAliment, "
         + "Enfermedades, Tratamiento, ProteinaAnterior, LipidosAnterior, CarbohidratosAnterior, ComidasAnterior, ActividadFisica, "
         + "FechaRegistro, Estado "
-        + "FROM Paciente WHERE "
+        + "FROM paciente WHERE "
         + "Usuario_idUsuario = ?";
     
     private static final String SQL_SELECT_BY_IDNUTRICIONISTA =
@@ -60,7 +60,7 @@ public class PacienteDAOImpl implements PacienteDAO {
         + "Telefono, Direccion, PesoAnterior, Estatura, CirBraquial, CirPantorrilla, DificultadesAliment, "
         + "Enfermedades, Tratamiento, ProteinaAnterior, LipidosAnterior, CarbohidratosAnterior, ComidasAnterior, ActividadFisica, "
         + "FechaRegistro, Estado "
-        + "FROM Paciente WHERE "
+        + "FROM paciente WHERE "
         + "Nutricionista_idNutricionista = ? AND Estado=1";
 
     private static final String SQL_SELECT_BY_USUARIO =
@@ -69,12 +69,12 @@ public class PacienteDAOImpl implements PacienteDAO {
         + "Telefono, Direccion, PesoAnterior, Estatura, CirBraquial, CirPantorrilla, DificultadesAliment, "
         + "Enfermedades, Tratamiento, ProteinaAnterior, LipidosAnterior, CarbohidratosAnterior, ComidasAnterior, ActividadFisica, "
         + "FechaRegistro, Estado "
-        + "FROM Paciente WHERE "
+        + "FROM paciente WHERE "
         + "Usuario_idUsuario = ?";
     
     /* SQL to update data */
     private static final String SQL_UPDATE =
-        "UPDATE Paciente SET "
+        "UPDATE paciente SET "
         + "Usuario_idUsuario = ?, Nutricionista_idNutricionista = ?, Nombre = ?, Apellidos = ?, FechaNacimiento = ?, Sexo = ?, Telefono = ?,  "
         + "Direccion = ?, PesoAnterior = ?, Estatura = ?, CirBraquial = ?, CirPantorrilla = ?, DificultadesAliment = ?, Enfermedades = ?,  "
         + "Tratamiento = ?, ProteinaAnterior = ?, LipidosAnterior = ?, CarbohidratosAnterior = ?, ComidasAnterior = ?, ActividadFisica = ?, FechaRegistro = ?,  "
@@ -84,7 +84,7 @@ public class PacienteDAOImpl implements PacienteDAO {
 
     /* SQL to delete data */
     private static final String SQL_DELETE =
-        "DELETE FROM Paciente WHERE "
+        "DELETE FROM paciente WHERE "
         + "idPaciente = ?";
 
     /**

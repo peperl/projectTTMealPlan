@@ -26,7 +26,7 @@ import mx.ipn.www.finalproject.model.dao.PlanalimenticioDAO;
 public class PlanalimenticioDAOImpl implements PlanalimenticioDAO {
     /* SQL to insert data */
     private static final String SQL_INSERT =
-        "INSERT INTO PlanAlimenticio ("
+        "INSERT INTO planalimenticio ("
         + "Paciente_idPaciente, FechaCreacion, Duracion, GastoCalorico, Proteinas, Lipidos, "
         + "Carbohidratos, NoComidas, Estado, TMR "
         + ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -36,7 +36,7 @@ public class PlanalimenticioDAOImpl implements PlanalimenticioDAO {
         "SELECT "
         + "idPlanAlimenticio, Paciente_idPaciente, FechaCreacion, Duracion, GastoCalorico, Proteinas, Lipidos, "
         + "Carbohidratos, NoComidas, Estado, TMR "
-        + "FROM PlanAlimenticio WHERE "
+        + "FROM planalimenticio WHERE "
         + "idPlanAlimenticio = ?";
 
     /* SQL to select data */
@@ -44,20 +44,20 @@ public class PlanalimenticioDAOImpl implements PlanalimenticioDAO {
         "SELECT "
         + "idPlanAlimenticio, Paciente_idPaciente, FechaCreacion, Duracion, GastoCalorico, Proteinas, Lipidos, "
         + "Carbohidratos, NoComidas, Estado, TMR "
-        + "FROM PlanAlimenticio WHERE "
+        + "FROM planalimenticio WHERE "
         + "Paciente_idPaciente = ? ORDER BY FechaCreacion desc;";    
     
     private static final String SQL_SELECT_BY_PACIENTE =
         "SELECT "
         + "idPlanAlimenticio, Paciente_idPaciente, FechaCreacion, Duracion, GastoCalorico, Proteinas, Lipidos, "
         + "Carbohidratos, NoComidas, Estado, TMR "
-        + "FROM PlanAlimenticio WHERE "
+        + "FROM planalimenticio WHERE "
         + "Paciente_idPaciente = ? ORDER BY FechaCreacion desc;";
 
 
     /* SQL to update data */
     private static final String SQL_UPDATE =
-        "UPDATE PlanAlimenticio SET "
+        "UPDATE planalimenticio SET "
         + "Paciente_idPaciente = ?, FechaCreacion = ?, Duracion = ?, GastoCalorico = ?, Proteinas = ?, Lipidos = ?, Carbohidratos = ?,  "
         + "NoComidas = ?, Estado = ?, TMR = ? "
         + "WHERE "
@@ -65,7 +65,7 @@ public class PlanalimenticioDAOImpl implements PlanalimenticioDAO {
 
     /* SQL to delete data */
     private static final String SQL_DELETE =
-        "DELETE FROM PlanAlimenticio WHERE "
+        "DELETE FROM planalimenticio WHERE "
         + "idPlanAlimenticio = ?";
 
     /**
